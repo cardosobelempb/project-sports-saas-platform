@@ -208,21 +208,21 @@ enum AddressType {
 
 model User {
   id            String    @id @default(uuid()) @db.Uuid
-  email         String?   @unique @db.VarChar(255)
+  email         String    @unique @db.VarChar(255)
   emailVerified DateTime? @map("email_verified")
-  passwordHash  String?   @map("password_hash") @db.VarChar(255)
+  passwordHash  String    @map("password_hash") @db.VarChar(255)
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime? @updatedAt @map("updated_at")
   deletedAt     DateTime? @map("deleted_at")
 
-  profile      UserProfile?
   accounts     Account[]
   sessions     Session[]
+  tokens       Token[]
+  profile      UserProfile?
+  otps         Otp[]
   memberships  Membership[]
   addresses    Address[]
   lgpdConsents LgpdConsent[]
-  otps         Otp[]
-  tokens       Token[]
   athletes     Athlete[]
 
   @@index([email])

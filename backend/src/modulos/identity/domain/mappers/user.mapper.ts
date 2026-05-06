@@ -1,3 +1,11 @@
+import {
+  CreateUserDto,
+  UpdateUserDto,
+  UserResponseDto,
+  UserSummaryDto,
+} from "../../application/dto/user.dto";
+import { UserEntity } from "../entities/user.entity";
+
 // ============================================================
 // user.mapper.ts
 // Responsabilidade: converter UserEntity → DTOs de resposta
@@ -8,14 +16,6 @@
 //   toSummary          → UserSummaryDto   (listagem paginada)
 //   toHttp             → UserResponseDto  (detalhes completos)
 // ============================================================
-
-import {
-  CreateUserDto,
-  UpdateUserDto,
-  UserResponseDto,
-  UserSummaryDto,
-} from "../../application/dto/user.dto";
-import { UserEntity } from "../entities/user.entity";
 
 export class UserMapper {
   // ─── Helper privado ───────────────────────────────────────────────────
@@ -29,8 +29,8 @@ export class UserMapper {
 
   private static toCoreFields(entity: UserEntity): CreateUserDto {
     return {
-      email: entity.email ?? "",
-      passwordHash: entity.passwordHash ?? "",
+      email: entity.email.getValue().value,
+      passwordHash: entity.passwordHash?.getValue(),
     };
   }
 
@@ -70,7 +70,7 @@ export class UserMapper {
   static toSummary(entity: UserEntity): UserSummaryDto {
     return {
       id: entity.id.getValue(),
-      email: entity.email ?? "",
+      email: entity.email.getValue().value,
     };
   }
 
@@ -82,9 +82,8 @@ export class UserMapper {
   static toHttp(entity: UserEntity): UserResponseDto {
     return {
       id: entity.id.getValue(),
-      email: entity.email ?? "",
+      email: entity.email.getValue().value ?? "",
       createdAt: entity.createdAt.toISOString(),
-      emailVerified: entity.emailVerified?.toISOString(),
     };
   }
 }

@@ -1,12 +1,13 @@
 import { Controller } from "@/common/shared/http/decorators/controller.decorator";
 import { Post } from "@/common/shared/http/decorators/route.decorator";
 import { Validate } from "@/common/shared/http/decorators/validate.decorator";
-import type { FastifyReply, FastifyRequest } from "fastify";
-import { CreateUserDto } from "../../application/dto/user.dto";
+import { CreateUserDto } from "@/modulos/identity/application/dto/user.dto";
 import {
   CreateUserSchema,
   UserResponseSchema,
-} from "../../application/schemas/user.schema";
+} from "@/modulos/identity/application/schemas/user.schema";
+
+import type { FastifyReply, FastifyRequest } from "fastify";
 import { UserCreateUseCase } from "../../application/use-cases/user-create.usecase";
 
 @Controller("/users")

@@ -1,17 +1,19 @@
-import { BaseEntity } from "@/common/domain/entities/base.entity";
+import { BaseAggregate } from "@/common/domain/entities/base-agregate.entity";
 import { Optional } from "@/common/domain/types/Optional";
+import { EmailVO } from "@/common/domain/values-objects/email/email.vo";
+import { PasswordVO } from "@/common/domain/values-objects/password/password.vo";
 import { UUIDVO } from "@/common/domain/values-objects/uuidvo/uuid.vo";
 
 export interface UserProps {
-  email: string | null;
+  email: EmailVO;
+  passwordHash: PasswordVO;
   emailVerified: Date | null;
-  passwordHash: string | null;
   createdAt: Date;
   updatedAt: Date | null;
   deletedAt: Date | null;
 }
 
-export class UserEntity extends BaseEntity<UserProps> {
+export class UserEntity extends BaseAggregate<UserProps> {
   get email() {
     return this.props.email;
   }
@@ -36,19 +38,22 @@ export class UserEntity extends BaseEntity<UserProps> {
     return this.props.deletedAt;
   }
 
+  private touch() {
+    this.props.updatedAt = new Date();
+  }
+
   static create(
     props: Optional<
       UserProps,
-      "emailVerified" | "createdAt" | "updatedAt" | "deletedAt"
+      "createdAt" | "updatedAt" | "deletedAt" | "emailVerified"
     >,
     id?: UUIDVO,
   ) {
     return new UserEntity(
       {
         ...props,
-
+        emailVerified: props.emailVerified ?? new Date(),
         createdAt: props.createdAt ?? new Date(),
-        emailVerified: props.emailVerified ?? null,
         updatedAt: props.updatedAt ?? null,
         deletedAt: props.deletedAt ?? null,
       },

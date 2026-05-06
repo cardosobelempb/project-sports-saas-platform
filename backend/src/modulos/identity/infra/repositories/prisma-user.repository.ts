@@ -1,164 +1,152 @@
-import {
-  Page,
-  PageInput,
-  Sort,
-} from "@/common/domain/repositories/types/pagination.types";
-import { Prisma, PrismaClient } from "../../../../../generated/prisma";
-import { UserEntity } from "../../domain/entities/user.entity";
-import { UserRepository } from "../../domain/repositories/user.repository";
+import { SearchInput } from "@/common/domain/repositories/search.repository";
+import { Page } from "@/common/domain/repositories/types/pagination.types";
+import { PrismaRepository } from "@/common/infrastructure/db/prisma-transaction";
+import { PrismaDatabase } from "@/common/infrastructure/db/prisma.client";
+import { TOKENS } from "@/common/shared/container/tokens";
+import { UserEntity } from "@/modulos/identity/domain/entities/user.entity";
+import { UserRepository } from "@/modulos/identity/domain/repositories/user.repository";
+import { Prisma } from "../../../../../generated/prisma";
 import { PrismaUserMapper } from "../mappers/prisma-user.mapper";
 
-export class PrismaUserRepository implements UserRepository {
-  constructor(private readonly prisma: PrismaClient) {}
+export class PrismaUserRepository
+  extends PrismaRepository
+  implements UserRepository
+{
+  static inject = [TOKENS.PRISMA_CLIENT];
 
-  async page(params: PageInput): Promise<Page<UserEntity>> {
-    // ─── Paginação (zero-based, padrão Spring Boot) ───────────────────────
-    const pageNumber = params.page ?? 0; // Spring começa em 0, não em 1
-    const size = params.size ?? 20; // Padrão Spring Data: 20
-    const skip = pageNumber * size; // offset = page * size
+  constructor(prisma: PrismaDatabase) {
+    super(prisma);
+  }
 
-    // ─── Ordenação (parse do formato 'campo,direção') ──────────────────────
-    const [rawSortBy = "createdAt", rawSortDir = "desc"] = (
-      params.sort ?? "createdAt,desc"
-    ).split(",");
-
-    const allowedSortFields: Array<keyof Prisma.UserOrderByWithRelationInput> =
-      ["email", "createdAt", "updatedAt"];
-
-    // Garante que somente campos permitidos sejam usados (evita SQL injection por campo)
-    const sortBy = allowedSortFields.includes(
-      rawSortBy as keyof Prisma.UserOrderByWithRelationInput,
-    )
-      ? (rawSortBy as keyof Prisma.UserOrderByWithRelationInput)
-      : "createdAt";
-
-    // Garante que a direção seja apenas 'asc' ou 'desc'
-    const sortDirection: Prisma.SortOrder =
-      rawSortDir === "asc" ? "asc" : "desc";
-
-    const isSorted = !!params.sort;
-
-    // ─── Filtro ────────────────────────────────────────────────────────────
+  async page(params: SearchInput): Promise<Page<UserEntity>> {
+    const page = params.page ?? 1;
+    const perPage = params.perPage ?? 15;
     const filter = params.filter?.trim() ?? "";
-    const where = this.buildWhere(filter);
+    const sortDirection = params.sortDirection ?? "desc";
+    const allowedSortBy = new Set<keyof Prisma.UserOrderByWithRelationInput>([
+      "email",
+      "createdAt",
+      "updatedAt",
+    ]);
+    const sortBy =
+      params.sortBy &&
+      allowedSortBy.has(
+        params.sortBy as keyof Prisma.UserOrderByWithRelationInput,
+      )
+        ? params.sortBy
+        : "createdAt";
 
-    // ─── Query paginada em transação atômica ──────────────────────────────
-    const [totalElements, organizations] = await this.prisma.$transaction([
+    const where: Prisma.UserWhereInput = filter
+      ? {
+          OR: [{ email: { contains: filter, mode: "insensitive" } }],
+        }
+      : {};
+
+    const [total, users] = await this.prisma.$transaction([
       this.prisma.user.count({ where }),
       this.prisma.user.findMany({
         where,
         orderBy: { [sortBy]: sortDirection },
-        skip,
-        take: size,
+        skip: (page - 1) * perPage,
+        take: perPage,
       }),
     ]);
 
-    // ─── Cálculos derivados ───────────────────────────────────────────────
-    const totalPages = Math.ceil(totalElements / size);
-    const numberOfElements = organizations.length;
-    const isFirst = pageNumber === 0;
-    const isLast = pageNumber >= totalPages - 1;
-    const isEmpty = numberOfElements === 0;
-
-    // ─── Metadados de sort (espelha Sort do Spring) ───────────────────────
-    const sortMeta: Sort = {
-      sorted: isSorted,
-      unsorted: !isSorted,
-      empty: !isSorted,
-    };
-
-    // ─── Retorno no contrato Spring Data Page<T> ──────────────────────────
     return {
-      content: organizations.map(PrismaUserMapper.toDomain),
-
+      content: users.map(PrismaUserMapper.toDomain),
       pageable: {
-        sort: sortMeta,
-        offset: skip, // posição absoluta do primeiro elemento
-        pageSize: size,
-        pageNumber,
+        offset: (page - 1) * perPage,
+        pageNumber: page,
+        pageSize: perPage,
+        sort: {
+          sorted: !!params.sortBy,
+          unsorted: !params.sortBy,
+          empty: !params.sortBy,
+        },
+
         paged: true,
         unpaged: false,
       },
-
-      sort: sortMeta,
-      totalElements,
-      totalPages,
-      numberOfElements,
-      size,
-      number: pageNumber, // 'number' é o nome do campo no Spring (página atual)
-      first: isFirst,
-      last: isLast,
-      empty: isEmpty,
+      totalPages: Math.ceil(total / perPage),
+      totalElements: total,
+      last: page * perPage >= total,
+      size: perPage,
+      number: page,
+      sort: {
+        sorted: !!params.sortBy,
+        unsorted: !params.sortBy,
+        empty: !params.sortBy,
+      },
+      numberOfElements: users.length,
+      first: page === 1,
+      empty: users.length === 0,
     };
   }
-  private buildWhere(filter: string): Prisma.UserWhereInput {
-    if (!filter) return {};
 
-    return {
-      OR: [{ email: { contains: filter, mode: "insensitive" } }],
-    };
-  }
   async findById(id: string): Promise<UserEntity | null> {
-    const user = await this.prisma.user.findUnique({
-      where: { id },
-    });
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) return null;
+    return PrismaUserMapper.toDomain(user);
+  }
 
-    if (!user) {
-      return null;
-    }
+  async exists(id: string): Promise<boolean> {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    if (!user) return false;
+    return true;
+  }
+
+  async findByEmail(email: string): Promise<UserEntity | null> {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) return null;
+    return PrismaUserMapper.toDomain(user);
+  }
+
+  async existsByEmail(email: string): Promise<boolean> {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) return false;
+    return true;
+  }
+
+  async create(entity: UserEntity): Promise<UserEntity> {
+    const data = PrismaUserMapper.toPrisma(entity);
+    console.log("data", data);
+
+    const user = await this.prisma.user.create({ data });
 
     return PrismaUserMapper.toDomain(user);
   }
+
+  async createWithTx(
+    entity: UserEntity,
+    tx: Prisma.TransactionClient,
+  ): Promise<UserEntity> {
+    const data = PrismaUserMapper.toPrisma(entity);
+    const user = await tx.user.create({ data });
+    return PrismaUserMapper.toDomain(user);
+  }
+
+  async save(entity: UserEntity): Promise<UserEntity> {
+    const user = await this.prisma.user.update({
+      where: { id: entity.id.toString() },
+      data: {
+        ...PrismaUserMapper.toPrisma(entity),
+      },
+    });
+
+    return PrismaUserMapper.toDomain(user);
+  }
+
+  async delete(entity: UserEntity): Promise<void> {
+    await this.prisma.user.delete({
+      where: { id: entity.id.toString() },
+    });
+  }
+
   async findManyByIds(ids: string[]): Promise<UserEntity[]> {
     const users = await this.prisma.user.findMany({
       where: { id: { in: ids } },
     });
 
     return users.map(PrismaUserMapper.toDomain);
-  }
-  async create(entity: UserEntity): Promise<UserEntity> {
-    const data = PrismaUserMapper.toPrisma(entity);
-    const created = await this.prisma.user.create({
-      data,
-    });
-
-    return PrismaUserMapper.toDomain(created);
-  }
-  async exists(id: string): Promise<boolean> {
-    const user = await this.prisma.user.findUnique({
-      where: { id },
-      select: { id: true },
-    });
-
-    return !!user;
-  }
-
-  async save(entity: UserEntity): Promise<UserEntity> {
-    const raw = PrismaUserMapper.toPrisma(entity);
-    const updated = await this.prisma.user.update({
-      where: { id: raw.id },
-      data: raw,
-    });
-
-    return PrismaUserMapper.toDomain(updated);
-  }
-  async delete(entity: UserEntity): Promise<void> {
-    await this.prisma.user.delete({
-      where: { id: entity.id.getValue() },
-    });
-  }
-
-  async findByEmail(email: string): Promise<UserEntity | null> {
-    const user = await this.prisma.user.findUnique({
-      where: { email },
-    });
-
-    console.log("PrismaUserRepository.findByEmail - user:", user);
-
-    if (!user) {
-      return null;
-    }
-
-    return PrismaUserMapper.toDomain(user);
   }
 }

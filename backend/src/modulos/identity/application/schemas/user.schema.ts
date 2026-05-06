@@ -35,8 +35,8 @@ export type UserParams = z.infer<typeof UserParamsSchema>;
 export const UserSchema = z
   .object({
     id: UUIDString,
-    email: z.string(ValidatorMessage.REQUIRED_FIELD).optional(),
-    passwordHash: z.string(ValidatorMessage.REQUIRED_FIELD).optional(),
+    email: z.string(ValidatorMessage.REQUIRED_FIELD),
+    passwordHash: z.string(ValidatorMessage.REQUIRED_FIELD),
     emailVerified: IsoDateTimeInput.optional().nullable(),
     createdAt: IsoDateTimeInput.optional(),
     updatedAt: IsoDateTimeInput.optional().nullable(),

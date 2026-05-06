@@ -8,7 +8,7 @@ import {
 import { UUIDVO } from "@/common/domain/values-objects/uuidvo/uuid.vo";
 import { AccountEntity } from "../../domain/entities/account.entity";
 import { AccountMapper } from "../../domain/mappers/account-mapper";
-import { PrismaAccountRepository } from "../../infra/repositories/account-prisma.repository";
+import { PrismaAccountRepository } from "../../infra/repositories/prisma-account.repository";
 import { AccountResponseDto, CreateAccountDto } from "../dto/account.dto";
 
 export type AccountCreateUseCaseResponse = Either<
