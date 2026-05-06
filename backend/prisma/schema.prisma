@@ -1,0 +1,575 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum EntityStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum VisibilityStatus {
+  VISIBLE
+  HIDDEN
+  ARCHIVED
+}
+
+enum YesNoStatus {
+  YES
+  NO
+}
+
+enum UserLevel {
+  OWNER
+  ADMIN
+  AFFILIATE
+  OPERATOR
+  CUSTOMER
+}
+
+enum DocumentType {
+  CPF
+  CNPJ
+  RG
+  OTHER
+}
+
+enum DeliveryMethod {
+  DELIVERY
+  PICKUP
+  TABLE
+  OTHER
+}
+
+enum DeliveryFeeType {
+  FIXED
+  BY_DISTANCE
+  BY_CEP
+  MANUAL
+}
+
+enum PaymentMethod {
+  MONEY
+  DEBIT_CARD
+  CREDIT_CARD
+  FOOD_CARD
+  PIX
+  ONLINE
+  OTHER
+}
+
+enum PaymentGateway {
+  MERCADO_PAGO
+  PAGSEGURO
+  GETNET
+  PIX_MANUAL
+  OTHER
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELED
+  REFUNDED
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  PREPARING
+  READY
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELED
+}
+
+enum SubscriptionStatus {
+  PENDING
+  ACTIVE
+  EXPIRED
+  CANCELED
+  SUSPENDED
+}
+
+enum SubscriptionMode {
+  TRIAL
+  PAID
+  VOUCHER
+  MANUAL
+}
+
+enum VoucherStatus {
+  UNUSED
+  USED
+  EXPIRED
+  CANCELED
+}
+
+enum BannerScope {
+  STORE
+  MARKETPLACE
+}
+
+enum MediaType {
+  PRODUCT
+  CATEGORY
+  STORE
+  BANNER
+  OTHER
+}
+
+enum DomainType {
+  STORE
+  MARKETPLACE
+  CUSTOM
+}
+
+enum ScheduleAction {
+  OPEN
+  CLOSE
+}
+
+enum MemberStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+  REMOVED
+}
+
+enum OrganizationStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+  DELETED
+}
+
+enum UserProfileStatus {
+  ACTIVE
+  INACTIVE
+  BLOCKED
+}
+
+enum MemberRole {
+  OWNER
+  ADMIN
+  MANAGER
+  SUPPORT
+  FINANCE
+  MEMBER
+}
+
+enum ConsentStatus {
+  ACTIVE
+  REVOKED
+  WITHDRAWN
+}
+
+enum TokenType {
+  REFRESH
+  ACCESS
+  RESET_PASSWORD
+  API_KEY
+}
+
+enum ProviderType {
+  GOOGLE
+  FACEBOOK
+  APPLE
+  CREDENTIALS
+  OTHER
+}
+
+enum TenantStatus {
+  TRIALING
+  ACTIVE
+  SUSPENDED
+  CANCELED
+}
+
+enum AddressType {
+  HOME
+  WORK
+  OTHER
+}
+
+// ============================================================
+// MODULE: IDENTITY_ACCESS
+// ============================================================
+// -----------------------------------------------------------------------------
+// Autenticação no padrão NextAuth
+// -----------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  email         String?   @unique @db.VarChar(255)
+  emailVerified DateTime? @map("email_verified")
+  passwordHash  String?   @map("password_hash") @db.VarChar(255)
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime? @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+
+  accounts     Account[]
+  sessions     Session[]
+  tokens       Token[]
+  profile      UserProfile?
+  otps         Otp[]
+  memberships  Membership[]
+  addresses    Address[]
+  lgpdConsents LgpdConsent[]
+  athletes     Athlete[]
+
+  @@index([email])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+model Account {
+  id                String       @id @default(uuid()) @db.Uuid
+  userId            String       @map("user_id") @db.Uuid
+  providerType      ProviderType @default(CREDENTIALS) @map("provider_type")
+  provider          String       @db.VarChar(50)
+  providerAccountId String       @map("provider_account_id") @db.VarChar(255)
+
+  refreshToken String?    @map("refresh_token") @db.Text
+  accessToken  String?    @map("access_token") @db.Text
+  expiresAt    Int?       @map("expires_at")
+  tokenType    TokenType? @default(ACCESS) @map("token_type")
+  scope        String?    @db.Text
+  idToken      String?    @map("id_token") @db.Text
+  sessionState String?    @map("session_state") @db.Text
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@index([deletedAt])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(uuid()) @db.Uuid
+  sessionToken String   @unique @map("session_token") @db.VarChar(255)
+  userId       String   @map("user_id") @db.Uuid
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String   @db.VarChar(255)
+  token      String   @unique @db.VarChar(255)
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model UserProfile {
+  id             String            @id @default(uuid()) @db.Uuid
+  userId         String            @unique @map("user_id") @db.Uuid
+  firstName      String?           @map("first_name") @db.VarChar(100)
+  lastName       String?           @map("last_name") @db.VarChar(100)
+  displayName    String?           @map("display_name") @db.VarChar(150)
+  fullName       String?           @map("full_name") @db.VarChar(200)
+  documentType   DocumentType?     @map("document_type")
+  documentNumber String?           @unique @map("document_number") @db.VarChar(30)
+  phone          String?           @db.VarChar(20)
+  birthDate      DateTime?         @map("birth_date") @db.Date
+  avatarUrl      String?           @map("avatar_url") @db.VarChar(500)
+  status         UserProfileStatus @default(ACTIVE)
+  createdAt      DateTime          @default(now()) @map("created_at")
+  updatedAt      DateTime?         @updatedAt @map("updated_at")
+  deletedAt      DateTime?         @map("deleted_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([documentNumber])
+  @@index([phone])
+  @@index([deletedAt])
+  @@map("user_profiles")
+}
+
+// -----------------------------------------------------------------------------
+// LGPD e logs operacionais
+// -----------------------------------------------------------------------------
+
+model LgpdConsent {
+  id       String @id @default(uuid()) @db.Uuid
+  userId   String @map("user_id") @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+
+  consentTerms       Boolean @map("consent_terms")
+  consentMarketing   Boolean @map("consent_marketing")
+  consentDataSharing Boolean @map("consent_data_sharing")
+  consentAnalytics   Boolean @map("consent_analytics")
+
+  ipAddress      String        @map("ip_address") @db.VarChar(45)
+  macAddress     String?       @map("mac_address") @db.VarChar(20)
+  userAgent      String        @map("user_agent") @db.VarChar(500)
+  consentVersion String        @map("consent_version") @db.VarChar(10)
+  status         ConsentStatus @default(ACTIVE)
+  withdrawnAt    DateTime?     @map("withdrawn_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant         Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @db.Uuid
+
+  @@unique([userId, tenantId, consentVersion])
+  @@index([userId])
+  @@index([tenantId])
+  @@index([status])
+  @@index([deletedAt])
+  @@map("lgpd_consents")
+}
+
+// Tokens internos da aplicação: refresh, reset password, API token etc.
+model Token {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  type      TokenType @default(ACCESS)
+  valueHash String    @map("value_hash") @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([userId, type])
+  @@index([userId, expiresAt])
+  @@index([deletedAt])
+  @@map("tokens")
+}
+
+model Otp {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String?   @map("user_id") @db.Uuid
+  phone     String    @db.VarChar(30)
+  codeHash  String    @map("code_hash") @db.VarChar(255)
+  ipAddress String?   @map("ip_address")
+  expiresAt DateTime  @map("expires_at")
+  attempts  Int       @default(0)
+  usedAt    DateTime? @map("used_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([phone])
+  @@index([userId])
+  @@index([expiresAt])
+  @@index([deletedAt])
+  @@map("otps")
+}
+
+// ============================================================
+// MODULE: GEO
+// ============================================================
+model State {
+  id        String    @id @default(uuid()) @db.Uuid
+  name      String?   @map("name") @db.VarChar(75)
+  uf        String?   @db.VarChar(5)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  cities    City[]
+  addresses Address[]
+
+  @@unique([uf])
+  @@index([deletedAt])
+  @@map("states")
+}
+
+model City {
+  id        String  @id @default(uuid()) @db.Uuid
+  name      String? @map("name") @db.VarChar(120)
+  stateId   String? @map("state_id") @db.Uuid
+  subdomain String? @map("subdomain") @db.VarChar(255)
+
+  state     State?    @relation(fields: [stateId], references: [id], onDelete: SetNull)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  addresses Address[]
+
+  @@index([stateId])
+  @@index([subdomain])
+  @@index([deletedAt])
+  @@map("cities")
+}
+
+// -----------------------------------------------------------------------------
+// SaaS / Multi-tenant
+// -----------------------------------------------------------------------------
+
+model Tenant {
+  id             String        @id @default(uuid()) @db.Uuid
+  name           String        @db.VarChar(150)
+  slug           String        @unique @db.VarChar(150)
+  documentType   DocumentType? @map("document_type")
+  documentNumber String?       @unique @map("document_number") @db.VarChar(30)
+  contactEmail   String?       @map("contact_email") @db.VarChar(255)
+  phone          String?       @db.VarChar(20)
+  status         TenantStatus  @default(TRIALING)
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  memberships   Membership[]
+  organizations Organization[]
+  lgpdConsents  LgpdConsent[]
+  addresses     Address[]
+
+  @@index([status])
+  @@index([deletedAt])
+  @@map("tenants")
+}
+
+model Athlete {
+  id     String @id @default(uuid()) @db.Uuid
+  userId String @unique @map("user_id") @db.Uuid
+
+  nickname String? @db.VarChar(100)
+
+  // Dados esportivos
+  dominantHand String? @map("dominant_hand") @db.VarChar(10)
+  playingStyle String? @map("playing_style") @db.VarChar(50)
+
+  // Status competitivo
+  isProfessional Boolean @default(false)
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([deletedAt])
+  @@map("athletes")
+}
+
+model Organization {
+  id             String             @id @default(uuid()) @db.Uuid
+  name           String             @db.VarChar(150)
+  slug           String             @unique @db.VarChar(150)
+  documentType   DocumentType?      @map("document_type")
+  documentNumber String?            @unique @map("document_number") @db.VarChar(30)
+  contactEmail   String?            @map("contact_email") @db.VarChar(255)
+  phone          String?            @db.VarChar(20)
+  logoUrl        String?            @map("logo_url") @db.VarChar(500)
+  status         OrganizationStatus @default(ACTIVE)
+  createdAt      DateTime           @default(now()) @map("created_at")
+  updatedAt      DateTime?          @updatedAt @map("updated_at")
+  deletedAt      DateTime?          @map("deleted_at")
+
+  memberships  Membership[]
+  addresses    Address[]
+  lgpdConsents LgpdConsent[]
+  tenant       Tenant?       @relation(fields: [tenantId], references: [id])
+  tenantId     String?       @db.Uuid
+
+  @@index([status])
+  @@index([deletedAt])
+  @@map("organizations")
+}
+
+model Membership {
+  id       String @id @default(uuid()) @db.Uuid
+  userId   String @map("user_id") @db.Uuid
+  tenantId String @map("tenant_id") @db.Uuid
+
+  role   MemberRole   @default(MEMBER)
+  status MemberStatus @default(ACTIVE)
+
+  joinedAt     DateTime? @map("joined_at")
+  invitedEmail String?   @map("invited_email") @db.VarChar(255)
+  invitedById  String?   @map("invited_by_id") @db.Uuid
+  expiresAt    DateTime? @map("expires_at")
+  removedAt    DateTime? @map("removed_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  tenant         Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  user           User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?       @db.Uuid
+
+  @@unique([userId, tenantId])
+  @@index([userId])
+  @@index([tenantId])
+  @@index([tenantId, role])
+  @@index([tenantId, status])
+  @@index([invitedEmail])
+  @@index([deletedAt])
+  @@map("memberships")
+}
+
+model Address {
+  id             String  @id @default(uuid()) @db.Uuid
+  userId         String? @map("user_id") @db.Uuid
+  tenantId       String? @map("tenant_id") @db.Uuid
+  organizationId String? @map("organization_id") @db.Uuid
+
+  addressType AddressType @default(HOME) @map("address_type")
+
+  street        String? @map("street") @db.VarChar(255)
+  addressNumber String? @map("address_number") @db.VarChar(255)
+  complement    String? @map("complement") @db.VarChar(255)
+  neighborhood  String? @map("neighborhood") @db.VarChar(255)
+  reference     String? @map("reference") @db.VarChar(255)
+
+  cityId  String? @map("city_id") @db.Uuid
+  stateId String? @map("state_id") @db.Uuid
+
+  zipCode String? @map("zip_code") @db.VarChar(255)
+  country String? @map("country") @db.VarChar(255)
+
+  isPrimary Boolean @default(false)
+
+  createdAt DateTime? @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant       Tenant?       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  organization Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  city  City?  @relation(fields: [cityId], references: [id], onDelete: SetNull)
+  state State? @relation(fields: [stateId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([tenantId])
+  @@index([organizationId])
+  @@index([stateId])
+  @@index([cityId])
+  @@index([deletedAt])
+  @@map("addresses")
+}

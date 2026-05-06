@@ -1,0 +1,41 @@
+# Dependências
+node_modules/
+
+# Ambiente
+.env
+.env.local
+.env.production
+.env*.local
+
+# Build
+dist/
+build/
+
+# Prisma gerado
+src/generated/
+
+# WhatsApp session data
+tokens/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+/src/generated/prisma
+
+# Testes
+coverage/
+jest.config.js
+jest.setup.js
+__tests__/setupTests.js
+__tests__/teardownTests.js
+__tests__/__snapshots__/
+vite.config.ts
