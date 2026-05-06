@@ -64,6 +64,7 @@ export const UpdateUserSchema = UserSchema.partial();
 // Resposta completa: expõe tudo exceto campos de soft-delete
 export const UserResponseSchema = UserSchema.omit({
   passwordHash: true, // Nunca exponha hashes de senha em respostas HTTP!
+  emailVerified: true, // Decida se quer expor ou não — aqui optamos por ocultar
   deletedAt: true,
   updatedAt: true,
 });

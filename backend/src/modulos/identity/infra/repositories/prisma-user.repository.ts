@@ -110,12 +110,16 @@ export class PrismaUserRepository implements UserRepository {
     return PrismaUserMapper.toDomain(user);
   }
   async findManyByIds(ids: string[]): Promise<UserEntity[]> {
-    throw new Error("Method not implemented.");
+    const users = await this.prisma.user.findMany({
+      where: { id: { in: ids } },
+    });
+
+    return users.map(PrismaUserMapper.toDomain);
   }
   async create(entity: UserEntity): Promise<UserEntity> {
-    const raw = PrismaUserMapper.toPrisma(entity);
+    const data = PrismaUserMapper.toPrisma(entity);
     const created = await this.prisma.user.create({
-      data: raw,
+      data,
     });
 
     return PrismaUserMapper.toDomain(created);
@@ -148,6 +152,8 @@ export class PrismaUserRepository implements UserRepository {
     const user = await this.prisma.user.findUnique({
       where: { email },
     });
+
+    console.log("PrismaUserRepository.findByEmail - user:", user);
 
     if (!user) {
       return null;

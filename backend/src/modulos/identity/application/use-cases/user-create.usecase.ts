@@ -32,7 +32,7 @@ export class UserCreateUseCase {
 
     const existing = await this.userRepository.findByEmail(input.email);
 
-    if (existing) {
+    if (!existing) {
       return left(
         new AlreadyExistsError({
           message: `User with email '${input.email}' already exists`,

@@ -3,7 +3,10 @@ import { Post } from "@/common/shared/http/decorators/route.decorator";
 import { Validate } from "@/common/shared/http/decorators/validate.decorator";
 import type { FastifyReply, FastifyRequest } from "fastify";
 import { CreateUserDto } from "../../application/dto/user.dto";
-import { CreateUserSchema } from "../../application/schemas/user.schema";
+import {
+  CreateUserSchema,
+  UserResponseSchema,
+} from "../../application/schemas/user.schema";
 import { UserCreateUseCase } from "../../application/use-cases/user-create.usecase";
 
 @Controller("/users")
@@ -16,6 +19,12 @@ export class UserCreateController {
   @Post("/", {
     tags: ["User"],
     summary: "Cria um novo usuário",
+    description: "Endpoint para criar um novo usuário no sistema.",
+    body: CreateUserSchema,
+    responses: {
+      201: { description: "Usuário criado", schema: UserResponseSchema },
+      400: { description: "Dados inválidos" },
+    },
   })
   async handle(request: FastifyRequest, reply: FastifyReply) {
     const body = request.body as CreateUserDto;

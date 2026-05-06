@@ -6,5 +6,11 @@ import { registerModule } from "@/common/shared/module/register-module";
 import { userModule } from "../../user.module";
 
 export async function userRoutes(app: FastifyInstance): Promise<void> {
-  await registerModule(app, userModule);
+  // ✅ prefix aqui — envolve tudo que o registerModule registrar
+  await app.register(
+    async (router) => {
+      await registerModule(router, userModule);
+    },
+    { prefix: "api/v1" },
+  );
 }
