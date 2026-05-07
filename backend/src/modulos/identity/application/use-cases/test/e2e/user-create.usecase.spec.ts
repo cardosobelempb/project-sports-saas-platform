@@ -9,7 +9,7 @@ describe("UserCreateUseCase", () => {
       create: vi.fn(),
     };
 
-    const useCase = new UserCreateUseCase(fakeRepo as any);
+    const useCase = new UserCreateUseCase(fakeRepo as any, {} as any);
 
     await useCase.execute({
       email: "john@email.com",
