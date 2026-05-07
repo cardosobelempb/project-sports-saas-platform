@@ -199,6 +199,92 @@ enum AddressType {
   OTHER
 }
 
+enum MatchType {
+  FRIENDLY
+  RANKED
+  TOURNAMENT
+  TRAINING
+  CHALLENGE
+  CASUAL
+}
+
+enum MatchPeriodType {
+  DAILY
+  WEEKLY
+  MONTHLY
+  ANNUAL
+}
+
+enum MatchStatus {
+  PENDING
+  IN_PROGRESS
+  CONFIRMED
+  DISPUTED
+  FINISHED
+  CANCELLED
+  ADMIN_APPROVED
+}
+
+enum RankingScope {
+  CITY
+  STATE
+  CLUB
+  NATIONAL
+  AGE_GROUP
+  LEVEL
+}
+
+enum TournamentFrequency {
+  DAILY
+  WEEKLY
+  MONTHLY
+  ANNUAL
+  CUSTOM
+}
+
+enum TournamentFormat {
+  KNOCKOUT
+  GROUP_STAGE
+  ROUND_ROBIN
+  DOUBLE_ELIMINATION
+}
+
+enum MatchValidation {
+  PENDING
+  CONFIRMED_BY_BOTH
+  ADMIN_APPROVED
+  DISPUTED
+}
+
+enum SportType {
+  INDIVIDUAL
+  TEAM
+  DUO
+}
+
+enum ScoringType {
+  POINTS
+  GOALS
+  SETS
+  TIME
+  DISTANCE
+}
+
+enum WinCondition {
+  HIGHEST_SCORE
+  BEST_OF
+  LOWEST_SCORE
+  TIME_BASED
+}
+
+enum RankingHistoryReason {
+  MATCH_WIN
+  MATCH_LOSS
+  MATCH_DRAW
+  ADMIN_ADJUSTMENT
+  PENALTY
+}
+
 // ============================================================
 // MODULE: IDENTITY_ACCESS
 // ============================================================
@@ -211,6 +297,7 @@ model User {
   email         String    @unique @db.VarChar(255)
   emailVerified DateTime? @map("email_verified")
   passwordHash  String    @map("password_hash") @db.VarChar(255)
+  athlete       Athlete?
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime? @updatedAt @map("updated_at")
   deletedAt     DateTime? @map("deleted_at")
@@ -223,7 +310,6 @@ model User {
   memberships  Membership[]
   addresses    Address[]
   lgpdConsents LgpdConsent[]
-  athletes     Athlete[]
 
   @@index([email])
   @@index([deletedAt])
@@ -451,9 +537,8 @@ model Tenant {
 }
 
 model Athlete {
-  id     String @id @default(uuid()) @db.Uuid
-  userId String @unique @map("user_id") @db.Uuid
-
+  id       String  @id @default(uuid()) @db.Uuid
+  userId   String  @unique @map("user_id") @db.Uuid
   nickname String? @db.VarChar(100)
 
   // Dados esportivos
@@ -467,7 +552,8 @@ model Athlete {
   updatedAt DateTime? @updatedAt @map("updated_at")
   deletedAt DateTime? @map("deleted_at")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user     User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rankings AthleteRanking[]
 
   @@index([userId])
   @@index([deletedAt])
@@ -572,4 +658,317 @@ model Address {
   @@index([cityId])
   @@index([deletedAt])
   @@map("addresses")
+}
+
+model Sport {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  slug        String    @unique
+  sportType   SportType @map("sport_type")
+  isTeamSport Boolean   @default(false) @map("is_team_sport")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  ruleSets        RuleSet[]
+  matches         Match[]
+  tournaments     Tournament[]
+  athleteRankings AthleteRanking[]
+
+  @@index([deletedAt])
+  @@map("sports")
+}
+
+model RuleSet {
+  id      String @id @default(uuid()) @db.Uuid
+  sportId String @map("sport_id") @db.Uuid
+  name    String
+
+  scoringType  ScoringType  @map("scoring_type")
+  winCondition WinCondition @map("win_condition")
+
+  maxPeriods    Int? @map("max_periods")
+  pointsToWin   Int? @map("points_to_win")
+  minDifference Int? @map("min_difference")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  sport   Sport   @relation(fields: [sportId], references: [id])
+  matches Match[]
+
+  @@index([deletedAt])
+  @@map("rule_sets")
+}
+
+model Match {
+  id        String    @id @default(uuid()) @db.Uuid
+  sportId   String    @map("sport_id") @db.Uuid
+  ruleSetId String    @map("rule_set_id") @db.Uuid
+  matchType MatchType @map("match_type")
+
+  status     MatchStatus
+  startedAt  DateTime?   @map("started_at")
+  finishedAt DateTime?   @map("finished_at")
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime?   @updatedAt @map("updated_at")
+  deletedAt  DateTime?   @map("deleted_at")
+
+  sport   Sport   @relation(fields: [sportId], references: [id])
+  ruleSet RuleSet @relation(fields: [ruleSetId], references: [id])
+
+  participants MatchParticipant[]
+  periods      MatchPeriodType[]
+  scoreboard   Scoreboard?
+
+  tournamentMatch TournamentMatch?
+
+  matchPeriods MatchPeriod[]
+
+  @@index([deletedAt])
+  @@map("matches")
+}
+
+model MatchParticipant {
+  id      String @id @default(uuid()) @db.Uuid
+  matchId String @unique @map("match_id") @db.Uuid
+
+  athleteId String? @map("athlete_id") @db.Uuid
+  teamId    String? @map("team_id") @db.Uuid
+
+  side       String
+  totalScore Int     @default(0)
+  isWinner   Boolean @default(false)
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  match Match @relation(fields: [matchId], references: [id])
+
+  @@index([deletedAt])
+  @@map("match_participants")
+}
+
+model MatchPeriod {
+  id           String    @id @default(uuid()) @db.Uuid
+  matchId      String    @unique @map("match_id") @db.Uuid
+  periodNumber Int       @map("period_number")
+  name         String?
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+
+  match  Match              @relation(fields: [matchId], references: [id])
+  scores MatchPeriodScore[]
+
+  @@index([deletedAt])
+  @@map("match_periods")
+}
+
+model MatchPeriodScore {
+  id            String    @id @default(uuid()) @db.Uuid
+  periodId      String    @map("period_id") @db.Uuid
+  participantId String    @map("participant_id") @db.Uuid
+  score         Int
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime? @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+
+  period MatchPeriod @relation(fields: [periodId], references: [id])
+
+  @@index([deletedAt])
+  @@map("match_period_scores")
+}
+
+model Scoreboard {
+  id      String @id @default(uuid()) @db.Uuid
+  matchId String @unique @map("match_id") @db.Uuid
+
+  currentSet Int @default(1) @map("current_set")
+
+  playerAId String @map("player_a_id")
+  playerBId String @map("player_b_id")
+
+  playerAPoints Int @default(0) @map("player_a_points")
+  playerBPoints Int @default(0) @map("player_b_points")
+
+  playerASets Int @default(0) @map("player_a_sets")
+  playerBSets Int @default(0) @map("player_b_sets")
+
+  firstServerId   String @map("first_server_id")
+  currentServerId String @map("current_server_id")
+
+  hasSwitchedSides Boolean @default(false) @map("has_switched_sides")
+
+  isFinished Boolean   @default(false) @map("is_finished")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
+
+  match Match @relation(fields: [matchId], references: [id])
+
+  @@index([deletedAt])
+  @@map("scoreboards")
+}
+
+model PointEvent {
+  id        String @id @default(uuid()) @db.Uuid
+  matchId   String @unique @map("match_id") @db.Uuid
+  setNumber Int    @map("set_number")
+
+  playerId    String      @map("player_id") @db.Uuid
+  serverId    String      @map("server_id") @db.Uuid
+  scoringType ScoringType @map("scoring_type")
+
+  pointNumber Int @map("point_number")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@index([deletedAt])
+  @@map("point_events")
+}
+
+model Tournament {
+  id   String @id @default(uuid()) @db.Uuid
+  name String
+
+  sportId   String   @map("sport_id") @db.Uuid
+  startDate DateTime @map("start_date")
+
+  format TournamentFormat
+
+  sport Sport @relation(fields: [sportId], references: [id])
+
+  categories TournamentCategory[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@index([deletedAt])
+  @@map("tournaments")
+}
+
+model TournamentCategory {
+  id           String @id @default(uuid()) @db.Uuid
+  tournamentId String @map("tournament_id") @db.Uuid
+
+  name      String
+  minAge    Int?      @map("min_age")
+  maxAge    Int?      @map("max_age")
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id])
+
+  participants TournamentParticipant[]
+  matches      TournamentMatch[]
+
+  @@index([deletedAt])
+  @@map("tournament_categories")
+}
+
+model TournamentParticipant {
+  id         String    @id @default(uuid()) @db.Uuid
+  categoryId String    @map("category_id") @db.Uuid
+  athleteId  String    @map("athlete_id") @db.Uuid
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime? @updatedAt @map("updated_at")
+  deletedAt  DateTime? @map("deleted_at")
+
+  category TournamentCategory @relation(fields: [categoryId], references: [id])
+
+  @@index([deletedAt])
+  @@map("tournament_participants")
+}
+
+model TournamentMatch {
+  id         String @id @default(uuid()) @db.Uuid
+  categoryId String @map("category_id") @db.Uuid
+
+  playerAId String  @map("player_a_id") @db.Uuid
+  playerBId String? @map("player_b_id") @db.Uuid
+
+  round    Int
+  position Int
+
+  matchId   String?   @unique @map("match_id") @db.Uuid
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  category TournamentCategory @relation(fields: [categoryId], references: [id])
+  match    Match?             @relation(fields: [matchId], references: [id])
+
+  @@index([deletedAt])
+  @@map("tournament_matches")
+}
+
+model AthleteRanking {
+  id String @id @default(uuid()) @db.Uuid
+
+  athleteId String @map("athlete_id") @db.Uuid
+  sportId   String @map("sport_id") @db.Uuid
+
+  rating Int @default(1000)
+  xp     Int @default(0)
+
+  wins          Int @default(0)
+  losses        Int @default(0)
+  draws         Int @default(0)
+  matchesPlayed Int @default(0) @map("matches_played")
+
+  currentStreak Int @default(0) @map("current_streak")
+  bestStreak    Int @default(0) @map("best_streak")
+
+  cityId String? @map("city_id") @db.Uuid
+  clubId String? @map("club_id") @db.Uuid
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  athlete Athlete @relation(fields: [athleteId], references: [id])
+  sport   Sport   @relation(fields: [sportId], references: [id])
+
+  history RankingHistory[]
+
+  @@unique([athleteId, sportId])
+  @@index([sportId, rating])
+  @@index([sportId, cityId, rating])
+  @@index([sportId, clubId, rating])
+  @@map("athlete_rankings")
+}
+
+model RankingHistory {
+  id String @id @default(uuid()) @db.Uuid
+
+  athleteRankingId String  @map("athlete_ranking_id") @db.Uuid
+  matchId          String? @unique @map("match_id") @db.Uuid
+
+  oldRating    Int @map("old_rating")
+  newRating    Int @map("new_rating")
+  ratingChange Int @map("rating_change")
+
+  oldXp    Int @map("old_xp")
+  newXp    Int @map("new_xp")
+  xpChange Int @map("xp_change")
+
+  reason RankingHistoryReason
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  ranking AthleteRanking @relation(fields: [athleteRankingId], references: [id])
+
+  @@index([athleteRankingId])
+  @@index([matchId])
+  @@index([createdAt])
+  @@map("ranking_history")
 }

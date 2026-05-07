@@ -4,7 +4,7 @@ import { ModuleDefinition } from "@/common/shared/module/module.types";
 
 import { AccountCreateUseCase } from "./application/use-cases/account-create.use-case";
 import { AccountCreateController } from "./http/controllers/account-create.controller";
-import { PrismaAccountRepository } from "./infra/repositories/prisma-account.repository";
+import { PrismaAccountRepository } from "./infrastructure/repositories/prisma-account.repository";
 
 export const AccountModule: ModuleDefinition = {
   providers: [

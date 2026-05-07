@@ -10,7 +10,7 @@ import { PasswordVO } from "@/common/domain/values-objects/password/password.vo"
 import { BcryptHasher } from "@/common/shared/cryptography/bcrypt-hasher";
 import { UserEntity } from "@/modulos/identity/domain/entities/user.entity";
 import { UserMapper } from "../../domain/mappers/user.mapper";
-import { PrismaUserRepository } from "../../infra/repositories/prisma-user.repository";
+import { PrismaUserRepository } from "../../infrastructure/repositories/prisma-user.repository";
 import { CreateUserDto, UserResponseDto } from "../dto/user.dto";
 
 export type UserCreateUseCaseResponse = Either<

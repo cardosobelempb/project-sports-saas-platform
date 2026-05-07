@@ -324,6 +324,189 @@ exports.Prisma.AddressScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.SportScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  sportType: 'sportType',
+  isTeamSport: 'isTeamSport',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.RuleSetScalarFieldEnum = {
+  id: 'id',
+  sportId: 'sportId',
+  name: 'name',
+  scoringType: 'scoringType',
+  winCondition: 'winCondition',
+  maxPeriods: 'maxPeriods',
+  pointsToWin: 'pointsToWin',
+  minDifference: 'minDifference',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.MatchScalarFieldEnum = {
+  id: 'id',
+  sportId: 'sportId',
+  ruleSetId: 'ruleSetId',
+  matchType: 'matchType',
+  status: 'status',
+  startedAt: 'startedAt',
+  finishedAt: 'finishedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  periods: 'periods'
+};
+
+exports.Prisma.MatchParticipantScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  athleteId: 'athleteId',
+  teamId: 'teamId',
+  side: 'side',
+  totalScore: 'totalScore',
+  isWinner: 'isWinner',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.MatchPeriodScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  periodNumber: 'periodNumber',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.MatchPeriodScoreScalarFieldEnum = {
+  id: 'id',
+  periodId: 'periodId',
+  participantId: 'participantId',
+  score: 'score',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.ScoreboardScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  currentSet: 'currentSet',
+  playerAId: 'playerAId',
+  playerBId: 'playerBId',
+  playerAPoints: 'playerAPoints',
+  playerBPoints: 'playerBPoints',
+  playerASets: 'playerASets',
+  playerBSets: 'playerBSets',
+  firstServerId: 'firstServerId',
+  currentServerId: 'currentServerId',
+  hasSwitchedSides: 'hasSwitchedSides',
+  isFinished: 'isFinished',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.PointEventScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  setNumber: 'setNumber',
+  playerId: 'playerId',
+  serverId: 'serverId',
+  scoringType: 'scoringType',
+  pointNumber: 'pointNumber',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TournamentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  sportId: 'sportId',
+  startDate: 'startDate',
+  format: 'format',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TournamentCategoryScalarFieldEnum = {
+  id: 'id',
+  tournamentId: 'tournamentId',
+  name: 'name',
+  minAge: 'minAge',
+  maxAge: 'maxAge',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TournamentParticipantScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  athleteId: 'athleteId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TournamentMatchScalarFieldEnum = {
+  id: 'id',
+  categoryId: 'categoryId',
+  playerAId: 'playerAId',
+  playerBId: 'playerBId',
+  round: 'round',
+  position: 'position',
+  matchId: 'matchId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.AthleteRankingScalarFieldEnum = {
+  id: 'id',
+  athleteId: 'athleteId',
+  sportId: 'sportId',
+  rating: 'rating',
+  xp: 'xp',
+  wins: 'wins',
+  losses: 'losses',
+  draws: 'draws',
+  matchesPlayed: 'matchesPlayed',
+  currentStreak: 'currentStreak',
+  bestStreak: 'bestStreak',
+  cityId: 'cityId',
+  clubId: 'clubId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.RankingHistoryScalarFieldEnum = {
+  id: 'id',
+  athleteRankingId: 'athleteRankingId',
+  matchId: 'matchId',
+  oldRating: 'oldRating',
+  newRating: 'newRating',
+  ratingChange: 'ratingChange',
+  oldXp: 'oldXp',
+  newXp: 'newXp',
+  xpChange: 'xpChange',
+  reason: 'reason',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -408,6 +591,68 @@ exports.AddressType = exports.$Enums.AddressType = {
   OTHER: 'OTHER'
 };
 
+exports.SportType = exports.$Enums.SportType = {
+  INDIVIDUAL: 'INDIVIDUAL',
+  TEAM: 'TEAM',
+  DUO: 'DUO'
+};
+
+exports.ScoringType = exports.$Enums.ScoringType = {
+  POINTS: 'POINTS',
+  GOALS: 'GOALS',
+  SETS: 'SETS',
+  TIME: 'TIME',
+  DISTANCE: 'DISTANCE'
+};
+
+exports.WinCondition = exports.$Enums.WinCondition = {
+  HIGHEST_SCORE: 'HIGHEST_SCORE',
+  BEST_OF: 'BEST_OF',
+  LOWEST_SCORE: 'LOWEST_SCORE',
+  TIME_BASED: 'TIME_BASED'
+};
+
+exports.MatchType = exports.$Enums.MatchType = {
+  FRIENDLY: 'FRIENDLY',
+  RANKED: 'RANKED',
+  TOURNAMENT: 'TOURNAMENT',
+  TRAINING: 'TRAINING',
+  CHALLENGE: 'CHALLENGE',
+  CASUAL: 'CASUAL'
+};
+
+exports.MatchStatus = exports.$Enums.MatchStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  CONFIRMED: 'CONFIRMED',
+  DISPUTED: 'DISPUTED',
+  FINISHED: 'FINISHED',
+  CANCELLED: 'CANCELLED',
+  ADMIN_APPROVED: 'ADMIN_APPROVED'
+};
+
+exports.MatchPeriodType = exports.$Enums.MatchPeriodType = {
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  ANNUAL: 'ANNUAL'
+};
+
+exports.TournamentFormat = exports.$Enums.TournamentFormat = {
+  KNOCKOUT: 'KNOCKOUT',
+  GROUP_STAGE: 'GROUP_STAGE',
+  ROUND_ROBIN: 'ROUND_ROBIN',
+  DOUBLE_ELIMINATION: 'DOUBLE_ELIMINATION'
+};
+
+exports.RankingHistoryReason = exports.$Enums.RankingHistoryReason = {
+  MATCH_WIN: 'MATCH_WIN',
+  MATCH_LOSS: 'MATCH_LOSS',
+  MATCH_DRAW: 'MATCH_DRAW',
+  ADMIN_ADJUSTMENT: 'ADMIN_ADJUSTMENT',
+  PENALTY: 'PENALTY'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Account: 'Account',
@@ -423,7 +668,21 @@ exports.Prisma.ModelName = {
   Athlete: 'Athlete',
   Organization: 'Organization',
   Membership: 'Membership',
-  Address: 'Address'
+  Address: 'Address',
+  Sport: 'Sport',
+  RuleSet: 'RuleSet',
+  Match: 'Match',
+  MatchParticipant: 'MatchParticipant',
+  MatchPeriod: 'MatchPeriod',
+  MatchPeriodScore: 'MatchPeriodScore',
+  Scoreboard: 'Scoreboard',
+  PointEvent: 'PointEvent',
+  Tournament: 'Tournament',
+  TournamentCategory: 'TournamentCategory',
+  TournamentParticipant: 'TournamentParticipant',
+  TournamentMatch: 'TournamentMatch',
+  AthleteRanking: 'AthleteRanking',
+  RankingHistory: 'RankingHistory'
 };
 
 /**
