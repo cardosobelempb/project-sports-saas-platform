@@ -2,6 +2,7 @@
 
 import { getPrismaClient } from "@/common/infrastructure/db/prisma.client";
 import { TOKENS } from "@/common/shared/container/tokens";
+import { BcryptHasher } from "@/common/shared/cryptography/bcrypt-hasher";
 import { ModuleDefinition } from "@/common/shared/module/module.types";
 import { UserCreateUseCase } from "./application/use-cases/user-create.usecase";
 import { UserCreateController } from "./http/controllers/user-create.controller";
@@ -14,6 +15,10 @@ export const userModule: ModuleDefinition = {
     {
       token: TOKENS.PRISMA_CLIENT,
       useValue: prisma,
+    },
+    {
+      token: TOKENS.BCRYPT_HASHER,
+      useClass: BcryptHasher,
     },
     {
       token: PrismaUserRepository,

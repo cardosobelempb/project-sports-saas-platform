@@ -569,20 +569,24 @@ exports.OrganizationStatus = exports.$Enums.OrganizationStatus = {
   DELETED: 'DELETED'
 };
 
-exports.MemberRole = exports.$Enums.MemberRole = {
+exports.MemberShipRole = exports.$Enums.MemberShipRole = {
   OWNER: 'OWNER',
   ADMIN: 'ADMIN',
+  AFFILIATE: 'AFFILIATE',
+  OPERATOR: 'OPERATOR',
+  CUSTOMER: 'CUSTOMER',
   MANAGER: 'MANAGER',
   SUPPORT: 'SUPPORT',
   FINANCE: 'FINANCE',
   MEMBER: 'MEMBER'
 };
 
-exports.MemberStatus = exports.$Enums.MemberStatus = {
+exports.MemberShipStatus = exports.$Enums.MemberShipStatus = {
   ACTIVE: 'ACTIVE',
   INVITED: 'INVITED',
   SUSPENDED: 'SUSPENDED',
-  REMOVED: 'REMOVED'
+  REMOVED: 'REMOVED',
+  DELETED: 'DELETED'
 };
 
 exports.AddressType = exports.$Enums.AddressType = {

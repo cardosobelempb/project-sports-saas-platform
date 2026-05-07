@@ -39,6 +39,19 @@ export const createResponseSchema = <T extends z.ZodTypeAny>(
 });
 
 /**
+ * POST — criação de recurso (201 + erros padrão)
+ *
+ * @example
+ * response: createResponseSchema(z.object({ organization: OrganizationSchema }))
+ */
+export const signinResponseSchema = <T extends z.ZodTypeAny>(
+  successSchema: T,
+) => ({
+  201: successSchema,
+  ...defaultErrors,
+});
+
+/**
  * GET — busca de recurso (200 + erros padrão)
  *
  * @example

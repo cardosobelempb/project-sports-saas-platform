@@ -1,5 +1,5 @@
-import { BaseHashComparer } from "@/common/shared/utils/base-hash-comparer";
-import { BaseHashGenerator } from "@/common/shared/utils/base-hash-generator";
+import { BaseHashComparer } from "@/common/shared/cryptography/base-hash-comparer";
+import { BaseHashGenerator } from "@/common/shared/cryptography/base-hash-generator";
 
 export class PasswordUtils {
   constructor(

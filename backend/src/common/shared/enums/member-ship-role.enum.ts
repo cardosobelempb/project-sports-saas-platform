@@ -1,0 +1,11 @@
+export enum MemberShipRole {
+  OWNER = "OWNER",
+  ADMIN = "ADMIN",
+  AFFILIATE = "AFFILIATE",
+  OPERATOR = "OPERATOR",
+  CUSTOMER = "CUSTOMER",
+  MANAGER = "MANAGER",
+  SUPPORT = "SUPPORT",
+  FINANCE = "FINANCE",
+  MEMBER = "MEMBER",
+}

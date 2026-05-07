@@ -5,7 +5,7 @@ import { Post } from "@/common/shared/http/decorators/route.decorator";
 import { Validate } from "@/common/shared/http/decorators/validate.decorator";
 import { CreateAccountDto } from "../../application/dto/account.dto";
 import { CreateAccountSchema } from "../../application/schemas/account.shema";
-import { AccountCreateUseCase } from "../../application/use-cases/account-create.use-case";
+import { AccountCreateUseCase } from "../../application/use-cases/account-create.usecase";
 
 // export const AccountCreateController = (
 //   accountCreateUseCase: AccountCreateUseCase,

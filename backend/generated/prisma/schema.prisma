@@ -25,12 +25,24 @@ enum YesNoStatus {
   NO
 }
 
-enum UserLevel {
+enum MemberShipRole {
   OWNER
   ADMIN
   AFFILIATE
   OPERATOR
   CUSTOMER
+  MANAGER
+  SUPPORT
+  FINANCE
+  MEMBER
+}
+
+enum MemberShipStatus {
+  ACTIVE
+  INVITED
+  SUSPENDED
+  REMOVED
+  DELETED
 }
 
 enum DocumentType {
@@ -136,13 +148,6 @@ enum ScheduleAction {
   CLOSE
 }
 
-enum MemberStatus {
-  ACTIVE
-  INVITED
-  SUSPENDED
-  REMOVED
-}
-
 enum OrganizationStatus {
   ACTIVE
   INACTIVE
@@ -154,15 +159,6 @@ enum UserProfileStatus {
   ACTIVE
   INACTIVE
   BLOCKED
-}
-
-enum MemberRole {
-  OWNER
-  ADMIN
-  MANAGER
-  SUPPORT
-  FINANCE
-  MEMBER
 }
 
 enum ConsentStatus {
@@ -590,8 +586,8 @@ model Membership {
   userId   String @map("user_id") @db.Uuid
   tenantId String @map("tenant_id") @db.Uuid
 
-  role   MemberRole   @default(MEMBER)
-  status MemberStatus @default(ACTIVE)
+  role   MemberShipRole   @default(MEMBER)
+  status MemberShipStatus @default(ACTIVE)
 
   joinedAt     DateTime? @map("joined_at")
   invitedEmail String?   @map("invited_email") @db.VarChar(255)

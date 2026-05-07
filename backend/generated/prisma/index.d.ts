@@ -190,15 +190,30 @@ export const YesNoStatus: {
 export type YesNoStatus = (typeof YesNoStatus)[keyof typeof YesNoStatus]
 
 
-export const UserLevel: {
+export const MemberShipRole: {
   OWNER: 'OWNER',
   ADMIN: 'ADMIN',
   AFFILIATE: 'AFFILIATE',
   OPERATOR: 'OPERATOR',
-  CUSTOMER: 'CUSTOMER'
+  CUSTOMER: 'CUSTOMER',
+  MANAGER: 'MANAGER',
+  SUPPORT: 'SUPPORT',
+  FINANCE: 'FINANCE',
+  MEMBER: 'MEMBER'
 };
 
-export type UserLevel = (typeof UserLevel)[keyof typeof UserLevel]
+export type MemberShipRole = (typeof MemberShipRole)[keyof typeof MemberShipRole]
+
+
+export const MemberShipStatus: {
+  ACTIVE: 'ACTIVE',
+  INVITED: 'INVITED',
+  SUSPENDED: 'SUSPENDED',
+  REMOVED: 'REMOVED',
+  DELETED: 'DELETED'
+};
+
+export type MemberShipStatus = (typeof MemberShipStatus)[keyof typeof MemberShipStatus]
 
 
 export const DocumentType: {
@@ -346,16 +361,6 @@ export const ScheduleAction: {
 export type ScheduleAction = (typeof ScheduleAction)[keyof typeof ScheduleAction]
 
 
-export const MemberStatus: {
-  ACTIVE: 'ACTIVE',
-  INVITED: 'INVITED',
-  SUSPENDED: 'SUSPENDED',
-  REMOVED: 'REMOVED'
-};
-
-export type MemberStatus = (typeof MemberStatus)[keyof typeof MemberStatus]
-
-
 export const OrganizationStatus: {
   ACTIVE: 'ACTIVE',
   INACTIVE: 'INACTIVE',
@@ -373,18 +378,6 @@ export const UserProfileStatus: {
 };
 
 export type UserProfileStatus = (typeof UserProfileStatus)[keyof typeof UserProfileStatus]
-
-
-export const MemberRole: {
-  OWNER: 'OWNER',
-  ADMIN: 'ADMIN',
-  MANAGER: 'MANAGER',
-  SUPPORT: 'SUPPORT',
-  FINANCE: 'FINANCE',
-  MEMBER: 'MEMBER'
-};
-
-export type MemberRole = (typeof MemberRole)[keyof typeof MemberRole]
 
 
 export const ConsentStatus: {
@@ -568,9 +561,13 @@ export type YesNoStatus = $Enums.YesNoStatus
 
 export const YesNoStatus: typeof $Enums.YesNoStatus
 
-export type UserLevel = $Enums.UserLevel
+export type MemberShipRole = $Enums.MemberShipRole
 
-export const UserLevel: typeof $Enums.UserLevel
+export const MemberShipRole: typeof $Enums.MemberShipRole
+
+export type MemberShipStatus = $Enums.MemberShipStatus
+
+export const MemberShipStatus: typeof $Enums.MemberShipStatus
 
 export type DocumentType = $Enums.DocumentType
 
@@ -628,10 +625,6 @@ export type ScheduleAction = $Enums.ScheduleAction
 
 export const ScheduleAction: typeof $Enums.ScheduleAction
 
-export type MemberStatus = $Enums.MemberStatus
-
-export const MemberStatus: typeof $Enums.MemberStatus
-
 export type OrganizationStatus = $Enums.OrganizationStatus
 
 export const OrganizationStatus: typeof $Enums.OrganizationStatus
@@ -639,10 +632,6 @@ export const OrganizationStatus: typeof $Enums.OrganizationStatus
 export type UserProfileStatus = $Enums.UserProfileStatus
 
 export const UserProfileStatus: typeof $Enums.UserProfileStatus
-
-export type MemberRole = $Enums.MemberRole
-
-export const MemberRole: typeof $Enums.MemberRole
 
 export type ConsentStatus = $Enums.ConsentStatus
 
@@ -19762,8 +19751,8 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     tenantId: string | null
-    role: $Enums.MemberRole | null
-    status: $Enums.MemberStatus | null
+    role: $Enums.MemberShipRole | null
+    status: $Enums.MemberShipStatus | null
     joinedAt: Date | null
     invitedEmail: string | null
     invitedById: string | null
@@ -19779,8 +19768,8 @@ export namespace Prisma {
     id: string | null
     userId: string | null
     tenantId: string | null
-    role: $Enums.MemberRole | null
-    status: $Enums.MemberStatus | null
+    role: $Enums.MemberShipRole | null
+    status: $Enums.MemberShipStatus | null
     joinedAt: Date | null
     invitedEmail: string | null
     invitedById: string | null
@@ -19939,8 +19928,8 @@ export namespace Prisma {
     id: string
     userId: string
     tenantId: string
-    role: $Enums.MemberRole
-    status: $Enums.MemberStatus
+    role: $Enums.MemberShipRole
+    status: $Enums.MemberShipStatus
     joinedAt: Date | null
     invitedEmail: string | null
     invitedById: string | null
@@ -20074,8 +20063,8 @@ export namespace Prisma {
       id: string
       userId: string
       tenantId: string
-      role: $Enums.MemberRole
-      status: $Enums.MemberStatus
+      role: $Enums.MemberShipRole
+      status: $Enums.MemberShipStatus
       joinedAt: Date | null
       invitedEmail: string | null
       invitedById: string | null
@@ -20514,8 +20503,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Membership", 'String'>
     readonly userId: FieldRef<"Membership", 'String'>
     readonly tenantId: FieldRef<"Membership", 'String'>
-    readonly role: FieldRef<"Membership", 'MemberRole'>
-    readonly status: FieldRef<"Membership", 'MemberStatus'>
+    readonly role: FieldRef<"Membership", 'MemberShipRole'>
+    readonly status: FieldRef<"Membership", 'MemberShipStatus'>
     readonly joinedAt: FieldRef<"Membership", 'DateTime'>
     readonly invitedEmail: FieldRef<"Membership", 'String'>
     readonly invitedById: FieldRef<"Membership", 'String'>
@@ -39570,30 +39559,30 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'MemberRole'
+   * Reference to a field of type 'MemberShipRole'
    */
-  export type EnumMemberRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberRole'>
+  export type EnumMemberShipRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberShipRole'>
     
 
 
   /**
-   * Reference to a field of type 'MemberRole[]'
+   * Reference to a field of type 'MemberShipRole[]'
    */
-  export type ListEnumMemberRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberRole[]'>
+  export type ListEnumMemberShipRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberShipRole[]'>
     
 
 
   /**
-   * Reference to a field of type 'MemberStatus'
+   * Reference to a field of type 'MemberShipStatus'
    */
-  export type EnumMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberStatus'>
+  export type EnumMemberShipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberShipStatus'>
     
 
 
   /**
-   * Reference to a field of type 'MemberStatus[]'
+   * Reference to a field of type 'MemberShipStatus[]'
    */
-  export type ListEnumMemberStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberStatus[]'>
+  export type ListEnumMemberShipStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberShipStatus[]'>
     
 
 
@@ -40833,8 +40822,8 @@ export namespace Prisma {
     id?: UuidFilter<"Membership"> | string
     userId?: UuidFilter<"Membership"> | string
     tenantId?: UuidFilter<"Membership"> | string
-    role?: EnumMemberRoleFilter<"Membership"> | $Enums.MemberRole
-    status?: EnumMemberStatusFilter<"Membership"> | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFilter<"Membership"> | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFilter<"Membership"> | $Enums.MemberShipStatus
     joinedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableFilter<"Membership"> | string | null
     invitedById?: UuidNullableFilter<"Membership"> | string | null
@@ -40877,8 +40866,8 @@ export namespace Prisma {
     NOT?: MembershipWhereInput | MembershipWhereInput[]
     userId?: UuidFilter<"Membership"> | string
     tenantId?: UuidFilter<"Membership"> | string
-    role?: EnumMemberRoleFilter<"Membership"> | $Enums.MemberRole
-    status?: EnumMemberStatusFilter<"Membership"> | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFilter<"Membership"> | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFilter<"Membership"> | $Enums.MemberShipStatus
     joinedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableFilter<"Membership"> | string | null
     invitedById?: UuidNullableFilter<"Membership"> | string | null
@@ -40920,8 +40909,8 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Membership"> | string
     userId?: UuidWithAggregatesFilter<"Membership"> | string
     tenantId?: UuidWithAggregatesFilter<"Membership"> | string
-    role?: EnumMemberRoleWithAggregatesFilter<"Membership"> | $Enums.MemberRole
-    status?: EnumMemberStatusWithAggregatesFilter<"Membership"> | $Enums.MemberStatus
+    role?: EnumMemberShipRoleWithAggregatesFilter<"Membership"> | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusWithAggregatesFilter<"Membership"> | $Enums.MemberShipStatus
     joinedAt?: DateTimeNullableWithAggregatesFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableWithAggregatesFilter<"Membership"> | string | null
     invitedById?: UuidNullableWithAggregatesFilter<"Membership"> | string | null
@@ -43489,8 +43478,8 @@ export namespace Prisma {
 
   export type MembershipCreateInput = {
     id?: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -43508,8 +43497,8 @@ export namespace Prisma {
     id?: string
     userId: string
     tenantId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -43523,8 +43512,8 @@ export namespace Prisma {
 
   export type MembershipUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43542,8 +43531,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43559,8 +43548,8 @@ export namespace Prisma {
     id?: string
     userId: string
     tenantId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -43574,8 +43563,8 @@ export namespace Prisma {
 
   export type MembershipUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -43590,8 +43579,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46115,18 +46104,18 @@ export namespace Prisma {
     _max?: NestedEnumOrganizationStatusFilter<$PrismaModel>
   }
 
-  export type EnumMemberRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberRole | EnumMemberRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberRoleFilter<$PrismaModel> | $Enums.MemberRole
+  export type EnumMemberShipRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipRole | EnumMemberShipRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipRoleFilter<$PrismaModel> | $Enums.MemberShipRole
   }
 
-  export type EnumMemberStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberStatus | EnumMemberStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberStatusFilter<$PrismaModel> | $Enums.MemberStatus
+  export type EnumMemberShipStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipStatus | EnumMemberShipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipStatusFilter<$PrismaModel> | $Enums.MemberShipStatus
   }
 
   export type MembershipUserIdTenantIdCompoundUniqueInput = {
@@ -46185,24 +46174,24 @@ export namespace Prisma {
     organizationId?: SortOrder
   }
 
-  export type EnumMemberRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberRole | EnumMemberRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberRoleWithAggregatesFilter<$PrismaModel> | $Enums.MemberRole
+  export type EnumMemberShipRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipRole | EnumMemberShipRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipRoleWithAggregatesFilter<$PrismaModel> | $Enums.MemberShipRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMemberRoleFilter<$PrismaModel>
-    _max?: NestedEnumMemberRoleFilter<$PrismaModel>
+    _min?: NestedEnumMemberShipRoleFilter<$PrismaModel>
+    _max?: NestedEnumMemberShipRoleFilter<$PrismaModel>
   }
 
-  export type EnumMemberStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberStatus | EnumMemberStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberStatus
+  export type EnumMemberShipStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipStatus | EnumMemberShipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberShipStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMemberStatusFilter<$PrismaModel>
-    _max?: NestedEnumMemberStatusFilter<$PrismaModel>
+    _min?: NestedEnumMemberShipStatusFilter<$PrismaModel>
+    _max?: NestedEnumMemberShipStatusFilter<$PrismaModel>
   }
 
   export type EnumAddressTypeFilter<$PrismaModel = never> = {
@@ -48314,12 +48303,12 @@ export namespace Prisma {
     connect?: OrganizationWhereUniqueInput
   }
 
-  export type EnumMemberRoleFieldUpdateOperationsInput = {
-    set?: $Enums.MemberRole
+  export type EnumMemberShipRoleFieldUpdateOperationsInput = {
+    set?: $Enums.MemberShipRole
   }
 
-  export type EnumMemberStatusFieldUpdateOperationsInput = {
-    set?: $Enums.MemberStatus
+  export type EnumMemberShipStatusFieldUpdateOperationsInput = {
+    set?: $Enums.MemberShipStatus
   }
 
   export type TenantUpdateOneRequiredWithoutMembershipsNestedInput = {
@@ -49636,38 +49625,38 @@ export namespace Prisma {
     _max?: NestedEnumOrganizationStatusFilter<$PrismaModel>
   }
 
-  export type NestedEnumMemberRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberRole | EnumMemberRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberRoleFilter<$PrismaModel> | $Enums.MemberRole
+  export type NestedEnumMemberShipRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipRole | EnumMemberShipRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipRoleFilter<$PrismaModel> | $Enums.MemberShipRole
   }
 
-  export type NestedEnumMemberStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberStatus | EnumMemberStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberStatusFilter<$PrismaModel> | $Enums.MemberStatus
+  export type NestedEnumMemberShipStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipStatus | EnumMemberShipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipStatusFilter<$PrismaModel> | $Enums.MemberShipStatus
   }
 
-  export type NestedEnumMemberRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberRole | EnumMemberRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberRole[] | ListEnumMemberRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberRoleWithAggregatesFilter<$PrismaModel> | $Enums.MemberRole
+  export type NestedEnumMemberShipRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipRole | EnumMemberShipRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipRole[] | ListEnumMemberShipRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipRoleWithAggregatesFilter<$PrismaModel> | $Enums.MemberShipRole
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMemberRoleFilter<$PrismaModel>
-    _max?: NestedEnumMemberRoleFilter<$PrismaModel>
+    _min?: NestedEnumMemberShipRoleFilter<$PrismaModel>
+    _max?: NestedEnumMemberShipRoleFilter<$PrismaModel>
   }
 
-  export type NestedEnumMemberStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.MemberStatus | EnumMemberStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.MemberStatus[] | ListEnumMemberStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumMemberStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberStatus
+  export type NestedEnumMemberShipStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.MemberShipStatus | EnumMemberShipStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.MemberShipStatus[] | ListEnumMemberShipStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumMemberShipStatusWithAggregatesFilter<$PrismaModel> | $Enums.MemberShipStatus
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumMemberStatusFilter<$PrismaModel>
-    _max?: NestedEnumMemberStatusFilter<$PrismaModel>
+    _min?: NestedEnumMemberShipStatusFilter<$PrismaModel>
+    _max?: NestedEnumMemberShipStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumAddressTypeFilter<$PrismaModel = never> = {
@@ -50010,8 +49999,8 @@ export namespace Prisma {
 
   export type MembershipCreateWithoutUserInput = {
     id?: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -50027,8 +50016,8 @@ export namespace Prisma {
   export type MembershipUncheckedCreateWithoutUserInput = {
     id?: string
     tenantId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -50378,8 +50367,8 @@ export namespace Prisma {
     id?: UuidFilter<"Membership"> | string
     userId?: UuidFilter<"Membership"> | string
     tenantId?: UuidFilter<"Membership"> | string
-    role?: EnumMemberRoleFilter<"Membership"> | $Enums.MemberRole
-    status?: EnumMemberStatusFilter<"Membership"> | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFilter<"Membership"> | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFilter<"Membership"> | $Enums.MemberShipStatus
     joinedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableFilter<"Membership"> | string | null
     invitedById?: UuidNullableFilter<"Membership"> | string | null
@@ -51419,8 +51408,8 @@ export namespace Prisma {
 
   export type MembershipCreateWithoutTenantInput = {
     id?: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -51436,8 +51425,8 @@ export namespace Prisma {
   export type MembershipUncheckedCreateWithoutTenantInput = {
     id?: string
     userId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -51862,8 +51851,8 @@ export namespace Prisma {
 
   export type MembershipCreateWithoutOrganizationInput = {
     id?: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -51880,8 +51869,8 @@ export namespace Prisma {
     id?: string
     userId: string
     tenantId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -54837,8 +54826,8 @@ export namespace Prisma {
   export type MembershipCreateManyUserInput = {
     id?: string
     tenantId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -55032,8 +55021,8 @@ export namespace Prisma {
 
   export type MembershipUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55049,8 +55038,8 @@ export namespace Prisma {
   export type MembershipUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55065,8 +55054,8 @@ export namespace Prisma {
   export type MembershipUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55396,8 +55385,8 @@ export namespace Prisma {
   export type MembershipCreateManyTenantInput = {
     id?: string
     userId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -55465,8 +55454,8 @@ export namespace Prisma {
 
   export type MembershipUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55482,8 +55471,8 @@ export namespace Prisma {
   export type MembershipUncheckedUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55498,8 +55487,8 @@ export namespace Prisma {
   export type MembershipUncheckedUpdateManyWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55757,8 +55746,8 @@ export namespace Prisma {
     id?: string
     userId: string
     tenantId: string
-    role?: $Enums.MemberRole
-    status?: $Enums.MemberStatus
+    role?: $Enums.MemberShipRole
+    status?: $Enums.MemberShipStatus
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
@@ -55810,8 +55799,8 @@ export namespace Prisma {
 
   export type MembershipUpdateWithoutOrganizationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55828,8 +55817,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
@@ -55844,8 +55833,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
-    role?: EnumMemberRoleFieldUpdateOperationsInput | $Enums.MemberRole
-    status?: EnumMemberStatusFieldUpdateOperationsInput | $Enums.MemberStatus
+    role?: EnumMemberShipRoleFieldUpdateOperationsInput | $Enums.MemberShipRole
+    status?: EnumMemberShipStatusFieldUpdateOperationsInput | $Enums.MemberShipStatus
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null

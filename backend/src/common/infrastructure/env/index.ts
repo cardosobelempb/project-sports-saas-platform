@@ -34,19 +34,23 @@ export const envSchema = z.object({
   //   .default("hotspot"),
 
   // JWT
-  JWT_SECRET_KEY: z.string().min(1, "JWT_SECRET_KEY é obrigatória"),
-  JWT_EXPIRES_IN: z.string().default("1h"),
-  ACCESS_TOKEN_SECRET_KEY: z
+  JWT_ACCESS_TOKEN_SECRET: z
+    .string()
+    .min(1, "JWT_REFRESH_SECRET é obrigatória"),
+  JWT_ACCESS_TOKEN_EXPIRES_IN: z.coerce.number().default(1),
+  JWT_REFRESH_SECRET: z.string().min(1, "JWT_REFRESH_SECRET é obrigatória"),
+  JWT_REFRESH_TOKEN_EXPIRES_IN: z.coerce.number().default(1),
+  ACCESS_TOKEN_SECRET: z
     .string()
     .min(1, "ACCESS_TOKEN_SECRET_KEY é obrigatória"),
-  REFRESH_TOKEN_SECRET_KEY: z
+  REFRESH_TOKEN_SECRET: z
     .string()
     .min(1, "REFRESH_TOKEN_SECRET_KEY é obrigatória"),
-  ACCESS_TOKEN_EXPIRES_IN: z.string().default("15m"),
-  REFRESH_TOKEN_EXPIRES_IN: z.string().default("7d"),
+  ACCESS_TOKEN_EXPIRES_IN: z.coerce.number().default(15 * 60), // 15 minutos
+  REFRESH_TOKEN_EXPIRES_IN: z.coerce.number().default(7 * 24 * 60 * 60), // 7 dias
 
   // Cookie
-  COOKIE_SECRET_KEY: z.string().min(1, "COOKIE_SECRET é obrigatória"),
+  COOKIE_SECRET: z.string().min(1, "COOKIE_SECRET é obrigatória"),
 });
 
 const parsed = envSchema.safeParse(process.env);

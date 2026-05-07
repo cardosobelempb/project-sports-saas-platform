@@ -2,7 +2,7 @@
 
 import { ModuleDefinition } from "@/common/shared/module/module.types";
 
-import { AccountCreateUseCase } from "./application/use-cases/account-create.use-case";
+import { AccountCreateUseCase } from "./application/use-cases/account-create.usecase";
 import { AccountCreateController } from "./http/controllers/account-create.controller";
 import { PrismaAccountRepository } from "./infrastructure/repositories/prisma-account.repository";
 

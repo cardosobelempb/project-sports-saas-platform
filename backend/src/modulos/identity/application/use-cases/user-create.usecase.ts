@@ -24,10 +24,7 @@ export class UserCreateUseCase {
   constructor(
     private readonly userRepository: PrismaUserRepository,
     private readonly hasher: BcryptHasher,
-  ) {
-    this.userRepository = userRepository;
-    this.hasher = hasher;
-  }
+  ) {}
 
   async execute(input: CreateUserDto): Promise<UserCreateUseCaseResponse> {
     const existing = await this.userRepository.findByEmail(input.email);

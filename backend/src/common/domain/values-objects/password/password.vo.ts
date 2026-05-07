@@ -1,4 +1,4 @@
-import { BaseHash } from "@/common/shared/utils/base-Hash";
+import { BaseHash } from "@/common/shared/cryptography/base-Hash";
 import { BadRequestError } from "../../errors/controllers/bad-request.error";
 import { BaseVO } from "../base.vo";
 
