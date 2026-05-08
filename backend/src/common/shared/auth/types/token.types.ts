@@ -2,7 +2,6 @@
 
 export type AccessTokenPayload = {
   sub: string;
-  userId: string;
   tenantId: string;
   organizationId: string;
   email?: string;
@@ -13,4 +12,9 @@ export type AccessTokenPayload = {
 export type RefreshTokenPayload = {
   sub: string;
   sessionId: string;
+};
+
+export type SessionTokenPayload = {
+  sub: string;
+  // sessionToken: string;
 };

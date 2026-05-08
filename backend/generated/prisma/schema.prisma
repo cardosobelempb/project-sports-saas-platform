@@ -321,7 +321,7 @@ model Account {
 
   refreshToken String?    @map("refresh_token") @db.Text
   accessToken  String?    @map("access_token") @db.Text
-  expiresAt    Int?       @map("expires_at")
+  expireAt     Int?       @map("expires_at")
   tokenType    TokenType? @default(ACCESS) @map("token_type")
   scope        String?    @db.Text
   idToken      String?    @map("id_token") @db.Text
@@ -340,14 +340,19 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(uuid()) @db.Uuid
-  sessionToken String   @unique @map("session_token") @db.VarChar(255)
-  userId       String   @map("user_id") @db.Uuid
-  expires      DateTime
+  id           String    @id @default(uuid()) @db.Uuid
+  sessionToken String    @unique @map("session_token") @db.VarChar(255)
+  userId       String    @map("user_id") @db.Uuid
+  expireAt     DateTime  @map("expires_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+  @@index([expireAt])
+  @@index([deletedAt])
   @@map("sessions")
 }
 
@@ -429,7 +434,7 @@ model Token {
   userId    String    @map("user_id") @db.Uuid
   type      TokenType @default(ACCESS)
   valueHash String    @map("value_hash") @db.VarChar(255)
-  expiresAt DateTime  @map("expires_at")
+  expireAt  DateTime  @map("expires_at")
   revokedAt DateTime? @map("revoked_at")
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
@@ -439,7 +444,7 @@ model Token {
 
   @@index([userId])
   @@index([userId, type])
-  @@index([userId, expiresAt])
+  @@index([userId, expireAt])
   @@index([deletedAt])
   @@map("tokens")
 }
@@ -450,7 +455,7 @@ model Otp {
   phone     String    @db.VarChar(30)
   codeHash  String    @map("code_hash") @db.VarChar(255)
   ipAddress String?   @map("ip_address")
-  expiresAt DateTime  @map("expires_at")
+  expireAt  DateTime  @map("expires_at")
   attempts  Int       @default(0)
   usedAt    DateTime? @map("used_at")
   createdAt DateTime  @default(now()) @map("created_at")
@@ -461,7 +466,7 @@ model Otp {
 
   @@index([phone])
   @@index([userId])
-  @@index([expiresAt])
+  @@index([expireAt])
   @@index([deletedAt])
   @@map("otps")
 }
@@ -592,7 +597,7 @@ model Membership {
   joinedAt     DateTime? @map("joined_at")
   invitedEmail String?   @map("invited_email") @db.VarChar(255)
   invitedById  String?   @map("invited_by_id") @db.Uuid
-  expiresAt    DateTime? @map("expires_at")
+  expireAt     DateTime? @map("expires_at")
   removedAt    DateTime? @map("removed_at")
 
   createdAt DateTime  @default(now()) @map("created_at")

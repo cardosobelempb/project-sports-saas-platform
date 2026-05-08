@@ -6,11 +6,13 @@ import { BcryptHasher } from "@/common/shared/cryptography/bcrypt-hasher";
 import { MemberShipRepository } from "@/modulos/identity/domain/repositories/member-ship.repository";
 import { UserRepository } from "@/modulos/identity/domain/repositories/user.repository";
 import { PrismaUserRepository } from "@/modulos/identity/infrastructure/repositories/prisma-user.repository";
-import { AuthSigninDto, AuthSigninResponseDto } from "../dto/auth.dto";
+import { SessionEntity } from "../../domain/entities/session.entity";
+import { SessionRepository } from "../../domain/repositories/session.repository";
+import { SessionSigninDto, SessionSigninResponseDto } from "../dto/session.dto";
 
 export type UserCreateUseCaseResponse = Either<
   AlreadyExistsError,
-  AuthSigninResponseDto
+  SessionSigninResponseDto
 >;
 
 export class AuthSigninUseCase {
@@ -19,13 +21,13 @@ export class AuthSigninUseCase {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly memberShipRepository: MemberShipRepository,
-    private readonly sessionsRepository: SessionsRepository,
+    private readonly sessionsRepository: SessionRepository,
     private readonly hasher: BcryptHasher,
     private readonly encrypter: JwtEncrypter,
   ) {}
 
-  async execute(input: AuthSigninDto): Promise<UserCreateUseCaseResponse> {
-    const user = await this.userRepository.findByEmail(input.email);
+  async execute(input: SessionSigninDto): Promise<UserCreateUseCaseResponse> {
+    const user = await this.userRepository.findByEmail(input.);
 
     if (!user || !user.passwordHash) {
       throw new UnauthorizedError({
@@ -57,23 +59,32 @@ export class AuthSigninUseCase {
       });
     }
 
-    const accessToken = this.encrypter.encryptAccessToken({
+    const sessionToken = await this.encrypter.encryptSessionToken({
+      sub: user.id.getValue(),
+    });
+
+    const newSession = SessionEntity.create({
+        userId: user.id,
+        sessionToken,
+        expireAt: new Date(Date.now() + 1000 * 60 * 60 * 24), // Expira em 24 horas
+    }),
+
+    const session = await this.sessionsRepository.create(
+      newSession
+    );
+
+    const accessToken = await this.encrypter.encryptAccessToken({
       sub: user.id.getValue(),
       tenantId: membership.tenantId.getValue(),
       organizationId: membership.organizationId.getValue(),
       email: user.email.getValue().value,
-      role: membership?.role,
-      userId: user.id.getValue(),
-      sessionId: "", // Será preenchido após a criação da sessão
+      role: membership.role,
+      sessionId: session.id.getValue(),
     });
 
-    const session = await this.sessionsRepository.create({
-      userId: user.id,
-    });
-
-    const refreshToken = this.encrypter.encryptAccessToken({
-      userId: user.id.getValue(),
-      sessionId: session.id,
+    const refreshToken = await this.encrypter.encryptRefreshToken({
+      sub: user.id.getValue(),
+      sessionId: session.id.getValue(),
     });
 
     return right({

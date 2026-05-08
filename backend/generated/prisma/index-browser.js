@@ -138,7 +138,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   providerAccountId: 'providerAccountId',
   refreshToken: 'refreshToken',
   accessToken: 'accessToken',
-  expiresAt: 'expiresAt',
+  expireAt: 'expireAt',
   tokenType: 'tokenType',
   scope: 'scope',
   idToken: 'idToken',
@@ -152,7 +152,10 @@ exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   sessionToken: 'sessionToken',
   userId: 'userId',
-  expires: 'expires'
+  expireAt: 'expireAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -204,7 +207,7 @@ exports.Prisma.TokenScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   valueHash: 'valueHash',
-  expiresAt: 'expiresAt',
+  expireAt: 'expireAt',
   revokedAt: 'revokedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -217,7 +220,7 @@ exports.Prisma.OtpScalarFieldEnum = {
   phone: 'phone',
   codeHash: 'codeHash',
   ipAddress: 'ipAddress',
-  expiresAt: 'expiresAt',
+  expireAt: 'expireAt',
   attempts: 'attempts',
   usedAt: 'usedAt',
   createdAt: 'createdAt',
@@ -295,7 +298,7 @@ exports.Prisma.MembershipScalarFieldEnum = {
   joinedAt: 'joinedAt',
   invitedEmail: 'invitedEmail',
   invitedById: 'invitedById',
-  expiresAt: 'expiresAt',
+  expireAt: 'expireAt',
   removedAt: 'removedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',

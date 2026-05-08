@@ -10,7 +10,11 @@ import {
 } from "jsonwebtoken";
 import { BaseEncrypter } from "./base-encrypter";
 import { JwtPayload } from "./types/jwt.types";
-import { AccessTokenPayload } from "./types/token.types";
+import {
+  AccessTokenPayload,
+  RefreshTokenPayload,
+  SessionTokenPayload,
+} from "./types/token.types";
 
 /**
  * Implementação JWT completa:
@@ -29,9 +33,19 @@ export class JwtEncrypter implements BaseEncrypter<JwtPayload> {
     });
   }
 
-  generateRefreshToken(payload: { userId: string; sessionId: string }) {
+  async encryptSessionToken(payload: SessionTokenPayload): Promise<string> {
+    this.validateConfig();
+
+    return sign(payload, env.JWT_ACCESS_TOKEN_SECRET, {
+      expiresIn: `${env.JWT_ACCESS_TOKEN_EXPIRES_IN}m`, // Expires in 15 minutes
+    });
+  }
+
+  async encryptRefreshToken(payload: RefreshTokenPayload): Promise<string> {
+    this.validateConfig();
+
     return sign(payload, env.JWT_REFRESH_SECRET, {
-      expiresIn: `${env.JWT_REFRESH_TOKEN_EXPIRES_IN}d`,
+      expiresIn: `${env.JWT_REFRESH_TOKEN_EXPIRES_IN}d`, // Expires in 15 minutes
     });
   }
 
