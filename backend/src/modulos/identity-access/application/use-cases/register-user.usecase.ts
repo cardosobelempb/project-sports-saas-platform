@@ -57,11 +57,11 @@ export class RegisterCreateUseCase {
     private readonly jwt: BaseEncrypter,
   ) {}
 
-  async execute(
-    userInput: CreateUserDto,
-    userProfileInput: CreateUserProfileDto,
-  ): Promise<RegisterCreateUseCaseResponse> {
-    const userEntity = await this.usersRepository.findByEmail(userInput.email);
+  async execute(input: {
+    user: CreateUserDto;
+    profile: CreateUserProfileDto;
+  }): Promise<RegisterCreateUseCaseResponse> {
+    const userEntity = await this.usersRepository.findByEmail(input.user.email);
 
     if (userEntity && userEntity.deletedAt !== null) {
       return left(
@@ -73,35 +73,35 @@ export class RegisterCreateUseCase {
     }
 
     // const password = new PasswordVO(input.passwordHash, this.hasher);
-    const passwordHash = await this.hasher.hash(userInput.passwordHash, 12);
+    const passwordHash = await this.hasher.hash(input.user.passwordHash, 12);
 
     const user = UserEntity.create({
-      email: EmailVO.create(userInput.email),
+      email: EmailVO.create(input.user.email),
       passwordHash: new PasswordVO(passwordHash),
     });
 
     const userProfile = UserProfileEntity.create({
       userId: user.id,
-      firstName: userProfileInput.firstName,
-      lastName: userProfileInput.lastName,
-      fullName: `${userProfileInput.firstName} ${userProfileInput.lastName}`,
-      displayName: userProfileInput.displayName,
-      birthDate: userProfileInput.birthDate,
-      phone: PhoneVO.create(userProfileInput.phone, {
+      firstName: input.profile.firstName,
+      lastName: input.profile.lastName,
+      fullName: `${input.profile.firstName} ${input.profile.lastName}`,
+      displayName: input.profile.displayName,
+      birthDate: input.profile.birthDate,
+      phone: PhoneVO.create(input.profile.phone, {
         minLength: 10,
         maxLength: 11,
       }),
-      avatarUrl: userProfileInput.avatarUrl,
-      documentType: userProfileInput.documentType,
-      documentNumber: userProfileInput.documentNumber,
+      avatarUrl: input.profile.avatarUrl,
+      documentType: input.profile.documentType,
+      documentNumber: input.profile.documentNumber,
     });
 
     const tenant = TenantEntity.create({
-      name: `${userProfileInput.firstName}'s Tenant`,
-      slug: SlugVO.create(`${userProfileInput.firstName.toLowerCase()}-tenant`),
-      documentNumber: userProfileInput.documentNumber,
-      contactEmail: EmailVO.create(userInput.email),
-      phone: userProfileInput.phone,
+      name: `${input.profile.firstName}'s Tenant`,
+      slug: SlugVO.create(`${input.profile.firstName.toLowerCase()}-tenant`),
+      documentNumber: input.profile.documentNumber,
+      contactEmail: EmailVO.create(input.user.email),
+      phone: input.profile.phone,
     });
 
     const membership = MembershipEntity.create({
@@ -112,7 +112,7 @@ export class RegisterCreateUseCase {
       role: MembershipRole.OWNER,
       status: MembershipStatus.ACTIVE,
       joinedAt: new Date(),
-      invitedEmail: EmailVO.create(userInput.email), // Usar o email do usuário para o convite
+      invitedEmail: EmailVO.create(input.user.email), // Usar o email do usuário para o convite
     });
 
     const consentimento = LgpdConsentsEntity.create({
