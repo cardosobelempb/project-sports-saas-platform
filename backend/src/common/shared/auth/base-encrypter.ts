@@ -11,7 +11,7 @@ export abstract class BaseEncrypter<TPayload = unknown> {
    * @throws Erro se a criptografia falhar ou se a configuração for inválida.
    */
   abstract encryptAccessToken(payload: TPayload): Promise<string>;
-  abstract encryptRefreshToken?(payload: TPayload): Promise<string>;
+  abstract encryptRefreshToken(payload: TPayload): Promise<string>;
   abstract verifyAccessToken(token: string): void;
   abstract verifyRefreshToken(token: string): void;
   abstract decrypt(token: string): Promise<TPayload>;

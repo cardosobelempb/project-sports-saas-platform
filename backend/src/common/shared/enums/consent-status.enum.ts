@@ -1,0 +1,7 @@
+export enum ConsentStatus {
+  ACTIVE = "ACTIVE",
+  REVOKED = "REVOKED",
+  WITHDRAWN = "WITHDRAWN",
+  EXPIRED = "EXPIRED",
+  PENDING = "PENDING",
+}

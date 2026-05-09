@@ -1,4 +1,4 @@
-import { PrismaUserRepository } from "@/modulos/identity/infrastructure/repositories/prisma-user.repository";
+import { PrismaUserRepository } from "@/modulos/identity-access/infrastructure/repositories/prisma-user.repository";
 import type { PrismaClient } from "../../../../generated/prisma";
 
 export class TransactionRunner {

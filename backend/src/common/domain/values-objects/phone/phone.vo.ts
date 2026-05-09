@@ -227,3 +227,12 @@ export class PhoneVO extends BaseVO<string> {
     }
   }
 }
+
+/**
+ * Exemplo de uso:
+ * const phone = PhoneVO.create("(11) 91234-5678");
+ * console.log(phone.getValue()); // "11912345678"
+ * console.log(phone.format()); // "(11) 91234-5678"
+ * console.log(phone.isValid()); // true
+ * const invalidPhone = PhoneVO.create("123"); // lança BadRequestError
+ */

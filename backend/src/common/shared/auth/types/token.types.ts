@@ -2,11 +2,12 @@
 
 export type AccessTokenPayload = {
   sub: string;
-  tenantId: string;
-  organizationId: string;
-  email?: string;
-  role?: string;
-  sessionId?: string;
+  email: string;
+  memberships: Array<{
+    tenantId: string;
+    organizationId: string | null;
+    role: string;
+  }>;
 };
 
 export type RefreshTokenPayload = {

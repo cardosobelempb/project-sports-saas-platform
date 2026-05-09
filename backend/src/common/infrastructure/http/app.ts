@@ -1,16 +1,15 @@
+import fastifyCookie from "@fastify/cookie";
 import fastifyCors from "@fastify/cors";
 import Fastify, { type FastifyInstance } from "fastify";
+
 import {
   serializerCompiler,
   validatorCompiler,
 } from "fastify-type-provider-zod";
 
-import fastifyCookie from "@fastify/cookie";
-
 import { env } from "../env/index.js";
 import { buildLogger } from "../observability/logger.js";
 
-import { authPlugin } from "@/common/shared/auth/auth.plugin.js";
 import { swaggerPlugin } from "@/common/shared/http/swagger.plugin.js";
 import { getPrismaClient } from "../db/prisma.client.js";
 import { errorHandler } from "./middlewares/error-handler.js";
@@ -87,9 +86,10 @@ export async function buildApp(
   await app.register(fastifyCors, {
     origin: options.cors?.origin ?? env.ORIGIN,
     credentials: options.cors?.credentials ?? true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   });
 
-  const cookieSecret = env.COOKIE_SECRET_KEY;
+  const cookieSecret = env.COOKIE_SECRET;
 
   if (!cookieSecret) {
     logger.error({}, "Missing required environment variable: COOKIE_SECRET");
@@ -102,7 +102,6 @@ export async function buildApp(
   });
 
   await app.register(swaggerPlugin, options);
-  await app.register(authPlugin);
 
   // Disponibiliza logger e prisma via decorator para toda a aplicação
   app.decorate("logger", logger);

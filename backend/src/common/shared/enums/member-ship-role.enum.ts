@@ -1,4 +1,4 @@
-export enum MemberShipRole {
+export enum MembershipRole {
   OWNER = "OWNER",
   ADMIN = "ADMIN",
   AFFILIATE = "AFFILIATE",

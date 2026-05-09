@@ -1,4 +1,4 @@
-export enum MemberShipStatus {
+export enum MembershipStatus {
   ACTIVE = "ACTIVE",
   INVITED = "INVITED",
   SUSPENDED = "SUSPENDED",

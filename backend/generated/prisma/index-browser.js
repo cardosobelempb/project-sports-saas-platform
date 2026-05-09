@@ -138,7 +138,7 @@ exports.Prisma.AccountScalarFieldEnum = {
   providerAccountId: 'providerAccountId',
   refreshToken: 'refreshToken',
   accessToken: 'accessToken',
-  expireAt: 'expireAt',
+  expiredAt: 'expiredAt',
   scope: 'scope',
   idToken: 'idToken',
   sessionState: 'sessionState',
@@ -151,7 +151,7 @@ exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   sessionToken: 'sessionToken',
   userId: 'userId',
-  expireAt: 'expireAt',
+  expiredAt: 'expiredAt',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
   createdAt: 'createdAt',
@@ -163,7 +163,7 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   id: 'id',
   identifier: 'identifier',
   tokenHash: 'tokenHash',
-  expireAt: 'expireAt',
+  expiredAt: 'expiredAt',
   usedAt: 'usedAt',
   createdAt: 'createdAt'
 };
@@ -173,7 +173,7 @@ exports.Prisma.TokenScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   valueHash: 'valueHash',
-  expireAt: 'expireAt',
+  expiredAt: 'expiredAt',
   revokedAt: 'revokedAt',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
@@ -217,7 +217,7 @@ exports.Prisma.MembershipScalarFieldEnum = {
   joinedAt: 'joinedAt',
   invitedEmail: 'invitedEmail',
   invitedById: 'invitedById',
-  expireAt: 'expireAt',
+  expiredAt: 'expiredAt',
   removedAt: 'removedAt',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -230,7 +230,7 @@ exports.Prisma.OtpScalarFieldEnum = {
   phone: 'phone',
   codeHash: 'codeHash',
   ipAddress: 'ipAddress',
-  expireAt: 'expireAt',
+  expiredAt: 'expiredAt',
   attempts: 'attempts',
   usedAt: 'usedAt',
   createdAt: 'createdAt',
@@ -586,7 +586,9 @@ exports.UserProfileStatus = exports.$Enums.UserProfileStatus = {
 exports.ConsentStatus = exports.$Enums.ConsentStatus = {
   ACTIVE: 'ACTIVE',
   REVOKED: 'REVOKED',
-  WITHDRAWN: 'WITHDRAWN'
+  WITHDRAWN: 'WITHDRAWN',
+  EXPIRED: 'EXPIRED',
+  PENDING: 'PENDING'
 };
 
 exports.AddressType = exports.$Enums.AddressType = {

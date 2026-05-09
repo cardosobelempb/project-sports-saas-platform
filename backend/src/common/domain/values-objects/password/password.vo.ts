@@ -1,4 +1,4 @@
-import { BaseHash } from "@/common/shared/cryptography/base-Hash";
+import { BaseBcryptHasher } from "@/common/shared/cryptography/base-bcrypt-hasher";
 import { BadRequestError } from "../../errors/controllers/bad-request.error";
 import { BaseVO } from "../base.vo";
 
@@ -19,7 +19,7 @@ export interface PasswordOptions {
  * Aplica validações consistentes, permite hashing e comparação segura.
  */
 export class PasswordVO extends BaseVO<string> {
-  private readonly hasher?: BaseHash;
+  private readonly hasher?: BaseBcryptHasher;
   private readonly options: Required<PasswordOptions>;
   private static readonly DEFAULT_MIN_LENGTH = 8;
   private static readonly DEFAULT_MAX_LENGTH = 64;
@@ -27,7 +27,7 @@ export class PasswordVO extends BaseVO<string> {
 
   constructor(
     password: string,
-    hasher?: BaseHash,
+    hasher?: BaseBcryptHasher,
     options: PasswordOptions = {},
   ) {
     super(password);
@@ -158,7 +158,7 @@ export class PasswordVO extends BaseVO<string> {
   public static async validateOldPassword(
     oldPassword: string,
     oldHash: string,
-    hasher: BaseHash,
+    hasher: BaseBcryptHasher,
   ): Promise<void> {
     if (!hasher)
       throw new BadRequestError({

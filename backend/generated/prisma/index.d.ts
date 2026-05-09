@@ -383,7 +383,9 @@ export type UserProfileStatus = (typeof UserProfileStatus)[keyof typeof UserProf
 export const ConsentStatus: {
   ACTIVE: 'ACTIVE',
   REVOKED: 'REVOKED',
-  WITHDRAWN: 'WITHDRAWN'
+  WITHDRAWN: 'WITHDRAWN',
+  EXPIRED: 'EXPIRED',
+  PENDING: 'PENDING'
 };
 
 export type ConsentStatus = (typeof ConsentStatus)[keyof typeof ConsentStatus]
@@ -5777,11 +5779,11 @@ export namespace Prisma {
   }
 
   export type AccountAvgAggregateOutputType = {
-    expireAt: number | null
+    expiredAt: number | null
   }
 
   export type AccountSumAggregateOutputType = {
-    expireAt: number | null
+    expiredAt: number | null
   }
 
   export type AccountMinAggregateOutputType = {
@@ -5792,7 +5794,7 @@ export namespace Prisma {
     providerAccountId: string | null
     refreshToken: string | null
     accessToken: string | null
-    expireAt: number | null
+    expiredAt: number | null
     scope: string | null
     idToken: string | null
     sessionState: string | null
@@ -5809,7 +5811,7 @@ export namespace Prisma {
     providerAccountId: string | null
     refreshToken: string | null
     accessToken: string | null
-    expireAt: number | null
+    expiredAt: number | null
     scope: string | null
     idToken: string | null
     sessionState: string | null
@@ -5826,7 +5828,7 @@ export namespace Prisma {
     providerAccountId: number
     refreshToken: number
     accessToken: number
-    expireAt: number
+    expiredAt: number
     scope: number
     idToken: number
     sessionState: number
@@ -5838,11 +5840,11 @@ export namespace Prisma {
 
 
   export type AccountAvgAggregateInputType = {
-    expireAt?: true
+    expiredAt?: true
   }
 
   export type AccountSumAggregateInputType = {
-    expireAt?: true
+    expiredAt?: true
   }
 
   export type AccountMinAggregateInputType = {
@@ -5853,7 +5855,7 @@ export namespace Prisma {
     providerAccountId?: true
     refreshToken?: true
     accessToken?: true
-    expireAt?: true
+    expiredAt?: true
     scope?: true
     idToken?: true
     sessionState?: true
@@ -5870,7 +5872,7 @@ export namespace Prisma {
     providerAccountId?: true
     refreshToken?: true
     accessToken?: true
-    expireAt?: true
+    expiredAt?: true
     scope?: true
     idToken?: true
     sessionState?: true
@@ -5887,7 +5889,7 @@ export namespace Prisma {
     providerAccountId?: true
     refreshToken?: true
     accessToken?: true
-    expireAt?: true
+    expiredAt?: true
     scope?: true
     idToken?: true
     sessionState?: true
@@ -5991,7 +5993,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken: string | null
     accessToken: string | null
-    expireAt: number | null
+    expiredAt: number | null
     scope: string | null
     idToken: string | null
     sessionState: string | null
@@ -6027,7 +6029,7 @@ export namespace Prisma {
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6045,7 +6047,7 @@ export namespace Prisma {
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6063,7 +6065,7 @@ export namespace Prisma {
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6081,7 +6083,7 @@ export namespace Prisma {
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6090,7 +6092,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "providerType" | "provider" | "providerAccountId" | "refreshToken" | "accessToken" | "expireAt" | "scope" | "idToken" | "sessionState" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "providerType" | "provider" | "providerAccountId" | "refreshToken" | "accessToken" | "expiredAt" | "scope" | "idToken" | "sessionState" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6114,7 +6116,7 @@ export namespace Prisma {
       providerAccountId: string
       refreshToken: string | null
       accessToken: string | null
-      expireAt: number | null
+      expiredAt: number | null
       scope: string | null
       idToken: string | null
       sessionState: string | null
@@ -6552,7 +6554,7 @@ export namespace Prisma {
     readonly providerAccountId: FieldRef<"Account", 'String'>
     readonly refreshToken: FieldRef<"Account", 'String'>
     readonly accessToken: FieldRef<"Account", 'String'>
-    readonly expireAt: FieldRef<"Account", 'Int'>
+    readonly expiredAt: FieldRef<"Account", 'Int'>
     readonly scope: FieldRef<"Account", 'String'>
     readonly idToken: FieldRef<"Account", 'String'>
     readonly sessionState: FieldRef<"Account", 'String'>
@@ -6992,7 +6994,7 @@ export namespace Prisma {
     id: string | null
     sessionToken: string | null
     userId: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     ipAddress: string | null
     userAgent: string | null
     createdAt: Date | null
@@ -7004,7 +7006,7 @@ export namespace Prisma {
     id: string | null
     sessionToken: string | null
     userId: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     ipAddress: string | null
     userAgent: string | null
     createdAt: Date | null
@@ -7016,7 +7018,7 @@ export namespace Prisma {
     id: number
     sessionToken: number
     userId: number
-    expireAt: number
+    expiredAt: number
     ipAddress: number
     userAgent: number
     createdAt: number
@@ -7030,7 +7032,7 @@ export namespace Prisma {
     id?: true
     sessionToken?: true
     userId?: true
-    expireAt?: true
+    expiredAt?: true
     ipAddress?: true
     userAgent?: true
     createdAt?: true
@@ -7042,7 +7044,7 @@ export namespace Prisma {
     id?: true
     sessionToken?: true
     userId?: true
-    expireAt?: true
+    expiredAt?: true
     ipAddress?: true
     userAgent?: true
     createdAt?: true
@@ -7054,7 +7056,7 @@ export namespace Prisma {
     id?: true
     sessionToken?: true
     userId?: true
-    expireAt?: true
+    expiredAt?: true
     ipAddress?: true
     userAgent?: true
     createdAt?: true
@@ -7139,7 +7141,7 @@ export namespace Prisma {
     id: string
     sessionToken: string
     userId: string
-    expireAt: Date
+    expiredAt: Date
     ipAddress: string | null
     userAgent: string | null
     createdAt: Date
@@ -7168,7 +7170,7 @@ export namespace Prisma {
     id?: boolean
     sessionToken?: boolean
     userId?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7181,7 +7183,7 @@ export namespace Prisma {
     id?: boolean
     sessionToken?: boolean
     userId?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7194,7 +7196,7 @@ export namespace Prisma {
     id?: boolean
     sessionToken?: boolean
     userId?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7207,7 +7209,7 @@ export namespace Prisma {
     id?: boolean
     sessionToken?: boolean
     userId?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7215,7 +7217,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionToken" | "userId" | "expireAt" | "ipAddress" | "userAgent" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionToken" | "userId" | "expiredAt" | "ipAddress" | "userAgent" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -7235,7 +7237,7 @@ export namespace Prisma {
       id: string
       sessionToken: string
       userId: string
-      expireAt: Date
+      expiredAt: Date
       ipAddress: string | null
       userAgent: string | null
       createdAt: Date
@@ -7668,7 +7670,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Session", 'String'>
     readonly sessionToken: FieldRef<"Session", 'String'>
     readonly userId: FieldRef<"Session", 'String'>
-    readonly expireAt: FieldRef<"Session", 'DateTime'>
+    readonly expiredAt: FieldRef<"Session", 'DateTime'>
     readonly ipAddress: FieldRef<"Session", 'String'>
     readonly userAgent: FieldRef<"Session", 'String'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
@@ -8107,7 +8109,7 @@ export namespace Prisma {
     id: string | null
     identifier: string | null
     tokenHash: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     usedAt: Date | null
     createdAt: Date | null
   }
@@ -8116,7 +8118,7 @@ export namespace Prisma {
     id: string | null
     identifier: string | null
     tokenHash: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     usedAt: Date | null
     createdAt: Date | null
   }
@@ -8125,7 +8127,7 @@ export namespace Prisma {
     id: number
     identifier: number
     tokenHash: number
-    expireAt: number
+    expiredAt: number
     usedAt: number
     createdAt: number
     _all: number
@@ -8136,7 +8138,7 @@ export namespace Prisma {
     id?: true
     identifier?: true
     tokenHash?: true
-    expireAt?: true
+    expiredAt?: true
     usedAt?: true
     createdAt?: true
   }
@@ -8145,7 +8147,7 @@ export namespace Prisma {
     id?: true
     identifier?: true
     tokenHash?: true
-    expireAt?: true
+    expiredAt?: true
     usedAt?: true
     createdAt?: true
   }
@@ -8154,7 +8156,7 @@ export namespace Prisma {
     id?: true
     identifier?: true
     tokenHash?: true
-    expireAt?: true
+    expiredAt?: true
     usedAt?: true
     createdAt?: true
     _all?: true
@@ -8236,7 +8238,7 @@ export namespace Prisma {
     id: string
     identifier: string
     tokenHash: string
-    expireAt: Date
+    expiredAt: Date
     usedAt: Date | null
     createdAt: Date
     _count: VerificationTokenCountAggregateOutputType | null
@@ -8262,7 +8264,7 @@ export namespace Prisma {
     id?: boolean
     identifier?: boolean
     tokenHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["verificationToken"]>
@@ -8271,7 +8273,7 @@ export namespace Prisma {
     id?: boolean
     identifier?: boolean
     tokenHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["verificationToken"]>
@@ -8280,7 +8282,7 @@ export namespace Prisma {
     id?: boolean
     identifier?: boolean
     tokenHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
   }, ExtArgs["result"]["verificationToken"]>
@@ -8289,12 +8291,12 @@ export namespace Prisma {
     id?: boolean
     identifier?: boolean
     tokenHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
   }
 
-  export type VerificationTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "identifier" | "tokenHash" | "expireAt" | "usedAt" | "createdAt", ExtArgs["result"]["verificationToken"]>
+  export type VerificationTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "identifier" | "tokenHash" | "expiredAt" | "usedAt" | "createdAt", ExtArgs["result"]["verificationToken"]>
 
   export type $VerificationTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "VerificationToken"
@@ -8303,7 +8305,7 @@ export namespace Prisma {
       id: string
       identifier: string
       tokenHash: string
-      expireAt: Date
+      expiredAt: Date
       usedAt: Date | null
       createdAt: Date
     }, ExtArgs["result"]["verificationToken"]>
@@ -8732,7 +8734,7 @@ export namespace Prisma {
     readonly id: FieldRef<"VerificationToken", 'String'>
     readonly identifier: FieldRef<"VerificationToken", 'String'>
     readonly tokenHash: FieldRef<"VerificationToken", 'String'>
-    readonly expireAt: FieldRef<"VerificationToken", 'DateTime'>
+    readonly expiredAt: FieldRef<"VerificationToken", 'DateTime'>
     readonly usedAt: FieldRef<"VerificationToken", 'DateTime'>
     readonly createdAt: FieldRef<"VerificationToken", 'DateTime'>
   }
@@ -9121,7 +9123,7 @@ export namespace Prisma {
     userId: string | null
     type: $Enums.TokenType | null
     valueHash: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     revokedAt: Date | null
     ipAddress: string | null
     userAgent: string | null
@@ -9135,7 +9137,7 @@ export namespace Prisma {
     userId: string | null
     type: $Enums.TokenType | null
     valueHash: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     revokedAt: Date | null
     ipAddress: string | null
     userAgent: string | null
@@ -9149,7 +9151,7 @@ export namespace Prisma {
     userId: number
     type: number
     valueHash: number
-    expireAt: number
+    expiredAt: number
     revokedAt: number
     ipAddress: number
     userAgent: number
@@ -9165,7 +9167,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     valueHash?: true
-    expireAt?: true
+    expiredAt?: true
     revokedAt?: true
     ipAddress?: true
     userAgent?: true
@@ -9179,7 +9181,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     valueHash?: true
-    expireAt?: true
+    expiredAt?: true
     revokedAt?: true
     ipAddress?: true
     userAgent?: true
@@ -9193,7 +9195,7 @@ export namespace Prisma {
     userId?: true
     type?: true
     valueHash?: true
-    expireAt?: true
+    expiredAt?: true
     revokedAt?: true
     ipAddress?: true
     userAgent?: true
@@ -9280,7 +9282,7 @@ export namespace Prisma {
     userId: string
     type: $Enums.TokenType
     valueHash: string
-    expireAt: Date
+    expiredAt: Date
     revokedAt: Date | null
     ipAddress: string | null
     userAgent: string | null
@@ -9311,7 +9313,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     valueHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     revokedAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
@@ -9326,7 +9328,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     valueHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     revokedAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
@@ -9341,7 +9343,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     valueHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     revokedAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
@@ -9356,7 +9358,7 @@ export namespace Prisma {
     userId?: boolean
     type?: boolean
     valueHash?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     revokedAt?: boolean
     ipAddress?: boolean
     userAgent?: boolean
@@ -9365,7 +9367,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type TokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "valueHash" | "expireAt" | "revokedAt" | "ipAddress" | "userAgent" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["token"]>
+  export type TokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "valueHash" | "expiredAt" | "revokedAt" | "ipAddress" | "userAgent" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["token"]>
   export type TokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -9386,7 +9388,7 @@ export namespace Prisma {
       userId: string
       type: $Enums.TokenType
       valueHash: string
-      expireAt: Date
+      expiredAt: Date
       revokedAt: Date | null
       ipAddress: string | null
       userAgent: string | null
@@ -9821,7 +9823,7 @@ export namespace Prisma {
     readonly userId: FieldRef<"Token", 'String'>
     readonly type: FieldRef<"Token", 'TokenType'>
     readonly valueHash: FieldRef<"Token", 'String'>
-    readonly expireAt: FieldRef<"Token", 'DateTime'>
+    readonly expiredAt: FieldRef<"Token", 'DateTime'>
     readonly revokedAt: FieldRef<"Token", 'DateTime'>
     readonly ipAddress: FieldRef<"Token", 'String'>
     readonly userAgent: FieldRef<"Token", 'String'>
@@ -12580,7 +12582,7 @@ export namespace Prisma {
     joinedAt: Date | null
     invitedEmail: string | null
     invitedById: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     removedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12597,7 +12599,7 @@ export namespace Prisma {
     joinedAt: Date | null
     invitedEmail: string | null
     invitedById: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     removedAt: Date | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12614,7 +12616,7 @@ export namespace Prisma {
     joinedAt: number
     invitedEmail: number
     invitedById: number
-    expireAt: number
+    expiredAt: number
     removedAt: number
     createdAt: number
     updatedAt: number
@@ -12633,7 +12635,7 @@ export namespace Prisma {
     joinedAt?: true
     invitedEmail?: true
     invitedById?: true
-    expireAt?: true
+    expiredAt?: true
     removedAt?: true
     createdAt?: true
     updatedAt?: true
@@ -12650,7 +12652,7 @@ export namespace Prisma {
     joinedAt?: true
     invitedEmail?: true
     invitedById?: true
-    expireAt?: true
+    expiredAt?: true
     removedAt?: true
     createdAt?: true
     updatedAt?: true
@@ -12667,7 +12669,7 @@ export namespace Prisma {
     joinedAt?: true
     invitedEmail?: true
     invitedById?: true
-    expireAt?: true
+    expiredAt?: true
     removedAt?: true
     createdAt?: true
     updatedAt?: true
@@ -12757,7 +12759,7 @@ export namespace Prisma {
     joinedAt: Date | null
     invitedEmail: string | null
     invitedById: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     removedAt: Date | null
     createdAt: Date
     updatedAt: Date | null
@@ -12791,7 +12793,7 @@ export namespace Prisma {
     joinedAt?: boolean
     invitedEmail?: boolean
     invitedById?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     removedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12811,7 +12813,7 @@ export namespace Prisma {
     joinedAt?: boolean
     invitedEmail?: boolean
     invitedById?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     removedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12831,7 +12833,7 @@ export namespace Prisma {
     joinedAt?: boolean
     invitedEmail?: boolean
     invitedById?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     removedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12851,14 +12853,14 @@ export namespace Prisma {
     joinedAt?: boolean
     invitedEmail?: boolean
     invitedById?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     removedAt?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
   }
 
-  export type MembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "tenantId" | "organizationId" | "role" | "status" | "joinedAt" | "invitedEmail" | "invitedById" | "expireAt" | "removedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["membership"]>
+  export type MembershipOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "tenantId" | "organizationId" | "role" | "status" | "joinedAt" | "invitedEmail" | "invitedById" | "expiredAt" | "removedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["membership"]>
   export type MembershipInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -12892,7 +12894,7 @@ export namespace Prisma {
       joinedAt: Date | null
       invitedEmail: string | null
       invitedById: string | null
-      expireAt: Date | null
+      expiredAt: Date | null
       removedAt: Date | null
       createdAt: Date
       updatedAt: Date | null
@@ -13332,7 +13334,7 @@ export namespace Prisma {
     readonly joinedAt: FieldRef<"Membership", 'DateTime'>
     readonly invitedEmail: FieldRef<"Membership", 'String'>
     readonly invitedById: FieldRef<"Membership", 'String'>
-    readonly expireAt: FieldRef<"Membership", 'DateTime'>
+    readonly expiredAt: FieldRef<"Membership", 'DateTime'>
     readonly removedAt: FieldRef<"Membership", 'DateTime'>
     readonly createdAt: FieldRef<"Membership", 'DateTime'>
     readonly updatedAt: FieldRef<"Membership", 'DateTime'>
@@ -13801,7 +13803,7 @@ export namespace Prisma {
     phone: string | null
     codeHash: string | null
     ipAddress: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     attempts: number | null
     usedAt: Date | null
     createdAt: Date | null
@@ -13815,7 +13817,7 @@ export namespace Prisma {
     phone: string | null
     codeHash: string | null
     ipAddress: string | null
-    expireAt: Date | null
+    expiredAt: Date | null
     attempts: number | null
     usedAt: Date | null
     createdAt: Date | null
@@ -13829,7 +13831,7 @@ export namespace Prisma {
     phone: number
     codeHash: number
     ipAddress: number
-    expireAt: number
+    expiredAt: number
     attempts: number
     usedAt: number
     createdAt: number
@@ -13853,7 +13855,7 @@ export namespace Prisma {
     phone?: true
     codeHash?: true
     ipAddress?: true
-    expireAt?: true
+    expiredAt?: true
     attempts?: true
     usedAt?: true
     createdAt?: true
@@ -13867,7 +13869,7 @@ export namespace Prisma {
     phone?: true
     codeHash?: true
     ipAddress?: true
-    expireAt?: true
+    expiredAt?: true
     attempts?: true
     usedAt?: true
     createdAt?: true
@@ -13881,7 +13883,7 @@ export namespace Prisma {
     phone?: true
     codeHash?: true
     ipAddress?: true
-    expireAt?: true
+    expiredAt?: true
     attempts?: true
     usedAt?: true
     createdAt?: true
@@ -13982,7 +13984,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress: string | null
-    expireAt: Date
+    expiredAt: Date
     attempts: number
     usedAt: Date | null
     createdAt: Date
@@ -14015,7 +14017,7 @@ export namespace Prisma {
     phone?: boolean
     codeHash?: boolean
     ipAddress?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     attempts?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -14030,7 +14032,7 @@ export namespace Prisma {
     phone?: boolean
     codeHash?: boolean
     ipAddress?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     attempts?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -14045,7 +14047,7 @@ export namespace Prisma {
     phone?: boolean
     codeHash?: boolean
     ipAddress?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     attempts?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -14060,7 +14062,7 @@ export namespace Prisma {
     phone?: boolean
     codeHash?: boolean
     ipAddress?: boolean
-    expireAt?: boolean
+    expiredAt?: boolean
     attempts?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -14068,7 +14070,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type OtpOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "phone" | "codeHash" | "ipAddress" | "expireAt" | "attempts" | "usedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["otp"]>
+  export type OtpOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "phone" | "codeHash" | "ipAddress" | "expiredAt" | "attempts" | "usedAt" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["otp"]>
   export type OtpInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | Otp$userArgs<ExtArgs>
   }
@@ -14090,7 +14092,7 @@ export namespace Prisma {
       phone: string
       codeHash: string
       ipAddress: string | null
-      expireAt: Date
+      expiredAt: Date
       attempts: number
       usedAt: Date | null
       createdAt: Date
@@ -14525,7 +14527,7 @@ export namespace Prisma {
     readonly phone: FieldRef<"Otp", 'String'>
     readonly codeHash: FieldRef<"Otp", 'String'>
     readonly ipAddress: FieldRef<"Otp", 'String'>
-    readonly expireAt: FieldRef<"Otp", 'DateTime'>
+    readonly expiredAt: FieldRef<"Otp", 'DateTime'>
     readonly attempts: FieldRef<"Otp", 'Int'>
     readonly usedAt: FieldRef<"Otp", 'DateTime'>
     readonly createdAt: FieldRef<"Otp", 'DateTime'>
@@ -15169,7 +15171,7 @@ export namespace Prisma {
     lastName: string | null
     displayName: string | null
     fullName: string | null
-    documentType: $Enums.DocumentType | null
+    documentType: $Enums.DocumentType
     documentNumber: string | null
     phone: string | null
     birthDate: Date | null
@@ -15295,7 +15297,7 @@ export namespace Prisma {
       lastName: string | null
       displayName: string | null
       fullName: string | null
-      documentType: $Enums.DocumentType | null
+      documentType: $Enums.DocumentType
       documentNumber: string | null
       phone: string | null
       birthDate: Date | null
@@ -38620,7 +38622,7 @@ export namespace Prisma {
     providerAccountId: 'providerAccountId',
     refreshToken: 'refreshToken',
     accessToken: 'accessToken',
-    expireAt: 'expireAt',
+    expiredAt: 'expiredAt',
     scope: 'scope',
     idToken: 'idToken',
     sessionState: 'sessionState',
@@ -38636,7 +38638,7 @@ export namespace Prisma {
     id: 'id',
     sessionToken: 'sessionToken',
     userId: 'userId',
-    expireAt: 'expireAt',
+    expiredAt: 'expiredAt',
     ipAddress: 'ipAddress',
     userAgent: 'userAgent',
     createdAt: 'createdAt',
@@ -38651,7 +38653,7 @@ export namespace Prisma {
     id: 'id',
     identifier: 'identifier',
     tokenHash: 'tokenHash',
-    expireAt: 'expireAt',
+    expiredAt: 'expiredAt',
     usedAt: 'usedAt',
     createdAt: 'createdAt'
   };
@@ -38664,7 +38666,7 @@ export namespace Prisma {
     userId: 'userId',
     type: 'type',
     valueHash: 'valueHash',
-    expireAt: 'expireAt',
+    expiredAt: 'expiredAt',
     revokedAt: 'revokedAt',
     ipAddress: 'ipAddress',
     userAgent: 'userAgent',
@@ -38717,7 +38719,7 @@ export namespace Prisma {
     joinedAt: 'joinedAt',
     invitedEmail: 'invitedEmail',
     invitedById: 'invitedById',
-    expireAt: 'expireAt',
+    expiredAt: 'expiredAt',
     removedAt: 'removedAt',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -38733,7 +38735,7 @@ export namespace Prisma {
     phone: 'phone',
     codeHash: 'codeHash',
     ipAddress: 'ipAddress',
-    expireAt: 'expireAt',
+    expiredAt: 'expiredAt',
     attempts: 'attempts',
     usedAt: 'usedAt',
     createdAt: 'createdAt',
@@ -39516,7 +39518,7 @@ export namespace Prisma {
     providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
-    expireAt?: IntNullableFilter<"Account"> | number | null
+    expiredAt?: IntNullableFilter<"Account"> | number | null
     scope?: StringNullableFilter<"Account"> | string | null
     idToken?: StringNullableFilter<"Account"> | string | null
     sessionState?: StringNullableFilter<"Account"> | string | null
@@ -39534,7 +39536,7 @@ export namespace Prisma {
     providerAccountId?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     accessToken?: SortOrderInput | SortOrder
-    expireAt?: SortOrderInput | SortOrder
+    expiredAt?: SortOrderInput | SortOrder
     scope?: SortOrderInput | SortOrder
     idToken?: SortOrderInput | SortOrder
     sessionState?: SortOrderInput | SortOrder
@@ -39556,7 +39558,7 @@ export namespace Prisma {
     providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
-    expireAt?: IntNullableFilter<"Account"> | number | null
+    expiredAt?: IntNullableFilter<"Account"> | number | null
     scope?: StringNullableFilter<"Account"> | string | null
     idToken?: StringNullableFilter<"Account"> | string | null
     sessionState?: StringNullableFilter<"Account"> | string | null
@@ -39574,7 +39576,7 @@ export namespace Prisma {
     providerAccountId?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     accessToken?: SortOrderInput | SortOrder
-    expireAt?: SortOrderInput | SortOrder
+    expiredAt?: SortOrderInput | SortOrder
     scope?: SortOrderInput | SortOrder
     idToken?: SortOrderInput | SortOrder
     sessionState?: SortOrderInput | SortOrder
@@ -39599,7 +39601,7 @@ export namespace Prisma {
     providerAccountId?: StringWithAggregatesFilter<"Account"> | string
     refreshToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
     accessToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    expireAt?: IntNullableWithAggregatesFilter<"Account"> | number | null
+    expiredAt?: IntNullableWithAggregatesFilter<"Account"> | number | null
     scope?: StringNullableWithAggregatesFilter<"Account"> | string | null
     idToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
     sessionState?: StringNullableWithAggregatesFilter<"Account"> | string | null
@@ -39615,7 +39617,7 @@ export namespace Prisma {
     id?: UuidFilter<"Session"> | string
     sessionToken?: StringFilter<"Session"> | string
     userId?: UuidFilter<"Session"> | string
-    expireAt?: DateTimeFilter<"Session"> | Date | string
+    expiredAt?: DateTimeFilter<"Session"> | Date | string
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -39628,7 +39630,7 @@ export namespace Prisma {
     id?: SortOrder
     sessionToken?: SortOrder
     userId?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -39644,7 +39646,7 @@ export namespace Prisma {
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     userId?: UuidFilter<"Session"> | string
-    expireAt?: DateTimeFilter<"Session"> | Date | string
+    expiredAt?: DateTimeFilter<"Session"> | Date | string
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -39657,7 +39659,7 @@ export namespace Prisma {
     id?: SortOrder
     sessionToken?: SortOrder
     userId?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -39675,7 +39677,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"Session"> | string
     sessionToken?: StringWithAggregatesFilter<"Session"> | string
     userId?: UuidWithAggregatesFilter<"Session"> | string
-    expireAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    expiredAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     ipAddress?: StringNullableWithAggregatesFilter<"Session"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"Session"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
@@ -39690,7 +39692,7 @@ export namespace Prisma {
     id?: UuidFilter<"VerificationToken"> | string
     identifier?: StringFilter<"VerificationToken"> | string
     tokenHash?: StringFilter<"VerificationToken"> | string
-    expireAt?: DateTimeFilter<"VerificationToken"> | Date | string
+    expiredAt?: DateTimeFilter<"VerificationToken"> | Date | string
     usedAt?: DateTimeNullableFilter<"VerificationToken"> | Date | string | null
     createdAt?: DateTimeFilter<"VerificationToken"> | Date | string
   }
@@ -39699,7 +39701,7 @@ export namespace Prisma {
     id?: SortOrder
     identifier?: SortOrder
     tokenHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
   }
@@ -39711,7 +39713,7 @@ export namespace Prisma {
     OR?: VerificationTokenWhereInput[]
     NOT?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
     identifier?: StringFilter<"VerificationToken"> | string
-    expireAt?: DateTimeFilter<"VerificationToken"> | Date | string
+    expiredAt?: DateTimeFilter<"VerificationToken"> | Date | string
     usedAt?: DateTimeNullableFilter<"VerificationToken"> | Date | string | null
     createdAt?: DateTimeFilter<"VerificationToken"> | Date | string
   }, "id" | "tokenHash">
@@ -39720,7 +39722,7 @@ export namespace Prisma {
     id?: SortOrder
     identifier?: SortOrder
     tokenHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: VerificationTokenCountOrderByAggregateInput
@@ -39735,7 +39737,7 @@ export namespace Prisma {
     id?: UuidWithAggregatesFilter<"VerificationToken"> | string
     identifier?: StringWithAggregatesFilter<"VerificationToken"> | string
     tokenHash?: StringWithAggregatesFilter<"VerificationToken"> | string
-    expireAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
+    expiredAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
     usedAt?: DateTimeNullableWithAggregatesFilter<"VerificationToken"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
@@ -39748,7 +39750,7 @@ export namespace Prisma {
     userId?: UuidFilter<"Token"> | string
     type?: EnumTokenTypeFilter<"Token"> | $Enums.TokenType
     valueHash?: StringFilter<"Token"> | string
-    expireAt?: DateTimeFilter<"Token"> | Date | string
+    expiredAt?: DateTimeFilter<"Token"> | Date | string
     revokedAt?: DateTimeNullableFilter<"Token"> | Date | string | null
     ipAddress?: StringNullableFilter<"Token"> | string | null
     userAgent?: StringNullableFilter<"Token"> | string | null
@@ -39763,7 +39765,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     valueHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     revokedAt?: SortOrderInput | SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
@@ -39781,7 +39783,7 @@ export namespace Prisma {
     userId?: UuidFilter<"Token"> | string
     type?: EnumTokenTypeFilter<"Token"> | $Enums.TokenType
     valueHash?: StringFilter<"Token"> | string
-    expireAt?: DateTimeFilter<"Token"> | Date | string
+    expiredAt?: DateTimeFilter<"Token"> | Date | string
     revokedAt?: DateTimeNullableFilter<"Token"> | Date | string | null
     ipAddress?: StringNullableFilter<"Token"> | string | null
     userAgent?: StringNullableFilter<"Token"> | string | null
@@ -39796,7 +39798,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     valueHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     revokedAt?: SortOrderInput | SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
@@ -39816,7 +39818,7 @@ export namespace Prisma {
     userId?: UuidWithAggregatesFilter<"Token"> | string
     type?: EnumTokenTypeWithAggregatesFilter<"Token"> | $Enums.TokenType
     valueHash?: StringWithAggregatesFilter<"Token"> | string
-    expireAt?: DateTimeWithAggregatesFilter<"Token"> | Date | string
+    expiredAt?: DateTimeWithAggregatesFilter<"Token"> | Date | string
     revokedAt?: DateTimeNullableWithAggregatesFilter<"Token"> | Date | string | null
     ipAddress?: StringNullableWithAggregatesFilter<"Token"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"Token"> | string | null
@@ -40000,7 +40002,7 @@ export namespace Prisma {
     joinedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableFilter<"Membership"> | string | null
     invitedById?: UuidNullableFilter<"Membership"> | string | null
-    expireAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
+    expiredAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     removedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     createdAt?: DateTimeFilter<"Membership"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
@@ -40020,7 +40022,7 @@ export namespace Prisma {
     joinedAt?: SortOrderInput | SortOrder
     invitedEmail?: SortOrderInput | SortOrder
     invitedById?: SortOrderInput | SortOrder
-    expireAt?: SortOrderInput | SortOrder
+    expiredAt?: SortOrderInput | SortOrder
     removedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
@@ -40044,7 +40046,7 @@ export namespace Prisma {
     joinedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableFilter<"Membership"> | string | null
     invitedById?: UuidNullableFilter<"Membership"> | string | null
-    expireAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
+    expiredAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     removedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     createdAt?: DateTimeFilter<"Membership"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
@@ -40064,7 +40066,7 @@ export namespace Prisma {
     joinedAt?: SortOrderInput | SortOrder
     invitedEmail?: SortOrderInput | SortOrder
     invitedById?: SortOrderInput | SortOrder
-    expireAt?: SortOrderInput | SortOrder
+    expiredAt?: SortOrderInput | SortOrder
     removedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrderInput | SortOrder
@@ -40087,7 +40089,7 @@ export namespace Prisma {
     joinedAt?: DateTimeNullableWithAggregatesFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableWithAggregatesFilter<"Membership"> | string | null
     invitedById?: UuidNullableWithAggregatesFilter<"Membership"> | string | null
-    expireAt?: DateTimeNullableWithAggregatesFilter<"Membership"> | Date | string | null
+    expiredAt?: DateTimeNullableWithAggregatesFilter<"Membership"> | Date | string | null
     removedAt?: DateTimeNullableWithAggregatesFilter<"Membership"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Membership"> | Date | string
     updatedAt?: DateTimeNullableWithAggregatesFilter<"Membership"> | Date | string | null
@@ -40103,7 +40105,7 @@ export namespace Prisma {
     phone?: StringFilter<"Otp"> | string
     codeHash?: StringFilter<"Otp"> | string
     ipAddress?: StringNullableFilter<"Otp"> | string | null
-    expireAt?: DateTimeFilter<"Otp"> | Date | string
+    expiredAt?: DateTimeFilter<"Otp"> | Date | string
     attempts?: IntFilter<"Otp"> | number
     usedAt?: DateTimeNullableFilter<"Otp"> | Date | string | null
     createdAt?: DateTimeFilter<"Otp"> | Date | string
@@ -40118,7 +40120,7 @@ export namespace Prisma {
     phone?: SortOrder
     codeHash?: SortOrder
     ipAddress?: SortOrderInput | SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     attempts?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -40136,7 +40138,7 @@ export namespace Prisma {
     phone?: StringFilter<"Otp"> | string
     codeHash?: StringFilter<"Otp"> | string
     ipAddress?: StringNullableFilter<"Otp"> | string | null
-    expireAt?: DateTimeFilter<"Otp"> | Date | string
+    expiredAt?: DateTimeFilter<"Otp"> | Date | string
     attempts?: IntFilter<"Otp"> | number
     usedAt?: DateTimeNullableFilter<"Otp"> | Date | string | null
     createdAt?: DateTimeFilter<"Otp"> | Date | string
@@ -40151,7 +40153,7 @@ export namespace Prisma {
     phone?: SortOrder
     codeHash?: SortOrder
     ipAddress?: SortOrderInput | SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     attempts?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -40173,7 +40175,7 @@ export namespace Prisma {
     phone?: StringWithAggregatesFilter<"Otp"> | string
     codeHash?: StringWithAggregatesFilter<"Otp"> | string
     ipAddress?: StringNullableWithAggregatesFilter<"Otp"> | string | null
-    expireAt?: DateTimeWithAggregatesFilter<"Otp"> | Date | string
+    expiredAt?: DateTimeWithAggregatesFilter<"Otp"> | Date | string
     attempts?: IntWithAggregatesFilter<"Otp"> | number
     usedAt?: DateTimeNullableWithAggregatesFilter<"Otp"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Otp"> | Date | string
@@ -40191,7 +40193,7 @@ export namespace Prisma {
     lastName?: StringNullableFilter<"UserProfile"> | string | null
     displayName?: StringNullableFilter<"UserProfile"> | string | null
     fullName?: StringNullableFilter<"UserProfile"> | string | null
-    documentType?: EnumDocumentTypeNullableFilter<"UserProfile"> | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFilter<"UserProfile"> | $Enums.DocumentType
     documentNumber?: StringNullableFilter<"UserProfile"> | string | null
     phone?: StringNullableFilter<"UserProfile"> | string | null
     birthDate?: DateTimeNullableFilter<"UserProfile"> | Date | string | null
@@ -40210,7 +40212,7 @@ export namespace Prisma {
     lastName?: SortOrderInput | SortOrder
     displayName?: SortOrderInput | SortOrder
     fullName?: SortOrderInput | SortOrder
-    documentType?: SortOrderInput | SortOrder
+    documentType?: SortOrder
     documentNumber?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     birthDate?: SortOrderInput | SortOrder
@@ -40233,7 +40235,7 @@ export namespace Prisma {
     lastName?: StringNullableFilter<"UserProfile"> | string | null
     displayName?: StringNullableFilter<"UserProfile"> | string | null
     fullName?: StringNullableFilter<"UserProfile"> | string | null
-    documentType?: EnumDocumentTypeNullableFilter<"UserProfile"> | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFilter<"UserProfile"> | $Enums.DocumentType
     phone?: StringNullableFilter<"UserProfile"> | string | null
     birthDate?: DateTimeNullableFilter<"UserProfile"> | Date | string | null
     avatarUrl?: StringNullableFilter<"UserProfile"> | string | null
@@ -40251,7 +40253,7 @@ export namespace Prisma {
     lastName?: SortOrderInput | SortOrder
     displayName?: SortOrderInput | SortOrder
     fullName?: SortOrderInput | SortOrder
-    documentType?: SortOrderInput | SortOrder
+    documentType?: SortOrder
     documentNumber?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     birthDate?: SortOrderInput | SortOrder
@@ -40275,7 +40277,7 @@ export namespace Prisma {
     lastName?: StringNullableWithAggregatesFilter<"UserProfile"> | string | null
     displayName?: StringNullableWithAggregatesFilter<"UserProfile"> | string | null
     fullName?: StringNullableWithAggregatesFilter<"UserProfile"> | string | null
-    documentType?: EnumDocumentTypeNullableWithAggregatesFilter<"UserProfile"> | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeWithAggregatesFilter<"UserProfile"> | $Enums.DocumentType
     documentNumber?: StringNullableWithAggregatesFilter<"UserProfile"> | string | null
     phone?: StringNullableWithAggregatesFilter<"UserProfile"> | string | null
     birthDate?: DateTimeNullableWithAggregatesFilter<"UserProfile"> | Date | string | null
@@ -42009,7 +42011,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expireAt?: number | null
+    expiredAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -42027,7 +42029,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expireAt?: number | null
+    expiredAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -42043,7 +42045,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42061,7 +42063,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42078,7 +42080,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expireAt?: number | null
+    expiredAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -42094,7 +42096,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42111,7 +42113,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42123,7 +42125,7 @@ export namespace Prisma {
   export type SessionCreateInput = {
     id?: string
     sessionToken: string
-    expireAt: Date | string
+    expiredAt: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -42136,7 +42138,7 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     userId: string
-    expireAt: Date | string
+    expiredAt: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -42147,7 +42149,7 @@ export namespace Prisma {
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42160,7 +42162,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42172,7 +42174,7 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     userId: string
-    expireAt: Date | string
+    expiredAt: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -42183,7 +42185,7 @@ export namespace Prisma {
   export type SessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42195,7 +42197,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42207,7 +42209,7 @@ export namespace Prisma {
     id?: string
     identifier: string
     tokenHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -42216,7 +42218,7 @@ export namespace Prisma {
     id?: string
     identifier: string
     tokenHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -42225,7 +42227,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42234,7 +42236,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42243,7 +42245,7 @@ export namespace Prisma {
     id?: string
     identifier: string
     tokenHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
   }
@@ -42252,7 +42254,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42261,7 +42263,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
     tokenHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -42270,7 +42272,7 @@ export namespace Prisma {
     id?: string
     type?: $Enums.TokenType
     valueHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     revokedAt?: Date | string | null
     ipAddress?: string | null
     userAgent?: string | null
@@ -42285,7 +42287,7 @@ export namespace Prisma {
     userId: string
     type?: $Enums.TokenType
     valueHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     revokedAt?: Date | string | null
     ipAddress?: string | null
     userAgent?: string | null
@@ -42298,7 +42300,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42313,7 +42315,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42327,7 +42329,7 @@ export namespace Prisma {
     userId: string
     type?: $Enums.TokenType
     valueHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     revokedAt?: Date | string | null
     ipAddress?: string | null
     userAgent?: string | null
@@ -42340,7 +42342,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42354,7 +42356,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42556,7 +42558,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -42576,7 +42578,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -42590,7 +42592,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42610,7 +42612,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42627,7 +42629,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -42641,7 +42643,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42658,7 +42660,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42670,7 +42672,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress?: string | null
-    expireAt: Date | string
+    expiredAt: Date | string
     attempts?: number
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -42685,7 +42687,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress?: string | null
-    expireAt: Date | string
+    expiredAt: Date | string
     attempts?: number
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -42698,7 +42700,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42713,7 +42715,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42727,7 +42729,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress?: string | null
-    expireAt: Date | string
+    expiredAt: Date | string
     attempts?: number
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -42740,7 +42742,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42754,7 +42756,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42768,7 +42770,7 @@ export namespace Prisma {
     lastName?: string | null
     displayName?: string | null
     fullName?: string | null
-    documentType?: $Enums.DocumentType | null
+    documentType: $Enums.DocumentType
     documentNumber?: string | null
     phone?: string | null
     birthDate?: Date | string | null
@@ -42787,7 +42789,7 @@ export namespace Prisma {
     lastName?: string | null
     displayName?: string | null
     fullName?: string | null
-    documentType?: $Enums.DocumentType | null
+    documentType: $Enums.DocumentType
     documentNumber?: string | null
     phone?: string | null
     birthDate?: Date | string | null
@@ -42804,7 +42806,7 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    documentType?: NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
     documentNumber?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42823,7 +42825,7 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    documentType?: NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
     documentNumber?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42841,7 +42843,7 @@ export namespace Prisma {
     lastName?: string | null
     displayName?: string | null
     fullName?: string | null
-    documentType?: $Enums.DocumentType | null
+    documentType: $Enums.DocumentType
     documentNumber?: string | null
     phone?: string | null
     birthDate?: Date | string | null
@@ -42858,7 +42860,7 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    documentType?: NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
     documentNumber?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42876,7 +42878,7 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    documentType?: NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
     documentNumber?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44960,7 +44962,7 @@ export namespace Prisma {
     providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     scope?: SortOrder
     idToken?: SortOrder
     sessionState?: SortOrder
@@ -44970,7 +44972,7 @@ export namespace Prisma {
   }
 
   export type AccountAvgOrderByAggregateInput = {
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
@@ -44981,7 +44983,7 @@ export namespace Prisma {
     providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     scope?: SortOrder
     idToken?: SortOrder
     sessionState?: SortOrder
@@ -44998,7 +45000,7 @@ export namespace Prisma {
     providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     scope?: SortOrder
     idToken?: SortOrder
     sessionState?: SortOrder
@@ -45008,7 +45010,7 @@ export namespace Prisma {
   }
 
   export type AccountSumOrderByAggregateInput = {
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
   }
 
   export type EnumProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -45059,7 +45061,7 @@ export namespace Prisma {
     id?: SortOrder
     sessionToken?: SortOrder
     userId?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
@@ -45071,7 +45073,7 @@ export namespace Prisma {
     id?: SortOrder
     sessionToken?: SortOrder
     userId?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
@@ -45083,7 +45085,7 @@ export namespace Prisma {
     id?: SortOrder
     sessionToken?: SortOrder
     userId?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
@@ -45095,7 +45097,7 @@ export namespace Prisma {
     id?: SortOrder
     identifier?: SortOrder
     tokenHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
   }
@@ -45104,7 +45106,7 @@ export namespace Prisma {
     id?: SortOrder
     identifier?: SortOrder
     tokenHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
   }
@@ -45113,7 +45115,7 @@ export namespace Prisma {
     id?: SortOrder
     identifier?: SortOrder
     tokenHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
   }
@@ -45130,7 +45132,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     valueHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     revokedAt?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
@@ -45144,7 +45146,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     valueHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     revokedAt?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
@@ -45158,7 +45160,7 @@ export namespace Prisma {
     userId?: SortOrder
     type?: SortOrder
     valueHash?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     revokedAt?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
@@ -45353,7 +45355,7 @@ export namespace Prisma {
     joinedAt?: SortOrder
     invitedEmail?: SortOrder
     invitedById?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     removedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -45370,7 +45372,7 @@ export namespace Prisma {
     joinedAt?: SortOrder
     invitedEmail?: SortOrder
     invitedById?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     removedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -45387,7 +45389,7 @@ export namespace Prisma {
     joinedAt?: SortOrder
     invitedEmail?: SortOrder
     invitedById?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     removedAt?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -45451,7 +45453,7 @@ export namespace Prisma {
     phone?: SortOrder
     codeHash?: SortOrder
     ipAddress?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     attempts?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
@@ -45469,7 +45471,7 @@ export namespace Prisma {
     phone?: SortOrder
     codeHash?: SortOrder
     ipAddress?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     attempts?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
@@ -45483,7 +45485,7 @@ export namespace Prisma {
     phone?: SortOrder
     codeHash?: SortOrder
     ipAddress?: SortOrder
-    expireAt?: SortOrder
+    expiredAt?: SortOrder
     attempts?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
@@ -45511,11 +45513,11 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type EnumDocumentTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumDocumentTypeNullableFilter<$PrismaModel> | $Enums.DocumentType | null
+  export type EnumDocumentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentTypeFilter<$PrismaModel> | $Enums.DocumentType
   }
 
   export type EnumUserProfileStatusFilter<$PrismaModel = never> = {
@@ -45579,14 +45581,14 @@ export namespace Prisma {
     deletedAt?: SortOrder
   }
 
-  export type EnumDocumentTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumDocumentTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.DocumentType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumDocumentTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumDocumentTypeNullableFilter<$PrismaModel>
+  export type EnumDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.DocumentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocumentTypeFilter<$PrismaModel>
+    _max?: NestedEnumDocumentTypeFilter<$PrismaModel>
   }
 
   export type EnumUserProfileStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -47468,8 +47470,8 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type NullableEnumDocumentTypeFieldUpdateOperationsInput = {
-    set?: $Enums.DocumentType | null
+  export type EnumDocumentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.DocumentType
   }
 
   export type EnumUserProfileStatusFieldUpdateOperationsInput = {
@@ -48899,11 +48901,11 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumDocumentTypeNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumDocumentTypeNullableFilter<$PrismaModel> | $Enums.DocumentType | null
+  export type NestedEnumDocumentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentTypeFilter<$PrismaModel> | $Enums.DocumentType
   }
 
   export type NestedEnumUserProfileStatusFilter<$PrismaModel = never> = {
@@ -48913,14 +48915,14 @@ export namespace Prisma {
     not?: NestedEnumUserProfileStatusFilter<$PrismaModel> | $Enums.UserProfileStatus
   }
 
-  export type NestedEnumDocumentTypeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel> | null
-    not?: NestedEnumDocumentTypeNullableWithAggregatesFilter<$PrismaModel> | $Enums.DocumentType | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumDocumentTypeNullableFilter<$PrismaModel>
-    _max?: NestedEnumDocumentTypeNullableFilter<$PrismaModel>
+  export type NestedEnumDocumentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.DocumentType | EnumDocumentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.DocumentType[] | ListEnumDocumentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumDocumentTypeWithAggregatesFilter<$PrismaModel> | $Enums.DocumentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDocumentTypeFilter<$PrismaModel>
+    _max?: NestedEnumDocumentTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumUserProfileStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -49106,7 +49108,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expireAt?: number | null
+    expiredAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -49122,7 +49124,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expireAt?: number | null
+    expiredAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -49144,7 +49146,7 @@ export namespace Prisma {
   export type SessionCreateWithoutUserInput = {
     id?: string
     sessionToken: string
-    expireAt: Date | string
+    expiredAt: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -49155,7 +49157,7 @@ export namespace Prisma {
   export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
     sessionToken: string
-    expireAt: Date | string
+    expiredAt: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -49177,7 +49179,7 @@ export namespace Prisma {
     id?: string
     type?: $Enums.TokenType
     valueHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     revokedAt?: Date | string | null
     ipAddress?: string | null
     userAgent?: string | null
@@ -49190,7 +49192,7 @@ export namespace Prisma {
     id?: string
     type?: $Enums.TokenType
     valueHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     revokedAt?: Date | string | null
     ipAddress?: string | null
     userAgent?: string | null
@@ -49215,7 +49217,7 @@ export namespace Prisma {
     lastName?: string | null
     displayName?: string | null
     fullName?: string | null
-    documentType?: $Enums.DocumentType | null
+    documentType: $Enums.DocumentType
     documentNumber?: string | null
     phone?: string | null
     birthDate?: Date | string | null
@@ -49232,7 +49234,7 @@ export namespace Prisma {
     lastName?: string | null
     displayName?: string | null
     fullName?: string | null
-    documentType?: $Enums.DocumentType | null
+    documentType: $Enums.DocumentType
     documentNumber?: string | null
     phone?: string | null
     birthDate?: Date | string | null
@@ -49253,7 +49255,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress?: string | null
-    expireAt: Date | string
+    expiredAt: Date | string
     attempts?: number
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -49266,7 +49268,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress?: string | null
-    expireAt: Date | string
+    expiredAt: Date | string
     attempts?: number
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -49291,7 +49293,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -49309,7 +49311,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -49443,7 +49445,7 @@ export namespace Prisma {
     providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
-    expireAt?: IntNullableFilter<"Account"> | number | null
+    expiredAt?: IntNullableFilter<"Account"> | number | null
     scope?: StringNullableFilter<"Account"> | string | null
     idToken?: StringNullableFilter<"Account"> | string | null
     sessionState?: StringNullableFilter<"Account"> | string | null
@@ -49475,7 +49477,7 @@ export namespace Prisma {
     id?: UuidFilter<"Session"> | string
     sessionToken?: StringFilter<"Session"> | string
     userId?: UuidFilter<"Session"> | string
-    expireAt?: DateTimeFilter<"Session"> | Date | string
+    expiredAt?: DateTimeFilter<"Session"> | Date | string
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -49507,7 +49509,7 @@ export namespace Prisma {
     userId?: UuidFilter<"Token"> | string
     type?: EnumTokenTypeFilter<"Token"> | $Enums.TokenType
     valueHash?: StringFilter<"Token"> | string
-    expireAt?: DateTimeFilter<"Token"> | Date | string
+    expiredAt?: DateTimeFilter<"Token"> | Date | string
     revokedAt?: DateTimeNullableFilter<"Token"> | Date | string | null
     ipAddress?: StringNullableFilter<"Token"> | string | null
     userAgent?: StringNullableFilter<"Token"> | string | null
@@ -49533,7 +49535,7 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    documentType?: NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
     documentNumber?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49550,7 +49552,7 @@ export namespace Prisma {
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     displayName?: NullableStringFieldUpdateOperationsInput | string | null
     fullName?: NullableStringFieldUpdateOperationsInput | string | null
-    documentType?: NullableEnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType | null
+    documentType?: EnumDocumentTypeFieldUpdateOperationsInput | $Enums.DocumentType
     documentNumber?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -49586,7 +49588,7 @@ export namespace Prisma {
     phone?: StringFilter<"Otp"> | string
     codeHash?: StringFilter<"Otp"> | string
     ipAddress?: StringNullableFilter<"Otp"> | string | null
-    expireAt?: DateTimeFilter<"Otp"> | Date | string
+    expiredAt?: DateTimeFilter<"Otp"> | Date | string
     attempts?: IntFilter<"Otp"> | number
     usedAt?: DateTimeNullableFilter<"Otp"> | Date | string | null
     createdAt?: DateTimeFilter<"Otp"> | Date | string
@@ -49623,7 +49625,7 @@ export namespace Prisma {
     joinedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     invitedEmail?: StringNullableFilter<"Membership"> | string | null
     invitedById?: UuidNullableFilter<"Membership"> | string | null
-    expireAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
+    expiredAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     removedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
     createdAt?: DateTimeFilter<"Membership"> | Date | string
     updatedAt?: DateTimeNullableFilter<"Membership"> | Date | string | null
@@ -49964,7 +49966,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -49982,7 +49984,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -50120,7 +50122,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -50138,7 +50140,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -53229,7 +53231,7 @@ export namespace Prisma {
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expireAt?: number | null
+    expiredAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -53241,7 +53243,7 @@ export namespace Prisma {
   export type SessionCreateManyUserInput = {
     id?: string
     sessionToken: string
-    expireAt: Date | string
+    expiredAt: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -53253,7 +53255,7 @@ export namespace Prisma {
     id?: string
     type?: $Enums.TokenType
     valueHash: string
-    expireAt: Date | string
+    expiredAt: Date | string
     revokedAt?: Date | string | null
     ipAddress?: string | null
     userAgent?: string | null
@@ -53267,7 +53269,7 @@ export namespace Prisma {
     phone: string
     codeHash: string
     ipAddress?: string | null
-    expireAt: Date | string
+    expiredAt: Date | string
     attempts?: number
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -53284,7 +53286,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -53333,7 +53335,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53349,7 +53351,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53365,7 +53367,7 @@ export namespace Prisma {
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53377,7 +53379,7 @@ export namespace Prisma {
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53388,7 +53390,7 @@ export namespace Prisma {
   export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53399,7 +53401,7 @@ export namespace Prisma {
   export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53411,7 +53413,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53424,7 +53426,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53437,7 +53439,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     type?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
     valueHash?: StringFieldUpdateOperationsInput | string
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53451,7 +53453,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53464,7 +53466,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53477,7 +53479,7 @@ export namespace Prisma {
     phone?: StringFieldUpdateOperationsInput | string
     codeHash?: StringFieldUpdateOperationsInput | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     attempts?: IntFieldUpdateOperationsInput | number
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53492,7 +53494,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53510,7 +53512,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53526,7 +53528,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53647,7 +53649,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -53672,7 +53674,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53690,7 +53692,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53706,7 +53708,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53757,7 +53759,7 @@ export namespace Prisma {
     joinedAt?: Date | string | null
     invitedEmail?: string | null
     invitedById?: string | null
-    expireAt?: Date | string | null
+    expiredAt?: Date | string | null
     removedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string | null
@@ -53771,7 +53773,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53789,7 +53791,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -53805,7 +53807,7 @@ export namespace Prisma {
     joinedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     invitedEmail?: NullableStringFieldUpdateOperationsInput | string | null
     invitedById?: NullableStringFieldUpdateOperationsInput | string | null
-    expireAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    expiredAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     removedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
