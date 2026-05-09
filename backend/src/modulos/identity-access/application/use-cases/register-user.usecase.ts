@@ -12,6 +12,7 @@ import { NotAllwedError } from "@/common/domain/errors/usecases/not-allwed.error
 import { PhoneVO } from "@/common/domain/values-objects/phone/phone.vo";
 import { SlugVO } from "@/common/domain/values-objects/slug/slug.vo";
 import { UUIDVO } from "@/common/domain/values-objects/uuidvo/uuid.vo";
+import { TransactionManager } from "@/common/infrastructure/db/transaction/transaction-manager";
 import { BaseEncrypter } from "@/common/shared/auth/base-encrypter";
 import { BaseBcryptHasher } from "@/common/shared/cryptography/base-bcrypt-hasher";
 import { MembershipRole } from "@/common/shared/enums/member-ship-role.enum";
@@ -23,7 +24,9 @@ import { UserProfileEntity } from "../../domain/entities/user-profile.entity";
 import { UserEntity } from "../../domain/entities/user.entity";
 import { TenantMapper } from "../../domain/mappers/tenant.mapper";
 import { UserMapper } from "../../domain/mappers/user.mapper";
+import { LgpdConsentsRepository } from "../../domain/repositories/lgpd-consent.repository";
 import { MembershipRepository } from "../../domain/repositories/member-ship.repository";
+import { TenantRepository } from "../../domain/repositories/tenant.repository";
 import { TokenRepository } from "../../domain/repositories/token-repository";
 import { UserProfileRepository } from "../../domain/repositories/user-profile.repository";
 import { UserRepository } from "../../domain/repositories/user.repository";
@@ -51,10 +54,11 @@ export class RegisterCreateUseCase {
   constructor(
     private readonly usersRepository: UserRepository,
     private readonly membershipsRepository: MembershipRepository,
-    private readonly tokensRepository: TokenRepository,
     private readonly userProfileRepository: UserProfileRepository,
     private readonly hasher: BaseBcryptHasher,
-    private readonly jwt: BaseEncrypter,
+    private readonly tenantRepository: TenantRepository,
+    private readonly lgpdConsentsRepository: LgpdConsentsRepository,
+    private readonly transactionManager: TransactionManager,
   ) {}
 
   async execute(input: {
@@ -127,13 +131,25 @@ export class RegisterCreateUseCase {
       consentVersion: "1.0",
     });
 
-    await this.usersRepository.save(user);
-    await this.userProfileRepository.save(userProfile);
-    await this.membershipsRepository.save(membership);
+    const result = await this.transactionManager.run(async (tx) => {
+      const tenantRepo = this.tenantRepository.withTx(tx);
+      const userRepo = this.usersRepository.withTx(tx);
+      const membershipRepo = this.membershipsRepository.withTx(tx);
+      const userProfileRepo = this.userProfileRepository.withTx(tx);
+      const lgpdConsentsRepo = this.lgpdConsentsRepository.withTx(tx);
 
-    return right({
-      user: UserMapper.toSummary(user),
-      tenant: TenantMapper.toSummary(tenant),
+      await tenantRepo.create(tenant);
+      await userRepo.create(user);
+      await membershipRepo.create(membership);
+      await userProfileRepo.create(userProfile);
+      await lgpdConsentsRepo.create(consentimento);
+
+      return {
+        user: UserMapper.toSummary(user),
+        tenant: TenantMapper.toSummary(tenant),
+      };
     });
+
+    return right(result);
   }
 }

@@ -3,14 +3,19 @@ import {
   PageInput,
   Sort,
 } from "@/common/domain/repositories/types/pagination.types";
-import { getPrismaClient } from "@/common/infrastructure/db/prisma.client";
+import { PrismaDatabase } from "@/common/infrastructure/db/prisma-repository";
+import { TOKENS } from "@/common/shared/container/tokens";
 import { Prisma } from "../../../../../generated/prisma";
 import { AccountEntity } from "../../domain/entities/account.entity";
 import { AccountMapper } from "../../domain/mappers/account.mapper";
 import { AccountRepository } from "../../domain/repositories/account-repository";
 
-export class PrismaAccountRepository implements AccountRepository {
-  private prisma = getPrismaClient();
+export class PrismaAccountRepository extends AccountRepository {
+  static inject = [TOKENS.PRISMA_CLIENT];
+
+  constructor(prisma: PrismaDatabase) {
+    super(prisma);
+  }
 
   async findByCpf(cpf: string): Promise<AccountEntity | null> {
     const account = await this.prisma.account.findFirst({

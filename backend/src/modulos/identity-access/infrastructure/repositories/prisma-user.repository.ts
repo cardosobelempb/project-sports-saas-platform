@@ -1,17 +1,14 @@
 import { SearchInput } from "@/common/domain/repositories/search.repository";
 import { Page } from "@/common/domain/repositories/types/pagination.types";
-import { PrismaRepository } from "@/common/infrastructure/db/prisma-transaction";
-import { PrismaDatabase } from "@/common/infrastructure/db/prisma.client";
+
+import { PrismaDatabase } from "@/common/infrastructure/db/prisma-repository";
 import { TOKENS } from "@/common/shared/container/tokens";
 import { UserEntity } from "@/modulos/identity-access/domain/entities/user.entity";
 import { UserRepository } from "@/modulos/identity-access/domain/repositories/user.repository";
 import { Prisma } from "../../../../../generated/prisma";
 import { PrismaUserMapper } from "../mappers/prisma-user.mapper";
 
-export class PrismaUserRepository
-  extends PrismaRepository
-  implements UserRepository
-{
+export class PrismaUserRepository extends UserRepository {
   static inject = [TOKENS.PRISMA_CLIENT];
 
   constructor(prisma: PrismaDatabase) {
@@ -113,15 +110,6 @@ export class PrismaUserRepository
 
     const user = await this.prisma.user.create({ data });
 
-    return PrismaUserMapper.toDomain(user);
-  }
-
-  async createWithTx(
-    entity: UserEntity,
-    tx: Prisma.TransactionClient,
-  ): Promise<UserEntity> {
-    const data = PrismaUserMapper.toPrisma(entity);
-    const user = await tx.user.create({ data });
     return PrismaUserMapper.toDomain(user);
   }
 
