@@ -6,12 +6,10 @@
 
 import { z } from "zod";
 
-import { ValidatorMessage } from "@/common/domain/validations/ValidatorMessage";
 import { ProviderType } from "@/common/shared/enums/provider-type.enum";
-import {
-  IsoDateTimeInput,
-  UUIDString,
-} from "@/common/shared/lib/schemas/helpers";
+import { TokenType } from "@/common/shared/enums/token-type.enum";
+import { UUIDString } from "@/common/shared/lib/schemas/helpers";
+import { s } from "@/common/shared/lib/schemas/primitives";
 import {
   actionResponseSchema,
   createResponseSchema,
@@ -19,6 +17,7 @@ import {
   pageResponseSchema,
   updateResponseSchema,
 } from "@/common/shared/lib/schemas/response.factory";
+import { UuidSchema } from "@/common/shared/lib/schemas/string.schema";
 
 // ─── Params ───────────────────────────────────────────────────────────────────
 
@@ -38,21 +37,20 @@ export type AccountParams = z.infer<typeof AccountParamsSchema>;
 
 export const AccountSchema = z
   .object({
-    id: UUIDString,
-    userId: UUIDString,
-    providerType: z.enum(ProviderType),
-    provider: z.string(ValidatorMessage.REQUIRED_FIELD),
-    providerAccountId: UUIDString,
-    refreshToken: z.string().optional().nullable(),
-    accessToken: z.string().optional().nullable(),
-    expiresAt: z.number().optional().nullable(),
-    tokenType: z.string().optional().nullable(),
-    scope: z.string().optional().nullable(),
-    idToken: z.string().optional().nullable(),
-    sessionState: z.string().optional().nullable(),
-    createdAt: IsoDateTimeInput.optional(),
-    updatedAt: IsoDateTimeInput.optional().nullable(),
-    deletedAt: IsoDateTimeInput.optional().nullable(),
+    id: UuidSchema,
+    userId: UuidSchema,
+    providerAccountId: UuidSchema,
+    provider: z.enum(ProviderType).default(ProviderType.CREDENTIALS),
+    refreshToken: s.token,
+    accessToken: s.token,
+    expiresAt: s.number,
+    tokenType: z.enum(TokenType).default(TokenType.ACCESS),
+    scope: s.string,
+    idToken: s.slug,
+    sessionState: s.string,
+    createdAt: s.date,
+    updatedAt: s.nullableDate,
+    deletedAt: s,
   })
   .strict();
 
@@ -84,7 +82,7 @@ export const AccountSummarySchema = AccountSchema.pick({
   userId: true,
   provider: true,
   providerAccountId: true,
-  providerType: true,
+  createdAt: true,
 });
 
 // ─── Response wrappers via factory ───────────────────────────────────────────

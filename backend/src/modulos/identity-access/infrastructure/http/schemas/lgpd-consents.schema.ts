@@ -37,7 +37,7 @@ export type LgpdConsentsParams = z.infer<typeof LgpdConsentsParamsSchema>;
 export const LgpdConsentsSchema = z
   .object({
     id: UuidSchema,
-    userI: UuidSchema,
+    userId: UuidSchema,
     consentTerms: s.isVerified,
     consentMarketing: s.isVerified,
     consentDataSharing: s.isVerified,
@@ -81,14 +81,14 @@ export const LgpdConsentsResponseSchema = LgpdConsentsSchema.omit({
 // Resumo para listagem: versão compacta — evita over-fetching
 export const LgpdConsentsSummarySchema = LgpdConsentsSchema.pick({
   id: true,
-  userI: true,
+  userId: true,
   status: true,
   createdAt: true,
 });
 
 export const LgpdConsentsAuthSchema = LgpdConsentsSchema.pick({
   id: true,
-  userI: true,
+  userId: true,
   consentTerms: true,
   consentMarketing: true,
   consentDataSharing: true,

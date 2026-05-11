@@ -3,8 +3,8 @@ import {
   TokenResponseDto,
   TokenSummaryDto,
   UpdateTokenDto,
-} from "../../application/dto/token.dto";
-import { TokenEntity } from "../entities/token.entity";
+} from "../../../auth/application/dto/token.dto";
+import { TokenEntity } from "../../../auth/domain/entities/token.entity";
 
 // ============================================================
 // token.mapper.ts

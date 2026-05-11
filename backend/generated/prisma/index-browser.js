@@ -133,12 +133,12 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
-  providerType: 'providerType',
+  tokenType: 'tokenType',
   provider: 'provider',
   providerAccountId: 'providerAccountId',
   refreshToken: 'refreshToken',
   accessToken: 'accessToken',
-  expiredAt: 'expiredAt',
+  expiresAt: 'expiresAt',
   scope: 'scope',
   idToken: 'idToken',
   sessionState: 'sessionState',
@@ -149,9 +149,9 @@ exports.Prisma.AccountScalarFieldEnum = {
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
-  sessionToken: 'sessionToken',
   userId: 'userId',
-  expiredAt: 'expiredAt',
+  sessionToken: 'sessionToken',
+  expires: 'expires',
   ipAddress: 'ipAddress',
   userAgent: 'userAgent',
   createdAt: 'createdAt',
@@ -162,7 +162,7 @@ exports.Prisma.SessionScalarFieldEnum = {
 exports.Prisma.VerificationTokenScalarFieldEnum = {
   id: 'id',
   identifier: 'identifier',
-  tokenHash: 'tokenHash',
+  token: 'token',
   expiredAt: 'expiredAt',
   usedAt: 'usedAt',
   createdAt: 'createdAt'
@@ -520,20 +520,20 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.ProviderType = exports.$Enums.ProviderType = {
-  GOOGLE: 'GOOGLE',
-  FACEBOOK: 'FACEBOOK',
-  APPLE: 'APPLE',
-  CREDENTIALS: 'CREDENTIALS',
-  OTHER: 'OTHER'
-};
-
 exports.TokenType = exports.$Enums.TokenType = {
   REFRESH: 'REFRESH',
   ACCESS: 'ACCESS',
   RESET_PASSWORD: 'RESET_PASSWORD',
   EMAIL_VERIFICATION: 'EMAIL_VERIFICATION',
   API_KEY: 'API_KEY'
+};
+
+exports.ProviderType = exports.$Enums.ProviderType = {
+  GOOGLE: 'GOOGLE',
+  FACEBOOK: 'FACEBOOK',
+  APPLE: 'APPLE',
+  CREDENTIALS: 'CREDENTIALS',
+  OTHER: 'OTHER'
 };
 
 exports.TenantStatus = exports.$Enums.TenantStatus = {

@@ -5779,22 +5779,22 @@ export namespace Prisma {
   }
 
   export type AccountAvgAggregateOutputType = {
-    expiredAt: number | null
+    expiresAt: number | null
   }
 
   export type AccountSumAggregateOutputType = {
-    expiredAt: number | null
+    expiresAt: number | null
   }
 
   export type AccountMinAggregateOutputType = {
     id: string | null
     userId: string | null
-    providerType: $Enums.ProviderType | null
-    provider: string | null
+    tokenType: $Enums.TokenType | null
+    provider: $Enums.ProviderType | null
     providerAccountId: string | null
     refreshToken: string | null
     accessToken: string | null
-    expiredAt: number | null
+    expiresAt: number | null
     scope: string | null
     idToken: string | null
     sessionState: string | null
@@ -5806,12 +5806,12 @@ export namespace Prisma {
   export type AccountMaxAggregateOutputType = {
     id: string | null
     userId: string | null
-    providerType: $Enums.ProviderType | null
-    provider: string | null
+    tokenType: $Enums.TokenType | null
+    provider: $Enums.ProviderType | null
     providerAccountId: string | null
     refreshToken: string | null
     accessToken: string | null
-    expiredAt: number | null
+    expiresAt: number | null
     scope: string | null
     idToken: string | null
     sessionState: string | null
@@ -5823,12 +5823,12 @@ export namespace Prisma {
   export type AccountCountAggregateOutputType = {
     id: number
     userId: number
-    providerType: number
+    tokenType: number
     provider: number
     providerAccountId: number
     refreshToken: number
     accessToken: number
-    expiredAt: number
+    expiresAt: number
     scope: number
     idToken: number
     sessionState: number
@@ -5840,22 +5840,22 @@ export namespace Prisma {
 
 
   export type AccountAvgAggregateInputType = {
-    expiredAt?: true
+    expiresAt?: true
   }
 
   export type AccountSumAggregateInputType = {
-    expiredAt?: true
+    expiresAt?: true
   }
 
   export type AccountMinAggregateInputType = {
     id?: true
     userId?: true
-    providerType?: true
+    tokenType?: true
     provider?: true
     providerAccountId?: true
     refreshToken?: true
     accessToken?: true
-    expiredAt?: true
+    expiresAt?: true
     scope?: true
     idToken?: true
     sessionState?: true
@@ -5867,12 +5867,12 @@ export namespace Prisma {
   export type AccountMaxAggregateInputType = {
     id?: true
     userId?: true
-    providerType?: true
+    tokenType?: true
     provider?: true
     providerAccountId?: true
     refreshToken?: true
     accessToken?: true
-    expiredAt?: true
+    expiresAt?: true
     scope?: true
     idToken?: true
     sessionState?: true
@@ -5884,12 +5884,12 @@ export namespace Prisma {
   export type AccountCountAggregateInputType = {
     id?: true
     userId?: true
-    providerType?: true
+    tokenType?: true
     provider?: true
     providerAccountId?: true
     refreshToken?: true
     accessToken?: true
-    expiredAt?: true
+    expiresAt?: true
     scope?: true
     idToken?: true
     sessionState?: true
@@ -5988,12 +5988,12 @@ export namespace Prisma {
   export type AccountGroupByOutputType = {
     id: string
     userId: string
-    providerType: $Enums.ProviderType
-    provider: string
+    tokenType: $Enums.TokenType
+    provider: $Enums.ProviderType
     providerAccountId: string
     refreshToken: string | null
     accessToken: string | null
-    expiredAt: number | null
+    expiresAt: number | null
     scope: string | null
     idToken: string | null
     sessionState: string | null
@@ -6024,12 +6024,12 @@ export namespace Prisma {
   export type AccountSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    providerType?: boolean
+    tokenType?: boolean
     provider?: boolean
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expiredAt?: boolean
+    expiresAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6042,12 +6042,12 @@ export namespace Prisma {
   export type AccountSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    providerType?: boolean
+    tokenType?: boolean
     provider?: boolean
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expiredAt?: boolean
+    expiresAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6060,12 +6060,12 @@ export namespace Prisma {
   export type AccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     userId?: boolean
-    providerType?: boolean
+    tokenType?: boolean
     provider?: boolean
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expiredAt?: boolean
+    expiresAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6078,12 +6078,12 @@ export namespace Prisma {
   export type AccountSelectScalar = {
     id?: boolean
     userId?: boolean
-    providerType?: boolean
+    tokenType?: boolean
     provider?: boolean
     providerAccountId?: boolean
     refreshToken?: boolean
     accessToken?: boolean
-    expiredAt?: boolean
+    expiresAt?: boolean
     scope?: boolean
     idToken?: boolean
     sessionState?: boolean
@@ -6092,7 +6092,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "providerType" | "provider" | "providerAccountId" | "refreshToken" | "accessToken" | "expiredAt" | "scope" | "idToken" | "sessionState" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "tokenType" | "provider" | "providerAccountId" | "refreshToken" | "accessToken" | "expiresAt" | "scope" | "idToken" | "sessionState" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -6111,12 +6111,12 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       userId: string
-      providerType: $Enums.ProviderType
-      provider: string
+      tokenType: $Enums.TokenType
+      provider: $Enums.ProviderType
       providerAccountId: string
       refreshToken: string | null
       accessToken: string | null
-      expiredAt: number | null
+      expiresAt: number | null
       scope: string | null
       idToken: string | null
       sessionState: string | null
@@ -6549,12 +6549,12 @@ export namespace Prisma {
   interface AccountFieldRefs {
     readonly id: FieldRef<"Account", 'String'>
     readonly userId: FieldRef<"Account", 'String'>
-    readonly providerType: FieldRef<"Account", 'ProviderType'>
-    readonly provider: FieldRef<"Account", 'String'>
+    readonly tokenType: FieldRef<"Account", 'TokenType'>
+    readonly provider: FieldRef<"Account", 'ProviderType'>
     readonly providerAccountId: FieldRef<"Account", 'String'>
     readonly refreshToken: FieldRef<"Account", 'String'>
     readonly accessToken: FieldRef<"Account", 'String'>
-    readonly expiredAt: FieldRef<"Account", 'Int'>
+    readonly expiresAt: FieldRef<"Account", 'Int'>
     readonly scope: FieldRef<"Account", 'String'>
     readonly idToken: FieldRef<"Account", 'String'>
     readonly sessionState: FieldRef<"Account", 'String'>
@@ -6992,9 +6992,9 @@ export namespace Prisma {
 
   export type SessionMinAggregateOutputType = {
     id: string | null
-    sessionToken: string | null
     userId: string | null
-    expiredAt: Date | null
+    sessionToken: string | null
+    expires: Date | null
     ipAddress: string | null
     userAgent: string | null
     createdAt: Date | null
@@ -7004,9 +7004,9 @@ export namespace Prisma {
 
   export type SessionMaxAggregateOutputType = {
     id: string | null
-    sessionToken: string | null
     userId: string | null
-    expiredAt: Date | null
+    sessionToken: string | null
+    expires: Date | null
     ipAddress: string | null
     userAgent: string | null
     createdAt: Date | null
@@ -7016,9 +7016,9 @@ export namespace Prisma {
 
   export type SessionCountAggregateOutputType = {
     id: number
-    sessionToken: number
     userId: number
-    expiredAt: number
+    sessionToken: number
+    expires: number
     ipAddress: number
     userAgent: number
     createdAt: number
@@ -7030,9 +7030,9 @@ export namespace Prisma {
 
   export type SessionMinAggregateInputType = {
     id?: true
-    sessionToken?: true
     userId?: true
-    expiredAt?: true
+    sessionToken?: true
+    expires?: true
     ipAddress?: true
     userAgent?: true
     createdAt?: true
@@ -7042,9 +7042,9 @@ export namespace Prisma {
 
   export type SessionMaxAggregateInputType = {
     id?: true
-    sessionToken?: true
     userId?: true
-    expiredAt?: true
+    sessionToken?: true
+    expires?: true
     ipAddress?: true
     userAgent?: true
     createdAt?: true
@@ -7054,9 +7054,9 @@ export namespace Prisma {
 
   export type SessionCountAggregateInputType = {
     id?: true
-    sessionToken?: true
     userId?: true
-    expiredAt?: true
+    sessionToken?: true
+    expires?: true
     ipAddress?: true
     userAgent?: true
     createdAt?: true
@@ -7139,9 +7139,9 @@ export namespace Prisma {
 
   export type SessionGroupByOutputType = {
     id: string
-    sessionToken: string
     userId: string
-    expiredAt: Date
+    sessionToken: string
+    expires: Date
     ipAddress: string | null
     userAgent: string | null
     createdAt: Date
@@ -7168,9 +7168,9 @@ export namespace Prisma {
 
   export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    sessionToken?: boolean
     userId?: boolean
-    expiredAt?: boolean
+    sessionToken?: boolean
+    expires?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7181,9 +7181,9 @@ export namespace Prisma {
 
   export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    sessionToken?: boolean
     userId?: boolean
-    expiredAt?: boolean
+    sessionToken?: boolean
+    expires?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7194,9 +7194,9 @@ export namespace Prisma {
 
   export type SessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    sessionToken?: boolean
     userId?: boolean
-    expiredAt?: boolean
+    sessionToken?: boolean
+    expires?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7207,9 +7207,9 @@ export namespace Prisma {
 
   export type SessionSelectScalar = {
     id?: boolean
-    sessionToken?: boolean
     userId?: boolean
-    expiredAt?: boolean
+    sessionToken?: boolean
+    expires?: boolean
     ipAddress?: boolean
     userAgent?: boolean
     createdAt?: boolean
@@ -7217,7 +7217,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionToken" | "userId" | "expiredAt" | "ipAddress" | "userAgent" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "sessionToken" | "expires" | "ipAddress" | "userAgent" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -7235,9 +7235,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      sessionToken: string
       userId: string
-      expiredAt: Date
+      sessionToken: string
+      expires: Date
       ipAddress: string | null
       userAgent: string | null
       createdAt: Date
@@ -7668,9 +7668,9 @@ export namespace Prisma {
    */
   interface SessionFieldRefs {
     readonly id: FieldRef<"Session", 'String'>
-    readonly sessionToken: FieldRef<"Session", 'String'>
     readonly userId: FieldRef<"Session", 'String'>
-    readonly expiredAt: FieldRef<"Session", 'DateTime'>
+    readonly sessionToken: FieldRef<"Session", 'String'>
+    readonly expires: FieldRef<"Session", 'DateTime'>
     readonly ipAddress: FieldRef<"Session", 'String'>
     readonly userAgent: FieldRef<"Session", 'String'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
@@ -8108,7 +8108,7 @@ export namespace Prisma {
   export type VerificationTokenMinAggregateOutputType = {
     id: string | null
     identifier: string | null
-    tokenHash: string | null
+    token: string | null
     expiredAt: Date | null
     usedAt: Date | null
     createdAt: Date | null
@@ -8117,7 +8117,7 @@ export namespace Prisma {
   export type VerificationTokenMaxAggregateOutputType = {
     id: string | null
     identifier: string | null
-    tokenHash: string | null
+    token: string | null
     expiredAt: Date | null
     usedAt: Date | null
     createdAt: Date | null
@@ -8126,7 +8126,7 @@ export namespace Prisma {
   export type VerificationTokenCountAggregateOutputType = {
     id: number
     identifier: number
-    tokenHash: number
+    token: number
     expiredAt: number
     usedAt: number
     createdAt: number
@@ -8137,7 +8137,7 @@ export namespace Prisma {
   export type VerificationTokenMinAggregateInputType = {
     id?: true
     identifier?: true
-    tokenHash?: true
+    token?: true
     expiredAt?: true
     usedAt?: true
     createdAt?: true
@@ -8146,7 +8146,7 @@ export namespace Prisma {
   export type VerificationTokenMaxAggregateInputType = {
     id?: true
     identifier?: true
-    tokenHash?: true
+    token?: true
     expiredAt?: true
     usedAt?: true
     createdAt?: true
@@ -8155,7 +8155,7 @@ export namespace Prisma {
   export type VerificationTokenCountAggregateInputType = {
     id?: true
     identifier?: true
-    tokenHash?: true
+    token?: true
     expiredAt?: true
     usedAt?: true
     createdAt?: true
@@ -8237,7 +8237,7 @@ export namespace Prisma {
   export type VerificationTokenGroupByOutputType = {
     id: string
     identifier: string
-    tokenHash: string
+    token: string
     expiredAt: Date
     usedAt: Date | null
     createdAt: Date
@@ -8263,7 +8263,7 @@ export namespace Prisma {
   export type VerificationTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     identifier?: boolean
-    tokenHash?: boolean
+    token?: boolean
     expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -8272,7 +8272,7 @@ export namespace Prisma {
   export type VerificationTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     identifier?: boolean
-    tokenHash?: boolean
+    token?: boolean
     expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -8281,7 +8281,7 @@ export namespace Prisma {
   export type VerificationTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     identifier?: boolean
-    tokenHash?: boolean
+    token?: boolean
     expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
@@ -8290,13 +8290,13 @@ export namespace Prisma {
   export type VerificationTokenSelectScalar = {
     id?: boolean
     identifier?: boolean
-    tokenHash?: boolean
+    token?: boolean
     expiredAt?: boolean
     usedAt?: boolean
     createdAt?: boolean
   }
 
-  export type VerificationTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "identifier" | "tokenHash" | "expiredAt" | "usedAt" | "createdAt", ExtArgs["result"]["verificationToken"]>
+  export type VerificationTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "identifier" | "token" | "expiredAt" | "usedAt" | "createdAt", ExtArgs["result"]["verificationToken"]>
 
   export type $VerificationTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "VerificationToken"
@@ -8304,7 +8304,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       identifier: string
-      tokenHash: string
+      token: string
       expiredAt: Date
       usedAt: Date | null
       createdAt: Date
@@ -8733,7 +8733,7 @@ export namespace Prisma {
   interface VerificationTokenFieldRefs {
     readonly id: FieldRef<"VerificationToken", 'String'>
     readonly identifier: FieldRef<"VerificationToken", 'String'>
-    readonly tokenHash: FieldRef<"VerificationToken", 'String'>
+    readonly token: FieldRef<"VerificationToken", 'String'>
     readonly expiredAt: FieldRef<"VerificationToken", 'DateTime'>
     readonly usedAt: FieldRef<"VerificationToken", 'DateTime'>
     readonly createdAt: FieldRef<"VerificationToken", 'DateTime'>
@@ -38617,12 +38617,12 @@ export namespace Prisma {
   export const AccountScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
-    providerType: 'providerType',
+    tokenType: 'tokenType',
     provider: 'provider',
     providerAccountId: 'providerAccountId',
     refreshToken: 'refreshToken',
     accessToken: 'accessToken',
-    expiredAt: 'expiredAt',
+    expiresAt: 'expiresAt',
     scope: 'scope',
     idToken: 'idToken',
     sessionState: 'sessionState',
@@ -38636,9 +38636,9 @@ export namespace Prisma {
 
   export const SessionScalarFieldEnum: {
     id: 'id',
-    sessionToken: 'sessionToken',
     userId: 'userId',
-    expiredAt: 'expiredAt',
+    sessionToken: 'sessionToken',
+    expires: 'expires',
     ipAddress: 'ipAddress',
     userAgent: 'userAgent',
     createdAt: 'createdAt',
@@ -38652,7 +38652,7 @@ export namespace Prisma {
   export const VerificationTokenScalarFieldEnum: {
     id: 'id',
     identifier: 'identifier',
-    tokenHash: 'tokenHash',
+    token: 'token',
     expiredAt: 'expiredAt',
     usedAt: 'usedAt',
     createdAt: 'createdAt'
@@ -39132,6 +39132,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'TokenType'
+   */
+  export type EnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TokenType[]'
+   */
+  export type ListEnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ProviderType'
    */
   export type EnumProviderTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProviderType'>
@@ -39156,20 +39170,6 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'TokenType'
-   */
-  export type EnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType'>
-    
-
-
-  /**
-   * Reference to a field of type 'TokenType[]'
-   */
-  export type ListEnumTokenTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenType[]'>
     
 
 
@@ -39513,12 +39513,12 @@ export namespace Prisma {
     NOT?: AccountWhereInput | AccountWhereInput[]
     id?: UuidFilter<"Account"> | string
     userId?: UuidFilter<"Account"> | string
-    providerType?: EnumProviderTypeFilter<"Account"> | $Enums.ProviderType
-    provider?: StringFilter<"Account"> | string
+    tokenType?: EnumTokenTypeFilter<"Account"> | $Enums.TokenType
+    provider?: EnumProviderTypeFilter<"Account"> | $Enums.ProviderType
     providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
-    expiredAt?: IntNullableFilter<"Account"> | number | null
+    expiresAt?: IntNullableFilter<"Account"> | number | null
     scope?: StringNullableFilter<"Account"> | string | null
     idToken?: StringNullableFilter<"Account"> | string | null
     sessionState?: StringNullableFilter<"Account"> | string | null
@@ -39531,12 +39531,12 @@ export namespace Prisma {
   export type AccountOrderByWithRelationInput = {
     id?: SortOrder
     userId?: SortOrder
-    providerType?: SortOrder
+    tokenType?: SortOrder
     provider?: SortOrder
     providerAccountId?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     accessToken?: SortOrderInput | SortOrder
-    expiredAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
     scope?: SortOrderInput | SortOrder
     idToken?: SortOrderInput | SortOrder
     sessionState?: SortOrderInput | SortOrder
@@ -39553,12 +39553,12 @@ export namespace Prisma {
     OR?: AccountWhereInput[]
     NOT?: AccountWhereInput | AccountWhereInput[]
     userId?: UuidFilter<"Account"> | string
-    providerType?: EnumProviderTypeFilter<"Account"> | $Enums.ProviderType
-    provider?: StringFilter<"Account"> | string
+    tokenType?: EnumTokenTypeFilter<"Account"> | $Enums.TokenType
+    provider?: EnumProviderTypeFilter<"Account"> | $Enums.ProviderType
     providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
-    expiredAt?: IntNullableFilter<"Account"> | number | null
+    expiresAt?: IntNullableFilter<"Account"> | number | null
     scope?: StringNullableFilter<"Account"> | string | null
     idToken?: StringNullableFilter<"Account"> | string | null
     sessionState?: StringNullableFilter<"Account"> | string | null
@@ -39571,12 +39571,12 @@ export namespace Prisma {
   export type AccountOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
-    providerType?: SortOrder
+    tokenType?: SortOrder
     provider?: SortOrder
     providerAccountId?: SortOrder
     refreshToken?: SortOrderInput | SortOrder
     accessToken?: SortOrderInput | SortOrder
-    expiredAt?: SortOrderInput | SortOrder
+    expiresAt?: SortOrderInput | SortOrder
     scope?: SortOrderInput | SortOrder
     idToken?: SortOrderInput | SortOrder
     sessionState?: SortOrderInput | SortOrder
@@ -39596,12 +39596,12 @@ export namespace Prisma {
     NOT?: AccountScalarWhereWithAggregatesInput | AccountScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Account"> | string
     userId?: UuidWithAggregatesFilter<"Account"> | string
-    providerType?: EnumProviderTypeWithAggregatesFilter<"Account"> | $Enums.ProviderType
-    provider?: StringWithAggregatesFilter<"Account"> | string
+    tokenType?: EnumTokenTypeWithAggregatesFilter<"Account"> | $Enums.TokenType
+    provider?: EnumProviderTypeWithAggregatesFilter<"Account"> | $Enums.ProviderType
     providerAccountId?: StringWithAggregatesFilter<"Account"> | string
     refreshToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
     accessToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
-    expiredAt?: IntNullableWithAggregatesFilter<"Account"> | number | null
+    expiresAt?: IntNullableWithAggregatesFilter<"Account"> | number | null
     scope?: StringNullableWithAggregatesFilter<"Account"> | string | null
     idToken?: StringNullableWithAggregatesFilter<"Account"> | string | null
     sessionState?: StringNullableWithAggregatesFilter<"Account"> | string | null
@@ -39615,9 +39615,9 @@ export namespace Prisma {
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     id?: UuidFilter<"Session"> | string
-    sessionToken?: StringFilter<"Session"> | string
     userId?: UuidFilter<"Session"> | string
-    expiredAt?: DateTimeFilter<"Session"> | Date | string
+    sessionToken?: StringFilter<"Session"> | string
+    expires?: DateTimeFilter<"Session"> | Date | string
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -39628,9 +39628,9 @@ export namespace Prisma {
 
   export type SessionOrderByWithRelationInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
     userId?: SortOrder
-    expiredAt?: SortOrder
+    sessionToken?: SortOrder
+    expires?: SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -39646,7 +39646,7 @@ export namespace Prisma {
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
     userId?: UuidFilter<"Session"> | string
-    expiredAt?: DateTimeFilter<"Session"> | Date | string
+    expires?: DateTimeFilter<"Session"> | Date | string
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -39657,9 +39657,9 @@ export namespace Prisma {
 
   export type SessionOrderByWithAggregationInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
     userId?: SortOrder
-    expiredAt?: SortOrder
+    sessionToken?: SortOrder
+    expires?: SortOrder
     ipAddress?: SortOrderInput | SortOrder
     userAgent?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -39675,9 +39675,9 @@ export namespace Prisma {
     OR?: SessionScalarWhereWithAggregatesInput[]
     NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Session"> | string
-    sessionToken?: StringWithAggregatesFilter<"Session"> | string
     userId?: UuidWithAggregatesFilter<"Session"> | string
-    expiredAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    sessionToken?: StringWithAggregatesFilter<"Session"> | string
+    expires?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     ipAddress?: StringNullableWithAggregatesFilter<"Session"> | string | null
     userAgent?: StringNullableWithAggregatesFilter<"Session"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
@@ -39691,7 +39691,7 @@ export namespace Prisma {
     NOT?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
     id?: UuidFilter<"VerificationToken"> | string
     identifier?: StringFilter<"VerificationToken"> | string
-    tokenHash?: StringFilter<"VerificationToken"> | string
+    token?: StringFilter<"VerificationToken"> | string
     expiredAt?: DateTimeFilter<"VerificationToken"> | Date | string
     usedAt?: DateTimeNullableFilter<"VerificationToken"> | Date | string | null
     createdAt?: DateTimeFilter<"VerificationToken"> | Date | string
@@ -39700,7 +39700,7 @@ export namespace Prisma {
   export type VerificationTokenOrderByWithRelationInput = {
     id?: SortOrder
     identifier?: SortOrder
-    tokenHash?: SortOrder
+    token?: SortOrder
     expiredAt?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -39708,7 +39708,8 @@ export namespace Prisma {
 
   export type VerificationTokenWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    tokenHash?: string
+    token?: string
+    identifier_token?: VerificationTokenIdentifierTokenCompoundUniqueInput
     AND?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
     OR?: VerificationTokenWhereInput[]
     NOT?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
@@ -39716,12 +39717,12 @@ export namespace Prisma {
     expiredAt?: DateTimeFilter<"VerificationToken"> | Date | string
     usedAt?: DateTimeNullableFilter<"VerificationToken"> | Date | string | null
     createdAt?: DateTimeFilter<"VerificationToken"> | Date | string
-  }, "id" | "tokenHash">
+  }, "id" | "token" | "identifier_token">
 
   export type VerificationTokenOrderByWithAggregationInput = {
     id?: SortOrder
     identifier?: SortOrder
-    tokenHash?: SortOrder
+    token?: SortOrder
     expiredAt?: SortOrder
     usedAt?: SortOrderInput | SortOrder
     createdAt?: SortOrder
@@ -39736,7 +39737,7 @@ export namespace Prisma {
     NOT?: VerificationTokenScalarWhereWithAggregatesInput | VerificationTokenScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"VerificationToken"> | string
     identifier?: StringWithAggregatesFilter<"VerificationToken"> | string
-    tokenHash?: StringWithAggregatesFilter<"VerificationToken"> | string
+    token?: StringWithAggregatesFilter<"VerificationToken"> | string
     expiredAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
     usedAt?: DateTimeNullableWithAggregatesFilter<"VerificationToken"> | Date | string | null
     createdAt?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
@@ -42006,12 +42007,12 @@ export namespace Prisma {
 
   export type AccountCreateInput = {
     id?: string
-    providerType?: $Enums.ProviderType
-    provider: string
+    tokenType?: $Enums.TokenType
+    provider?: $Enums.ProviderType
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expiredAt?: number | null
+    expiresAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -42024,12 +42025,12 @@ export namespace Prisma {
   export type AccountUncheckedCreateInput = {
     id?: string
     userId: string
-    providerType?: $Enums.ProviderType
-    provider: string
+    tokenType?: $Enums.TokenType
+    provider?: $Enums.ProviderType
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expiredAt?: number | null
+    expiresAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -42040,12 +42041,12 @@ export namespace Prisma {
 
   export type AccountUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42058,12 +42059,12 @@ export namespace Prisma {
   export type AccountUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42075,12 +42076,12 @@ export namespace Prisma {
   export type AccountCreateManyInput = {
     id?: string
     userId: string
-    providerType?: $Enums.ProviderType
-    provider: string
+    tokenType?: $Enums.TokenType
+    provider?: $Enums.ProviderType
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expiredAt?: number | null
+    expiresAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -42091,12 +42092,12 @@ export namespace Prisma {
 
   export type AccountUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42108,12 +42109,12 @@ export namespace Prisma {
   export type AccountUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -42125,7 +42126,7 @@ export namespace Prisma {
   export type SessionCreateInput = {
     id?: string
     sessionToken: string
-    expiredAt: Date | string
+    expires: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -42136,9 +42137,9 @@ export namespace Prisma {
 
   export type SessionUncheckedCreateInput = {
     id?: string
-    sessionToken: string
     userId: string
-    expiredAt: Date | string
+    sessionToken: string
+    expires: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -42149,7 +42150,7 @@ export namespace Prisma {
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42160,9 +42161,9 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42172,9 +42173,9 @@ export namespace Prisma {
 
   export type SessionCreateManyInput = {
     id?: string
-    sessionToken: string
     userId: string
-    expiredAt: Date | string
+    sessionToken: string
+    expires: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -42185,7 +42186,7 @@ export namespace Prisma {
   export type SessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42195,9 +42196,9 @@ export namespace Prisma {
 
   export type SessionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    sessionToken?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessionToken?: StringFieldUpdateOperationsInput | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42208,7 +42209,7 @@ export namespace Prisma {
   export type VerificationTokenCreateInput = {
     id?: string
     identifier: string
-    tokenHash: string
+    token: string
     expiredAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -42217,7 +42218,7 @@ export namespace Prisma {
   export type VerificationTokenUncheckedCreateInput = {
     id?: string
     identifier: string
-    tokenHash: string
+    token: string
     expiredAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -42226,7 +42227,7 @@ export namespace Prisma {
   export type VerificationTokenUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
-    tokenHash?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42235,7 +42236,7 @@ export namespace Prisma {
   export type VerificationTokenUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
-    tokenHash?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42244,7 +42245,7 @@ export namespace Prisma {
   export type VerificationTokenCreateManyInput = {
     id?: string
     identifier: string
-    tokenHash: string
+    token: string
     expiredAt: Date | string
     usedAt?: Date | string | null
     createdAt?: Date | string
@@ -42253,7 +42254,7 @@ export namespace Prisma {
   export type VerificationTokenUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
-    tokenHash?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -42262,7 +42263,7 @@ export namespace Prisma {
   export type VerificationTokenUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     identifier?: StringFieldUpdateOperationsInput | string
-    tokenHash?: StringFieldUpdateOperationsInput | string
+    token?: StringFieldUpdateOperationsInput | string
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44911,6 +44912,13 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type EnumTokenTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTypeFilter<$PrismaModel> | $Enums.TokenType
+  }
+
   export type EnumProviderTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ProviderType | EnumProviderTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ProviderType[] | ListEnumProviderTypeFieldRefInput<$PrismaModel>
@@ -44950,19 +44958,19 @@ export namespace Prisma {
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
-    provider: string
+    provider: $Enums.ProviderType
     providerAccountId: string
   }
 
   export type AccountCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    providerType?: SortOrder
+    tokenType?: SortOrder
     provider?: SortOrder
     providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
-    expiredAt?: SortOrder
+    expiresAt?: SortOrder
     scope?: SortOrder
     idToken?: SortOrder
     sessionState?: SortOrder
@@ -44972,18 +44980,18 @@ export namespace Prisma {
   }
 
   export type AccountAvgOrderByAggregateInput = {
-    expiredAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    providerType?: SortOrder
+    tokenType?: SortOrder
     provider?: SortOrder
     providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
-    expiredAt?: SortOrder
+    expiresAt?: SortOrder
     scope?: SortOrder
     idToken?: SortOrder
     sessionState?: SortOrder
@@ -44995,12 +45003,12 @@ export namespace Prisma {
   export type AccountMinOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
-    providerType?: SortOrder
+    tokenType?: SortOrder
     provider?: SortOrder
     providerAccountId?: SortOrder
     refreshToken?: SortOrder
     accessToken?: SortOrder
-    expiredAt?: SortOrder
+    expiresAt?: SortOrder
     scope?: SortOrder
     idToken?: SortOrder
     sessionState?: SortOrder
@@ -45010,7 +45018,17 @@ export namespace Prisma {
   }
 
   export type AccountSumOrderByAggregateInput = {
-    expiredAt?: SortOrder
+    expiresAt?: SortOrder
+  }
+
+  export type EnumTokenTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel> | $Enums.TokenType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTokenTypeFilter<$PrismaModel>
+    _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
   export type EnumProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -45059,9 +45077,9 @@ export namespace Prisma {
 
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
     userId?: SortOrder
-    expiredAt?: SortOrder
+    sessionToken?: SortOrder
+    expires?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
@@ -45071,9 +45089,9 @@ export namespace Prisma {
 
   export type SessionMaxOrderByAggregateInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
     userId?: SortOrder
-    expiredAt?: SortOrder
+    sessionToken?: SortOrder
+    expires?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
@@ -45083,9 +45101,9 @@ export namespace Prisma {
 
   export type SessionMinOrderByAggregateInput = {
     id?: SortOrder
-    sessionToken?: SortOrder
     userId?: SortOrder
-    expiredAt?: SortOrder
+    sessionToken?: SortOrder
+    expires?: SortOrder
     ipAddress?: SortOrder
     userAgent?: SortOrder
     createdAt?: SortOrder
@@ -45093,10 +45111,15 @@ export namespace Prisma {
     deletedAt?: SortOrder
   }
 
+  export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
+    identifier: string
+    token: string
+  }
+
   export type VerificationTokenCountOrderByAggregateInput = {
     id?: SortOrder
     identifier?: SortOrder
-    tokenHash?: SortOrder
+    token?: SortOrder
     expiredAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
@@ -45105,7 +45128,7 @@ export namespace Prisma {
   export type VerificationTokenMaxOrderByAggregateInput = {
     id?: SortOrder
     identifier?: SortOrder
-    tokenHash?: SortOrder
+    token?: SortOrder
     expiredAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
@@ -45114,17 +45137,10 @@ export namespace Prisma {
   export type VerificationTokenMinOrderByAggregateInput = {
     id?: SortOrder
     identifier?: SortOrder
-    tokenHash?: SortOrder
+    token?: SortOrder
     expiredAt?: SortOrder
     usedAt?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type EnumTokenTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTokenTypeFilter<$PrismaModel> | $Enums.TokenType
   }
 
   export type TokenCountOrderByAggregateInput = {
@@ -45167,16 +45183,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
-  }
-
-  export type EnumTokenTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel> | $Enums.TokenType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTokenTypeFilter<$PrismaModel>
-    _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
   export type EnumTenantStatusFilter<$PrismaModel = never> = {
@@ -47184,6 +47190,10 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type EnumTokenTypeFieldUpdateOperationsInput = {
+    set?: $Enums.TokenType
+  }
+
   export type EnumProviderTypeFieldUpdateOperationsInput = {
     set?: $Enums.ProviderType
   }
@@ -47226,10 +47236,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutTokensInput, UserUncheckedCreateWithoutTokensInput>
     connectOrCreate?: UserCreateOrConnectWithoutTokensInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type EnumTokenTypeFieldUpdateOperationsInput = {
-    set?: $Enums.TokenType
   }
 
   export type UserUpdateOneRequiredWithoutTokensNestedInput = {
@@ -48689,6 +48695,13 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumTokenTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTypeFilter<$PrismaModel> | $Enums.TokenType
+  }
+
   export type NestedEnumProviderTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.ProviderType | EnumProviderTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ProviderType[] | ListEnumProviderTypeFieldRefInput<$PrismaModel>
@@ -48708,6 +48721,16 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel> | $Enums.TokenType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTokenTypeFilter<$PrismaModel>
+    _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumProviderTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -48762,23 +48785,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedEnumTokenTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTokenTypeFilter<$PrismaModel> | $Enums.TokenType
-  }
-
-  export type NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TokenType | EnumTokenTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TokenType[] | ListEnumTokenTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTokenTypeWithAggregatesFilter<$PrismaModel> | $Enums.TokenType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTokenTypeFilter<$PrismaModel>
-    _max?: NestedEnumTokenTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumTenantStatusFilter<$PrismaModel = never> = {
@@ -49103,12 +49109,12 @@ export namespace Prisma {
 
   export type AccountCreateWithoutUserInput = {
     id?: string
-    providerType?: $Enums.ProviderType
-    provider: string
+    tokenType?: $Enums.TokenType
+    provider?: $Enums.ProviderType
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expiredAt?: number | null
+    expiresAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -49119,12 +49125,12 @@ export namespace Prisma {
 
   export type AccountUncheckedCreateWithoutUserInput = {
     id?: string
-    providerType?: $Enums.ProviderType
-    provider: string
+    tokenType?: $Enums.TokenType
+    provider?: $Enums.ProviderType
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expiredAt?: number | null
+    expiresAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -49146,7 +49152,7 @@ export namespace Prisma {
   export type SessionCreateWithoutUserInput = {
     id?: string
     sessionToken: string
-    expiredAt: Date | string
+    expires: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -49157,7 +49163,7 @@ export namespace Prisma {
   export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
     sessionToken: string
-    expiredAt: Date | string
+    expires: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -49440,12 +49446,12 @@ export namespace Prisma {
     NOT?: AccountScalarWhereInput | AccountScalarWhereInput[]
     id?: UuidFilter<"Account"> | string
     userId?: UuidFilter<"Account"> | string
-    providerType?: EnumProviderTypeFilter<"Account"> | $Enums.ProviderType
-    provider?: StringFilter<"Account"> | string
+    tokenType?: EnumTokenTypeFilter<"Account"> | $Enums.TokenType
+    provider?: EnumProviderTypeFilter<"Account"> | $Enums.ProviderType
     providerAccountId?: StringFilter<"Account"> | string
     refreshToken?: StringNullableFilter<"Account"> | string | null
     accessToken?: StringNullableFilter<"Account"> | string | null
-    expiredAt?: IntNullableFilter<"Account"> | number | null
+    expiresAt?: IntNullableFilter<"Account"> | number | null
     scope?: StringNullableFilter<"Account"> | string | null
     idToken?: StringNullableFilter<"Account"> | string | null
     sessionState?: StringNullableFilter<"Account"> | string | null
@@ -49475,9 +49481,9 @@ export namespace Prisma {
     OR?: SessionScalarWhereInput[]
     NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
     id?: UuidFilter<"Session"> | string
-    sessionToken?: StringFilter<"Session"> | string
     userId?: UuidFilter<"Session"> | string
-    expiredAt?: DateTimeFilter<"Session"> | Date | string
+    sessionToken?: StringFilter<"Session"> | string
+    expires?: DateTimeFilter<"Session"> | Date | string
     ipAddress?: StringNullableFilter<"Session"> | string | null
     userAgent?: StringNullableFilter<"Session"> | string | null
     createdAt?: DateTimeFilter<"Session"> | Date | string
@@ -53226,12 +53232,12 @@ export namespace Prisma {
 
   export type AccountCreateManyUserInput = {
     id?: string
-    providerType?: $Enums.ProviderType
-    provider: string
+    tokenType?: $Enums.TokenType
+    provider?: $Enums.ProviderType
     providerAccountId: string
     refreshToken?: string | null
     accessToken?: string | null
-    expiredAt?: number | null
+    expiresAt?: number | null
     scope?: string | null
     idToken?: string | null
     sessionState?: string | null
@@ -53243,7 +53249,7 @@ export namespace Prisma {
   export type SessionCreateManyUserInput = {
     id?: string
     sessionToken: string
-    expiredAt: Date | string
+    expires: Date | string
     ipAddress?: string | null
     userAgent?: string | null
     createdAt?: Date | string
@@ -53330,12 +53336,12 @@ export namespace Prisma {
 
   export type AccountUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53346,12 +53352,12 @@ export namespace Prisma {
 
   export type AccountUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53362,12 +53368,12 @@ export namespace Prisma {
 
   export type AccountUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    providerType?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
-    provider?: StringFieldUpdateOperationsInput | string
+    tokenType?: EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
+    provider?: EnumProviderTypeFieldUpdateOperationsInput | $Enums.ProviderType
     providerAccountId?: StringFieldUpdateOperationsInput | string
     refreshToken?: NullableStringFieldUpdateOperationsInput | string | null
     accessToken?: NullableStringFieldUpdateOperationsInput | string | null
-    expiredAt?: NullableIntFieldUpdateOperationsInput | number | null
+    expiresAt?: NullableIntFieldUpdateOperationsInput | number | null
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     idToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessionState?: NullableStringFieldUpdateOperationsInput | string | null
@@ -53379,7 +53385,7 @@ export namespace Prisma {
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53390,7 +53396,7 @@ export namespace Prisma {
   export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -53401,7 +53407,7 @@ export namespace Prisma {
   export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expires?: DateTimeFieldUpdateOperationsInput | Date | string
     ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
     userAgent?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

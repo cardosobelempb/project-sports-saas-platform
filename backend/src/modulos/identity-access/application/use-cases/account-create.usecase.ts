@@ -5,11 +5,10 @@ import {
   left,
   right,
 } from "@/common/domain/errors/handle-errors/either";
-import { UUIDVO } from "@/common/domain/values-objects/uuidvo/uuid.vo";
-import { AccountEntity } from "../../domain/entities/account.entity";
 import { AccountMapper } from "../../domain/mappers/account-mapper";
 import { PrismaAccountRepository } from "../../infrastructure/repositories/prisma-account.repository";
 import { AccountResponseDto, CreateAccountDto } from "../dto/account.dto";
+import { AccountFactory } from "./factories/acount.factory";
 
 export type AccountCreateUseCaseResponse = Either<
   AlreadyExistsError,
@@ -24,7 +23,7 @@ export class AccountCreateUseCase {
   async execute(
     input: CreateAccountDto,
   ): Promise<AccountCreateUseCaseResponse> {
-    if (!input.userId || !input.providerType || !input.providerAccountId) {
+    if (!input.userId || !input.provider || !input.providerAccountId) {
       return left(
         new AlreadyExistsError({
           message: "userId, providerType and providerAccountId are required",
@@ -44,15 +43,21 @@ export class AccountCreateUseCase {
       );
     }
 
-    const entity = AccountEntity.create({
-      userId: UUIDVO.create(input.userId),
-      providerType: input.providerType,
-      providerAccountId: UUIDVO.create(input.providerAccountId),
+    const entity = AccountFactory.build({
+      userId: input.userId,
+      providerAccountId: input.providerAccountId,
       provider: input.provider,
+      refreshToken: input.refreshToken,
+      accessToken: input.accessToken,
+      expiresAt: input.expiresAt,
+      tokenType: input.tokenType,
+      scope: input.scope,
+      idToken: input.idToken,
+      sessionState: input.sessionState,
     });
 
     const account = await this.accountRepository.create(entity);
-    const AccountDto = AccountMapper.toOutput(account);
+    const AccountDto = AccountMapper.toHttp(account);
 
     return right(AccountDto);
   }

@@ -3,8 +3,8 @@ import {
   UpdateVerificationTokenDto,
   VerificationTokenResponseDto,
   VerificationTokenSummaryDto,
-} from "../../application/dto/verification-token.dto";
-import { VerificationTokenEntity } from "../entities/verification-token.entity";
+} from "../../../auth/application/dto/verification-token.dto";
+import { VerificationTokenEntity } from "../../../auth/domain/entities/verification-token.entity";
 
 // ============================================================
 // verificationtoken.mapper.ts

@@ -1,6 +1,6 @@
 import { PageRepository } from "@/common/domain/repositories/page-repository";
 import { TokenType } from "@/common/shared/enums/token-type.enum";
-import { TokenEntity } from "../entities/token.entity";
+import { TokenEntity } from "../../../auth/domain/entities/token.entity";
 
 export abstract class TokenRepository extends PageRepository<TokenEntity> {
   abstract findValidByHash(params: {

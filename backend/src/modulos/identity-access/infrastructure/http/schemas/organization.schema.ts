@@ -39,7 +39,7 @@ export const OrganizationSchema = z
     tenantId: s.uuid,
     name: s.name,
     slug: s.slug,
-    logoUrl: s.url.nullable(),
+    logoUrl: s.url,
     status: z.enum(OrganizationStatus),
     createdAt: s.date,
     updatedAt: s.nullableDate,

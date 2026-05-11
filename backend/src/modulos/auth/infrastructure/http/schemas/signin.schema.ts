@@ -16,8 +16,8 @@ import {
   updateResponseSchema,
 } from "@/common/shared/lib/schemas/response.factory";
 
-import { MembershipSummarySchema } from "./member-ship.schema";
-import { UserSummarySchema } from "./user.schema";
+import { MembershipSummarySchema } from "../../../../identity-access/infrastructure/http/schemas/member-ship.schema";
+import { UserSummarySchema } from "../../../../identity-access/infrastructure/http/schemas/user.schema";
 
 // ─── Params ───────────────────────────────────────────────────────────────────
 

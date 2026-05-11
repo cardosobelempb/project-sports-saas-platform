@@ -1,23 +1,23 @@
 import {
-  CreateTenantDto,
-  TenantResponseDto,
-  TenantSummaryDto,
-  UpdateTenantDto,
-} from "../../application/dto/tenant.dto";
-import { TenantEntity } from "../entities/tenant.entity";
+  CreateOrganizationDto,
+  OrganizationResponseDto,
+  OrganizationSummaryDto,
+  UpdateOrganizationDto,
+} from "../../application/dto/organization.dto";
+import { OrganizationEntity } from "../entities/organization.entity";
 
 // ============================================================
-// tenant.mapper.ts
-// Responsabilidade: converter TenantEntity → DTOs de resposta
+// organization.mapper.ts
+// Responsabilidade: converter OrganizationEntity → DTOs de resposta
 //
 // Métodos públicos:
-//   toCreatedResponse  → TenantResponseDto  (pós-criação)
-//   toUpdatedResponse  → TenantResponseDto  (pós-atualização)
-//   toSummary          → TenantSummaryDto   (listagem paginada)
-//   toHttp             → TenantResponseDto  (detalhes completos)
+//   toCreatedResponse  → OrganizationResponseDto  (pós-criação)
+//   toUpdatedResponse  → OrganizationResponseDto  (pós-atualização)
+//   toSummary          → OrganizationSummaryDto   (listagem paginada)
+//   toHttp             → OrganizationResponseDto  (detalhes completos)
 // ============================================================
 
-export class TenantMapper {
+export class OrganizationMapper {
   // ─── Helper privado ───────────────────────────────────────────────────
   //
   // Centraliza a conversão dos campos comuns a create e update.
@@ -27,24 +27,27 @@ export class TenantMapper {
   //     entity.order pode ser 0  → || "" trataria como falsy (bug silencioso)
   //     entity.slug  pode ser "" → intencionalmente vazio, não deve virar null
 
-  private static toCoreFields(entity: TenantEntity): CreateTenantDto {
+  private static toCoreFields(
+    entity: OrganizationEntity,
+  ): CreateOrganizationDto {
     return {
+      tenantId: entity.tenantId.getValue(),
       name: entity.name,
       slug: entity.slug.getValue(),
-      contactEmail: entity.contactEmail.getValue().value,
-      phone: entity.phone,
-      documentNumber: entity.documentNumber,
+      logoUrl: entity.logoUrl,
+      status: entity.status,
     };
   }
+
   // ─── Pós-criação ──────────────────────────────────────────────────────
   //
   // Retorna os campos persistidos imediatamente após o INSERT.
   // Ideal para confirmar ao cliente o que foi salvo.
   //
   // @example
-  //   return right(TenantMapper.toCreatedResponse(entity));
+  //   return right(OrganizationMapper.toCreatedResponse(entity));
 
-  static toCreatedResponse(entity: TenantEntity): CreateTenantDto {
+  static toCreatedResponse(entity: OrganizationEntity): CreateOrganizationDto {
     return this.toCoreFields(entity);
   }
 
@@ -55,9 +58,9 @@ export class TenantMapper {
   // campos de auditoria (updatedAt, updatedBy, changedFields…).
   //
   // @example
-  //   return right(TenantMapper.toUpdatedResponse(entity));
+  //   return right(OrganizationMapper.toUpdatedResponse(entity));
 
-  static toUpdatedResponse(entity: TenantEntity): UpdateTenantDto {
+  static toUpdatedResponse(entity: OrganizationEntity): UpdateOrganizationDto {
     return this.toCoreFields(entity);
   }
 
@@ -67,15 +70,14 @@ export class TenantMapper {
   // renderizar uma linha de tabela/card, evitando over-fetching.
   //
   // @example
-  //   const page = PageResponseMapper.toDto(result, TenantMapper.toSummary);
+  //   const page = PageResponseMapper.toDto(result, OrganizationMapper.toSummary);
 
-  static toSummary(entity: TenantEntity): TenantSummaryDto {
+  static toSummary(entity: OrganizationEntity): OrganizationSummaryDto {
     return {
       id: entity.id.getValue(),
       name: entity.name,
-      slug: entity.slug.getValue(),
-      contactEmail: entity.contactEmail.getValue().value ?? "",
-      phone: entity.phone,
+      slug: entity.slug.toString(),
+      logoUrl: entity.logoUrl,
       status: entity.status,
     };
   }
@@ -85,14 +87,13 @@ export class TenantMapper {
   // Payload completo enviado em endpoints de detalhe.
   // Inclui campos de auditoria (createdAt) ausentes no resumo.
 
-  static toHttp(entity: TenantEntity): TenantResponseDto {
+  static toHttp(entity: OrganizationEntity): OrganizationResponseDto {
     return {
       id: entity.id.getValue(),
+      tenantId: entity.tenantId.getValue(),
       name: entity.name,
-      slug: entity.slug.getValue(),
-      documentNumber: entity.documentNumber,
-      contactEmail: entity.contactEmail.getValue().value ?? "",
-      phone: entity.phone,
+      slug: entity.slug.toString(),
+      logoUrl: entity.logoUrl,
       status: entity.status,
       createdAt: entity.createdAt,
     };

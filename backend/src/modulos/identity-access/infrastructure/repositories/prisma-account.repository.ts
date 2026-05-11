@@ -5,6 +5,7 @@ import {
 } from "@/common/domain/repositories/types/pagination.types";
 import { PrismaDatabase } from "@/common/infrastructure/db/prisma-repository";
 import { TOKENS } from "@/common/shared/container/tokens";
+import { ProviderType } from "@/common/shared/enums/provider-type.enum";
 import { Prisma } from "../../../../../generated/prisma";
 import { AccountEntity } from "../../domain/entities/account.entity";
 import { AccountMapper } from "../../domain/mappers/account.mapper";
@@ -19,7 +20,7 @@ export class PrismaAccountRepository extends AccountRepository {
 
   async findByCpf(cpf: string): Promise<AccountEntity | null> {
     const account = await this.prisma.account.findFirst({
-      where: { provider: "credentials", providerAccountId: cpf },
+      where: { provider: ProviderType.CREDENTIALS, providerAccountId: cpf },
       include: { user: true },
     });
 
@@ -102,7 +103,7 @@ export class PrismaAccountRepository extends AccountRepository {
     if (!filter) return {};
 
     return {
-      OR: [{ provider: { contains: filter, mode: "insensitive" } }],
+      OR: [{ providerAccountId: { contains: filter, mode: "insensitive" } }],
     };
   }
 
@@ -134,7 +135,7 @@ export class PrismaAccountRepository extends AccountRepository {
   async findByEmail(email: string): Promise<AccountEntity | null> {
     const account = await this.prisma.account.findFirst({
       where: {
-        provider: "credentials",
+        provider: ProviderType.CREDENTIALS,
         providerAccountId: email,
       },
     });

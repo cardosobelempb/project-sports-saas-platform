@@ -54,7 +54,6 @@ export const TenantSchema = z
 // Payload de criação: sem campos gerados pelo servidor
 export const CreateTenantSchema = TenantSchema.omit({
   id: true,
-  documentNumber: true,
   status: true,
   createdAt: true,
   updatedAt: true,

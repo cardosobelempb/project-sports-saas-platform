@@ -12,7 +12,7 @@ import { PrismaDatabase } from "../prisma-repository";
  * Padrão: Unit of Work  (Martin Fowler — Patterns of Enterprise Application Architecture)
  */
 
-export interface TransactionManager {
+export abstract class TransactionManager {
   /**
    * Executa um conjunto de operações dentro de uma transação atômica.
    * Em caso de erro, todas as operações são revertidas (rollback automático).
@@ -25,5 +25,5 @@ export interface TransactionManager {
    *   await stockRepo.withTx(tx).decrement(order.itemId);
    * });
    */
-  run<T>(work: (tx: PrismaDatabase) => Promise<T>): Promise<T>;
+  abstract run<T>(work: (tx: PrismaDatabase) => Promise<T>): Promise<T>;
 }
